@@ -2,14 +2,18 @@
   "name": "milsymbol-generator",
   "version": "1.0.0",
   "description": "Military symbol generator based on milsymbol.js",
-  "main": "index.js",
+  "main": "milsymbol-unit-generator.js",
+  "scripts": {
+    "build": "npm run bundle",
+    "bundle": "rollup -c"
+  },
   "dependencies": {},
   "devDependencies": {
     "material-components-web": "^0.30.0",
-    "rollup": "^0.55.5"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "rollup": "^0.55.5",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-css-only": "^0.4.0",
+    "rollup-plugin-node-resolve": "^3.0.2"
   },
   "repository": {
     "type": "git",
