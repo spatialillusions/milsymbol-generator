@@ -1,0 +1,24 @@
+{
+  "name": "milsymbol-generator",
+  "version": "1.0.0",
+  "description": "Military symbol generator based on milsymbol.js",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "material-components-web": "^0.30.0",
+    "rollup": "^0.55.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spatialillusions/milsymbol-generator.git"
+  },
+  "author": "Måns Beckman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spatialillusions/milsymbol-generator/issues"
+  },
+  "homepage": "https://github.com/spatialillusions/milsymbol-generator#readme"
+}
