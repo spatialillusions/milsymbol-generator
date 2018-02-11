@@ -81,7 +81,7 @@
     }
 
     .panels {
-        padding: 8px;
+        padding: 20px;
         margin-top: 8px;
 
         margin-top: 8px
@@ -95,6 +95,10 @@
         display: block;
     }
 
+    .symbol {
+        height: 200px;
+    }
+
     .symbol svg {
         max-width: 100%;
         max-height: 200px;
@@ -102,6 +106,23 @@
 
     .mdc-select {
         width: 100%
+    }
+
+    .mdc-select .mdc-list-item {
+        /*overflow-x: auto;*/
+    }
+
+    .mdc-menu__items em {
+        pointer-events: none;
+        color: var(--mdc-theme-text-icon-on-primary-light);
+        font-size: x-small;
+    }
+
+    .mdc-menu__items img {
+        pointer-events: none;
+        margin-right: 8px;
+        width: 30px;
+        max-height: 30px;
     }
 </style>
 
@@ -189,7 +210,7 @@
         <div class="panels">
             <div class="panel active mil-std-2525c" id="panel-1" role="tabpanel" aria-hidden="false">
                 <center>
-                    <div class="symbol">rendered symbol</div>
+                    <div class="symbol">This should display a rendered symbol</div>
                 </center>
 
 
@@ -249,11 +270,53 @@
                     </div>
                 </div>
 
+                <div class="function-id">
+                    <div class="mdc-select" role="listbox">
+                        <div class="mdc-select__surface" tabindex="0">
+                            <div class="mdc-select__label">Function ID</div>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__bottom-line"></div>
+                        </div>
+                        <div class="mdc-menu mdc-select__menu">
+                            <ul class="mdc-list mdc-menu__items">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symbol-modifier-1">
+                    <div class="mdc-select" role="listbox">
+                        <div class="mdc-select__surface" tabindex="0">
+                            <div class="mdc-select__label">Symbol Modifier 1</div>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__bottom-line"></div>
+                        </div>
+                        <div class="mdc-menu mdc-select__menu">
+                            <ul class="mdc-list mdc-menu__items">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="symbol-modifier-2">
+                    <div class="mdc-select" role="listbox">
+                        <div class="mdc-select__surface" tabindex="0">
+                            <div class="mdc-select__label">Symbol Modifier 2</div>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__bottom-line"></div>
+                        </div>
+                        <div class="mdc-menu mdc-select__menu">
+                            <ul class="mdc-list mdc-menu__items">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">Item Two</div>
-            <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">Item Three</div>
-            <div class="panel" id="panel-4" role="tabpanel" aria-hidden="true">Item Four</div>
+            <div class="panel" id="panel-2" role="tabpanel" aria-hidden="true">Not done yet</div>
+            <div class="panel" id="panel-3" role="tabpanel" aria-hidden="true">Not done yet</div>
+            <div class="panel" id="panel-4" role="tabpanel" aria-hidden="true">Not done yet</div>
         </div>
     </section>
     <!--
