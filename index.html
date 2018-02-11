@@ -17,7 +17,7 @@
         --mdc-theme-secondary-light: #02cecc;
         --mdc-theme-secondary-dark: #004040;
         --mdc-theme-background: #fff;
-        --mdc-theme-text-primary-on-primary: white;
+        /* --mdc-theme-text-primary-on-primary: white;
         --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
         --mdc-theme-text-hint-on-primary: rgba(255, 255, 255, 0.5);
         --mdc-theme-text-disabled-on-primary: rgba(255, 255, 255, 0.5);
@@ -61,7 +61,7 @@
         --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
         --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
         --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
-        --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
+        --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);*/
     }
 
     .toolbar {
@@ -106,6 +106,11 @@
 
     .mdc-select {
         width: 100%
+    }
+
+    .option-inputs {
+        padding: 20px;
+        margin-top: 8px
     }
 
     /*
@@ -425,13 +430,187 @@
             <div class="panel" id="panel-4" role="tabpanel" aria-hidden="true">Not done yet</div>
         </div>
     </section>
-    <!--
 
-    <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
-        <input type="text" class="mdc-text-field__input" id="demo-input">
-        <label for="demo-input" class="mdc-text-field__label">Tell us how you feel!</label>
+    <div class="option-inputs">
+        <h2 class="mdc-typography--title">
+            Amplifier Fields
+        </h2>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="additionalInformation" maxlength="20" size="30">
+                <label for="additionalInformation" class="mdc-text-field__label">Additional Information</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations; content is implementation specific.
+            </p>
+        </section>
+
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="altitudeDepth" maxlength="14" size="30">
+                <label for="altitudeDepth" class="mdc-text-field__label">Altitude/Depth</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations, that displays either altitude flight level, depth for submerged
+                objects; or height of equipment or structures on the ground.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="combatEffectiveness" maxlength="5" size="30">
+                <label for="combatEffectiveness" class="mdc-text-field__label">Combat Effectiveness</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units and installations that indicates unit effectiveness or installation capability.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="direction" maxlength="4" size="30">
+                <label for="direction" class="mdc-text-field__label">Direction</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A graphic modifier for units and equipment that identifies the direction of movement or intended movement of an object. Degrees
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="dtg" maxlength="16" size="30">
+                <label for="dtg" class="mdc-text-field__label">DTG</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations that displays DTG format: DDHHMMSSZMONYYYY or "O/O" for on order
+                (see 5.5.2.6)
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="evaluationRating" maxlength="2" size="30">
+                <label for="evaluationRating" class="mdc-text-field__label">Evaluation Rating</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations that consists of a one-letter reliability rating and a one-number
+                credibility rating.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="higherFormation" maxlength="21" size="30">
+                <label for="higherFormation" class="mdc-text-field__label">Higher Formation</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units that indicates number or title of higher echelon command (corps are designated by Roman numerals).
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="hostile" maxlength="3" size="30">
+                <label for="hostile" class="mdc-text-field__label">Hostile</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for equipment; letters "ENY" denote hostile symbols.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="iffSif" maxlength="5" size="30">
+                <label for="iffSif" class="mdc-text-field__label">IFF/SIF</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier displaying IFF/SIF Identification modes and codes.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="location" maxlength="19" size="30">
+                <label for="location" class="mdc-text-field__label">Location</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations that displays a symbol's location in degrees, minutes, and seconds
+                (or in UTM or other applicable display format).
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="quantity" maxlength="9" size="30">
+                <label for="quantity" class="mdc-text-field__label">Quantity</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier in an equipment symbol that identifies the number of items present.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="reinforcedReduced" maxlength="3" size="30">
+                <label for="reinforcedReduced" class="mdc-text-field__label">Reinforced or Reduced</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier in a unit symbol that displays (+) for reinforced, (-) for reduced, (±) reinforced and reduced.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="signatureEquipment" maxlength="1" size="30">
+                <label for="signatureEquipment" class="mdc-text-field__label">Signature Equipment</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for hostile equipment; "!" indicates detectable electronic signatures.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="specialHeadquarters" maxlength="9" size="30">
+                <label for="specialHeadquarters" class="mdc-text-field__label">Special Headquarters</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units; indicator is contained inside the frame; contains the name of the special C2 Headquarters.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="speed" maxlength="8" size="30">
+                <label for="speed" class="mdc-text-field__label">Speed</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units and equipment that displays velocity as set forth inMIL-STD-6040.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="staffComments" maxlength="20" size="30">
+                <label for="staffComments" class="mdc-text-field__label">Staff Comments</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment and installations; content is implementation specific.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="type" maxlength="24" size="30">
+                <label for="type" class="mdc-text-field__label">Type</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for equipment that indicates types of equipment.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="uniqueDesignation" maxlength="21" size="30">
+                <label for="uniqueDesignation" class="mdc-text-field__label">Unique Designation</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A text modifier for units, equipment, and installations that uniquely identifies a particular symbol or track number. Identifies
+                acquisitions number when used with SIGINT symbology.
+            </p>
+        </section>
+
+        <!--<tr><td><code>FieldID R2 </code>Sigint: </td><td><input type="text" id="sigint" onkeyup="drawSymbol()"><br></td><td>M = Mobile, S = Static, or U = Uncertain. <code>xxx</code></td></tr>-->
+        <!--<tr><td><code>FieldID AD </code>Platform Type: </td><td><input type="text" id="platformType" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
+        <tr><td><code>FieldID AE </code>Equipment Teardown Time: </td><td><input type="text" id="equipmentTeardownTime" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
+        <tr><td><code>FieldID AF </code>Common Identifier: </td><td><input type="text" id="commonIdentifier" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
+        -->
     </div>
--->
+
 
 </body>
 

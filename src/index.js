@@ -4,6 +4,7 @@ import "material-components-web/dist/material-components-web.min.css";
 import ms from "../../milsymbol/dist/milsymbol.js";
 
 import initLetterPanel from "./init-letter-panel.js";
+import renderSymbol from "./render-symbol.js";
 
 //Make sure symbol are centered
 ms.addSymbolPart(function squareIcon() {
@@ -46,8 +47,22 @@ export default function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
+  mdc.autoInit();
+
+  // Set up event listeners for all option inputs
+  var optionFields = {};
+  document
+    .querySelectorAll(".option-inputs .mdc-text-field")
+    .forEach(function(elm) {
+      var id = elm.querySelector(".mdc-text-field__input").getAttribute("id");
+      //optionFields[id] = new mdc.textField.MDCTextField(elm);
+      window.elm = elm;
+      optionFields[id] = elm.MDCTextField;
+      optionFields[id].listen("change", function() {
+        renderSymbol();
+      });
+    });
+
   initLetterPanel("2525c");
   initLetterPanel("app6b");
-
-  mdc.autoInit();
 }

@@ -111,7 +111,12 @@ export default function(standard) {
       mdcSelects[".symbol-modifier-1"].value +
       mdcSelects[".symbol-modifier-2"].value;
 
-    renderSymbol(standard, sidc);
+    var symbolElement = document.querySelector(
+      ".panel-" + standard + " .symbol"
+    );
+    symbolElement.setAttribute("sidc", sidc);
+    symbolElement.setAttribute("standard", standard);
+    renderSymbol();
   }
   //Set a generic SIDC for all battle dimensions
   for (var i in milstd[standard]) {
@@ -132,9 +137,6 @@ export default function(standard) {
   //console.log(milstd["2525c"]);
   var selectElement, selectItems, mdcSelect;
   var panel = document.querySelector(".panel-" + standard);
-  panel.querySelector(".symbol").innerHTML = new ms.Symbol("SFGP", {
-    size: 100
-  }).asSVG();
 
   className = ".coding-scheme";
   mdcSelects[className] = initSelect(
@@ -307,4 +309,7 @@ export default function(standard) {
   mdcSelects[className].listen("MDCSelect:change", function() {
     _preRenderSymbol(milstd, standard, mdcSelects);
   });
+
+  // Now emit a change to render first symbol
+  mdcSelects[className].emit("MDCSelect:change");
 }
