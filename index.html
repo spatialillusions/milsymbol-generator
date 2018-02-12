@@ -4,6 +4,12 @@
 <head>
     <title>Unit Symbol Generator - www.spatialillusions.com</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://www.spatialillusions.com/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="https://www.spatialillusions.com/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://www.spatialillusions.com/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="https://www.spatialillusions.com/manifest.json">
 </head>
 
 <link rel="stylesheet" href="milsymbol-unit-generator.css" type="text/css">
@@ -69,6 +75,10 @@
         margin: 0px;
     }
 
+    a {
+        color: #0080c2;
+    }
+
     .toolbar {
         position: absolute;
         top: 0;
@@ -78,6 +88,12 @@
         color: rgba(0, 0, 0, 0.87);
     }
 
+
+    @media not screen and (min-width: 400px) {
+        .mdc-toolbar__section--align-end {
+            display: none;
+        }
+    }
 
     .custom-indicator-tab-bar .mdc-tab-bar__indicator {
         /* @alternate */
@@ -245,6 +261,11 @@
                         />
                     </svg>
                 </span>
+            </section>
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                <a href="https://github.com/spatialillusions" style="text-decoration:none; margin-right:24px;">
+                    <b style="color:black; font-size: 14px;">MILITARY OPEN SOURCE</b>
+                </a>
             </section>
         </div>
         </div>
@@ -667,7 +688,21 @@
             </p>
         </section>
     </div>
-
+    <div style="max-width:800px; margin:auto; padding:8px;">
+        <small>
+            This page is built using
+            <a href="https://github.com/spatialillusions/milsymbol">milsymbol</a>. You can get the complete code for the
+            <a href="https://github.com/spatialillusions/milsymbol-generator">unit symbol generator</a> on GitHub.
+            <br>
+            <br> This page and milsymbol is built and maintained by Måns Beckman. If you want to support the development or simply
+            get in touch please send an email to
+            <a href="mailto:mans.beckman@spatialillusions.com">mans.beckman&#64;spatialillusions&#46;com</a>, it is always fun to hear what people are using the symbol generator
+            for.
+            <br>
+        </small>
+    </div>
+    <br>
+    <br>
 </body>
 
 </html>
