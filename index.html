@@ -3,6 +3,7 @@
 
 <head>
     <title>Unit Symbol Generator - www.spatialillusions.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <link rel="stylesheet" href="milsymbol-unit-generator.css" type="text/css">
@@ -64,6 +65,10 @@
         --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);*/
     }
 
+    body {
+        margin: 0px;
+    }
+
     .toolbar {
         position: absolute;
         top: 0;
@@ -78,6 +83,14 @@
         /* @alternate */
         background-color: #00aff5;
         background-color: var(--mdc-theme-primary, #00aff5);
+    }
+
+    .content {
+        margin-top: 126px;
+    }
+
+    .content.scroll {
+        margin-top: 366px;
     }
 
     .panels {
@@ -97,6 +110,20 @@
 
     .symbol {
         height: 200px;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding: 20px;
+        transition: box-shadow 0.2s ease;
+    }
+
+    .symbol.scroll {
+        box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        z-index: 1;
     }
 
     .symbol svg {
@@ -108,9 +135,21 @@
         width: 100%
     }
 
+    h2 {
+        margin-left: 20px;
+    }
+
     .option-inputs {
-        padding: 20px;
-        margin-top: 8px
+        padding: 0px 20px 0px 20px;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+    }
+
+    .option-inputs section {
+        width: 400px;
     }
 
     /*
@@ -125,15 +164,38 @@
         font-size: x-small;
     }
 
+    .mdc-menu__items figure {
+        pointer-events: none;
+        width: 30px;
+        height: 30px;
+        margin-right: 8px;
+        margin-left: -0px
+    }
+
     .mdc-menu__items img {
         pointer-events: none;
-        margin-right: 8px;
-        width: 30px;
+        max-width: 30px;
         max-height: 30px;
     }
 </style>
+<script>
+    function symbolOverlay() {
+        if (window.pageYOffset > 146 && window.innerHeight > 600) {
+            document.querySelectorAll(".symbol").forEach(function (elm) { elm.classList.add("scroll") });
+            document.querySelector(".content").classList.add("scroll");
+        } else {
+            document.querySelectorAll(".symbol").forEach(function (elm) { elm.classList.remove("scroll") });
+            document.querySelector(".content").classList.remove("scroll");
+        }
+    };
+    window.addEventListener("resize", function () { symbolOverlay() });
+    window.addEventListener("scroll", function () { symbolOverlay() });
+
+</script>
+
 
 <body onload="milsymbolUnitGenerator()" class="mdc-typography">
+
     <header class="toolbar mdc-toolbar">
         <div class="mdc-toolbar__row">
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -213,7 +275,7 @@
     </header>
 
 
-    <section style="margin-top: 126px;">
+    <section class="content">
         <div class="panels">
             <div class="panel active panel-2525c" id="panel-1" role="tabpanel" aria-hidden="false">
                 <center>
@@ -431,10 +493,11 @@
         </div>
     </section>
 
+    <h2 class="mdc-typography--title">
+        Amplifier Fields
+    </h2>
     <div class="option-inputs">
-        <h2 class="mdc-typography--title">
-            Amplifier Fields
-        </h2>
+
         <section id="demo-text-field-wrapper">
             <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
                 <input type="text" class="mdc-text-field__input" id="additionalInformation" maxlength="20" size="30">
@@ -603,14 +666,7 @@
                 acquisitions number when used with SIGINT symbology.
             </p>
         </section>
-
-        <!--<tr><td><code>FieldID R2 </code>Sigint: </td><td><input type="text" id="sigint" onkeyup="drawSymbol()"><br></td><td>M = Mobile, S = Static, or U = Uncertain. <code>xxx</code></td></tr>-->
-        <!--<tr><td><code>FieldID AD </code>Platform Type: </td><td><input type="text" id="platformType" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
-        <tr><td><code>FieldID AE </code>Equipment Teardown Time: </td><td><input type="text" id="equipmentTeardownTime" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
-        <tr><td><code>FieldID AF </code>Common Identifier: </td><td><input type="text" id="commonIdentifier" onkeyup="drawSymbol()"><br></td><td>xxx. <code>xxx</code></td></tr>
-        -->
     </div>
-
 
 </body>
 

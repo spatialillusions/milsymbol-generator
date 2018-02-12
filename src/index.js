@@ -58,7 +58,7 @@ export default function initGenerator() {
       //optionFields[id] = new mdc.textField.MDCTextField(elm);
       window.elm = elm;
       optionFields[id] = elm.MDCTextField;
-      optionFields[id].listen("change", function() {
+      optionFields[id].listen("keyup", function() {
         renderSymbol();
       });
     });

@@ -16,7 +16,11 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
     if (!symbol.isValid()) {
       item.setAttribute("aria-disabled", "true");
     } else {
-      text = '<img src="' + symbol.asCanvas(2).toDataURL() + '">' + text;
+      text =
+        '<figure><img src="' +
+        symbol.asCanvas(2).toDataURL() +
+        '"></figure>' +
+        text;
     }
   }
   item.innerHTML = text;
@@ -24,6 +28,78 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
   item.setAttribute("role", "option");
   item.setAttribute("tabindex", "0");
   if (mdcSelect) mdcSelect.appendChild(item);
+}
+
+function modifier1(battledimension) {
+  if (battledimension == "GRDTRK_UNT") {
+    return {
+      "-": { name: "-" },
+      A: { name: "Headquarters", sidc: "SFGP------A" },
+      B: { name: "Task Force HQ", sidc: "SFGP------B" },
+      C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },
+      D: { name: "Feint Dummy/Task Force HQ", sidc: "SFGP------D" },
+      E: { name: "Task Force", sidc: "SFGP------E" },
+      F: { name: "Feint Dummy", sidc: "SFGP------F" },
+      G: { name: "Feint Dummy/Task Force", sidc: "SFGP------G" }
+    };
+  }
+  if (battledimension == "GRDTRK_EQT") {
+    return {
+      "-": { name: "-" },
+      M: { name: "Mobility" }
+    };
+  }
+  if (battledimension == "GRDTRK_INS") {
+    return {
+      H: { name: "Installation", sidc: "SFGP------H" }
+    };
+  }
+
+  return { "-": { name: "-" } };
+}
+
+function modifier2(battledimension, modifier1) {
+  if (battledimension == "GRDTRK_UNT") {
+    return {
+      "-": { name: "-" },
+      A: { name: "Team/Crew", sidc: "SFGP-------A" },
+      B: { name: "Squad", sidc: "SFGP-------B" },
+      C: { name: "Section", sidc: "SFGP-------C" },
+      D: { name: "Platoon/Detachment", sidc: "SFGP-------D" },
+      E: { name: "Company/Battery/Troop", sidc: "SFGP-------E" },
+      F: { name: "Battalion/Squadron", sidc: "SFGP-------F" },
+      G: { name: "Regiment/Group", sidc: "SFGP-------G" },
+      H: { name: "Brigade", sidc: "SFGP-------H" },
+      I: { name: "Division", sidc: "SFGP-------I" },
+      J: { name: "Corps/Mef", sidc: "SFGP-------J" },
+      K: { name: "Army", sidc: "SFGP-------K" },
+      L: { name: "Army Group/Front", sidc: "SFGP-------L" },
+      M: { name: "Region", sidc: "SFGP-------M" },
+      N: { name: "Command", sidc: "SFGP-------N" }
+    };
+  }
+  if (battledimension == "GRDTRK_EQT" && modifier1 == "M") {
+    return {
+      O: { name: "Wheeled/Limited", sidc: "SFGPE-----MO" },
+      P: { name: "Wheeled", sidc: "SFGPE-----MP" },
+      Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
+      R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
+      S: { name: "Towed", sidc: "SFGPE-----MS" },
+      T: { name: "Rail", sidc: "SFGPE-----MT" },
+      U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
+      V: { name: "Sled", sidc: "SFGPE-----MV" },
+      W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
+      Y: { name: "Barge", sidc: "SFGPE-----MY" },
+      Z: { name: "Amphibious", sidc: "SFGPE-----MZ" }
+    };
+  }
+  /*if (battledimension == "GRDTRK_INS") {
+    return {
+      H: { name: "Installation" }
+    };
+  }*/
+
+  return { "-": { name: "-" } };
 }
 
 function initSelect(
@@ -35,9 +111,10 @@ function initSelect(
   selectedIndex
 ) {
   var selectElement = panel.querySelector(className + " .mdc-select");
-
+  //var selectedIndex = 0;
   if (mdcSelects.hasOwnProperty(className)) {
     var mdcSelect = mdcSelects[className];
+    selectedIndex = mdcSelect.selectedIndex;
     mdcSelect.selectedIndex = 0;
   } else {
     var mdcSelect = new mdc.select.MDCSelect(selectElement);
@@ -88,8 +165,10 @@ function initSelect(
       addSelectItem(selectItems, false, key, name, options[key].sidc, standard);
     }
   }
-  // maby add some clever stuff to try to keep the selected index...
+
+  if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
   mdcSelect.selectedIndex = selectedIndex || 0;
+
   return mdcSelect;
 }
 
@@ -118,6 +197,7 @@ export default function(standard) {
     symbolElement.setAttribute("standard", standard);
     renderSymbol();
   }
+
   //Set a generic SIDC for all battle dimensions
   for (var i in milstd[standard]) {
     for (var j in milstd[standard][i]) {
@@ -130,6 +210,31 @@ export default function(standard) {
           "-";
         if (j == "GRDTRK_EQT") milstd[standard][i][j].sidc += "E-----";
         if (j == "GRDTRK_INS") milstd[standard][i][j].sidc += "------" + "H-";
+        /*if (milstd[standard][i][j].hasOwnProperty("modifier 1")) {
+          for (var key in milstd[standard][i][j]["modifier 1"]) {
+            var sidc =
+              firstSymbol["code scheme"] +
+              "F" +
+              firstSymbol["battle dimension"] +
+              "-" +
+              "------" +
+              key;
+            milstd[standard][i][j]["modifier 1"][key].sidc = sidc;
+          }
+        }
+        if (milstd[standard][i][j].hasOwnProperty("modifier 2")) {
+          for (var key in milstd[standard][i][j]["modifier 2"]) {
+            var sidc =
+              firstSymbol["code scheme"] +
+              "F" +
+              firstSymbol["battle dimension"] +
+              "-" +
+              "------" +
+              "-" +
+              key;
+            milstd[standard][i][j]["modifier 2"][key].sidc = sidc;
+          }
+        }*/
       }
     }
   }
@@ -202,12 +307,6 @@ export default function(standard) {
     2
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    //console.log("outside listen battle dimension");
-    /*console.log(
-      `Selected "${battleDimension.selectedOptions[0].textContent}" at index ${
-        battleDimension.selectedIndex
-      } ` + `with value "${battleDimension.value}"`
-    );*/
     initSelect(
       panel,
       ".function-id",
@@ -221,9 +320,7 @@ export default function(standard) {
     initSelect(
       panel,
       ".symbol-modifier-1",
-      milstd[standard][mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ]["modifier 1"] || { "-": { name: "-" } },
+      modifier1(mdcSelects[".battle-dimension"].value),
       standard,
       mdcSelects
     ).emit("MDCSelect:change");
@@ -231,9 +328,10 @@ export default function(standard) {
     initSelect(
       panel,
       ".symbol-modifier-2",
-      milstd[standard][mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ]["modifier 2"] || { "-": { name: "-" } },
+      modifier2(
+        mdcSelects[".battle-dimension"].value,
+        mdcSelects[".symbol-modifier-1"].value
+      ),
       standard,
       mdcSelects
     ).emit("MDCSelect:change");
@@ -271,12 +369,6 @@ export default function(standard) {
     0
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    //.log("outside listen function id");
-    /*console.log(
-      `Selected "${functionId.selectedOptions[0].textContent}" at index ${
-        functionId.selectedIndex
-      } ` + `with value "${functionId.value}"`
-    );*/
     _preRenderSymbol(milstd, standard, mdcSelects);
   });
 
@@ -284,14 +376,22 @@ export default function(standard) {
   mdcSelects[className] = initSelect(
     panel,
     className,
-    milstd[standard][mdcSelects[".coding-scheme"].value][
-      mdcSelects[".battle-dimension"].value
-    ]["modifier 1"] || { "-": { name: "-" } },
+    modifier1(mdcSelects[".battle-dimension"].value),
     standard,
     mdcSelects,
     0
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
+    initSelect(
+      panel,
+      ".symbol-modifier-2",
+      modifier2(
+        mdcSelects[".battle-dimension"].value,
+        mdcSelects[".symbol-modifier-1"].value
+      ),
+      standard,
+      mdcSelects
+    );
     _preRenderSymbol(milstd, standard, mdcSelects);
   });
 
@@ -299,9 +399,10 @@ export default function(standard) {
   mdcSelects[className] = initSelect(
     panel,
     className,
-    milstd[standard][mdcSelects[".coding-scheme"].value][
-      mdcSelects[".battle-dimension"].value
-    ]["modifier 2"] || { "-": { name: "-" } },
+    modifier2(
+      mdcSelects[".battle-dimension"].value,
+      mdcSelects[".symbol-modifier-1"].value
+    ),
     standard,
     mdcSelects,
     0
