@@ -78,9 +78,13 @@ export default function initGenerator() {
     styleFields[id].listen("MDCSlider:input", function() {
       renderSymbol();
     });
-
-    //const slider = new MDCSlider(document.querySelector('.mdc-slider'));
-    //slider.listen('MDCSlider:change', () => console.log(`Value changed to ${slider.value}`));
+  });
+  document.querySelectorAll(".style-inputs .mdc-select").forEach(function(elm) {
+    var id = elm.getAttribute("id");
+    styleFields[id] = new mdc.select.MDCSelect(elm);
+    styleFields[id].listen("MDCSelect:change", function() {
+      renderSymbol();
+    });
   });
 
   initLetterPanel("2525c");

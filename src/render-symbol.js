@@ -18,7 +18,11 @@ export default function(standard, sidc) {
   document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
     style[elm.getAttribute("id")] = elm.getAttribute("aria-valuenow");
   });
-
+  document.querySelectorAll(".style-inputs .mdc-select").forEach(function(elm) {
+    var id = elm.getAttribute("id");
+    elm = elm.querySelector("li[aria-selected]");
+    if (elm) style[id] = elm.textContent.replace(/\n\s*/g, "");
+  });
   document.querySelectorAll(".symbol").forEach(function(elm) {
     if (elm.hasAttribute("sidc") && elm.hasAttribute("standard")) {
       style.standard =

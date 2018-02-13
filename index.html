@@ -227,8 +227,16 @@
         margin-top: 5px
     }
 
-    .mdc-slider {
-        /*-webkit-user-select: none;*/
+    .select {
+        /*margin-bottom: 20px;*/
+        width: 350px;
+        /*margin-right: 30px;
+        padding-right: 50px;*/
+        margin-top: 5px
+    }
+
+    .select .mdc-select {
+        margin-top: 4px
     }
 </style>
 <script>
@@ -798,8 +806,8 @@
         </section>
 
         <section class="slider">
-            fillOpacity
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            Fill opacity
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Opacity of the fill in the frame.</p>
             <div id="fillOpacity" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="1"
                 aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -813,9 +821,10 @@
                 </div>
             </div>
         </section>
+
         <section class="slider">
-            hqStafLength
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            HQ staf length
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Length of the HQ staf.</p>
             <div id="hqStafLength" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100"
                 aria-valuenow="100" data-step="10" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -834,8 +843,8 @@
         </section>
 
         <section class="slider">
-            infoSize
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            Information size
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of texts around symbol.</p>
             <div id="infoSize" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="10" aria-valuemax="100"
                 aria-valuenow="40" data-step="5" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -854,8 +863,8 @@
         </section>
 
         <section class="slider">
-            outlineWidth
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            Outline width
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Width of outline, if any.</p>
             <div id="outlineWidth" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="10"
                 aria-valuenow="0" data-step="1" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -874,8 +883,8 @@
         </section>
 
         <section class="slider">
-            size
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            Symbol size
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of the symbol.</p>
             <div id="size" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="20" aria-valuemax="250"
                 aria-valuenow="100" data-step="10" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -894,8 +903,8 @@
         </section>
 
         <section class="slider">
-            strokeWidth
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">some sort of description</p>
+            Stroke width
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">The stroke width for lines in the symbol.</p>
             <div id="strokeWidth" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="1" aria-valuemax="10"
                 aria-valuenow="3" data-step="1" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
@@ -913,9 +922,147 @@
             </div>
         </section>
 
+        <section class="select">
+            <div id="colorMode" class="mdc-select" role="listbox">
+                <div class="mdc-select__surface" tabindex="0">
+                    <div class="mdc-select__label mdc-select__label--float-above">Symbol color mode</div>
+                    <div class="mdc-select__selected-text"></div>
+                    <div class="mdc-select__bottom-line"></div>
+                </div>
+                <div class="mdc-menu mdc-select__menu">
+                    <ul class="mdc-list mdc-menu__items">
+                        <li class="mdc-list-item" role="option" aria-selected tabindex="0">
+                            Light
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Medium
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Dark
+                        </li>
+                        <!--<li class="mdc-list-item" role="option" tabindex="0">
+                            Swedish armed forces
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-        more style settings to come...
-        <br> infoColor </div>
+        <section class="select">
+            <div id="monoColor" class="mdc-select" role="listbox">
+                <div class="mdc-select__surface" tabindex="0">
+                    <div class="mdc-select__label">Symbol mono color</div>
+                    <div class="mdc-select__selected-text"></div>
+                    <div class="mdc-select__bottom-line"></div>
+                </div>
+                <div class="mdc-menu mdc-select__menu">
+                    <ul class="mdc-list mdc-menu__items">
+                        <li class="mdc-list-item" role="option" tabindex="0">
+
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Aqua
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Blue
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Gray
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Green
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Maroon
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Red
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Yellow
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="select">
+            <div id="infoColor" class="mdc-select" role="listbox">
+                <div class="mdc-select__surface" tabindex="0">
+                    <div class="mdc-select__label">Symbol info color</div>
+                    <div class="mdc-select__selected-text"></div>
+                    <div class="mdc-select__bottom-line"></div>
+                </div>
+                <div class="mdc-menu mdc-select__menu">
+                    <ul class="mdc-list mdc-menu__items">
+                        <li class="mdc-list-item" role="option" tabindex="0">
+
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Aqua
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Blue
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Gray
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Green
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Maroon
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Red
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Yellow
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="select">
+            <div id="outlineColor" class="mdc-select" role="listbox">
+                <div class="mdc-select__surface" tabindex="0">
+                    <div class="mdc-select__label mdc-select__label--float-above">Outline color</div>
+                    <div class="mdc-select__selected-text"></div>
+                    <div class="mdc-select__bottom-line"></div>
+                </div>
+                <div class="mdc-menu mdc-select__menu">
+                    <ul class="mdc-list mdc-menu__items">
+                        <li class="mdc-list-item" role="option" aria-selected tabindex="0">
+                            rgb(239, 239, 239)
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Aqua
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Blue
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Gray
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Green
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Maroon
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Red
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            Yellow
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <br>
     <br>
