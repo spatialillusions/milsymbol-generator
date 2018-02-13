@@ -11048,16 +11048,22 @@ function renderSymbol(standard, sidc) {
         options[elm.getAttribute("id")] = elm.value;
       }
     });
+  var style = {};
+  document
+    .querySelectorAll(".style-inputs .mdc-switch input")
+    .forEach(function(elm) {
+      style[elm.getAttribute("id")] = elm.checked;
+    });
+  document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
+    style[elm.getAttribute("id")] = elm.getAttribute("aria-valuenow");
+  });
 
   document.querySelectorAll(".symbol").forEach(function(elm) {
     if (elm.hasAttribute("sidc") && elm.hasAttribute("standard")) {
-      var style = {
-        size: 100,
-        standard:
-          elm.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6"
-      };
+      style.standard =
+        elm.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6";
 
-      elm.innerHTML = new milsymbol.Symbol(elm.getAttribute("sidc"), style, options, {
+      elm.innerHTML = new milsymbol.Symbol(elm.getAttribute("sidc"), options, style, {
         symetric: true
       }).asSVG();
     }
@@ -11534,6 +11540,13 @@ function initGenerator() {
     });
   // Set up event listeners for all option inputs
   var styleFields = {};
+  document
+    .querySelectorAll(".style-inputs .mdc-switch input")
+    .forEach(function(elm) {
+      elm.addEventListener("change", function() {
+        renderSymbol();
+      });
+    });
   document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
     var id = elm.getAttribute("id");
     styleFields[id] = new MDCSlider(elm);

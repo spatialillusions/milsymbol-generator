@@ -65,11 +65,18 @@ export default function initGenerator() {
     });
   // Set up event listeners for all option inputs
   var styleFields = {};
+  document
+    .querySelectorAll(".style-inputs .mdc-switch input")
+    .forEach(function(elm) {
+      elm.addEventListener("change", function() {
+        renderSymbol();
+      });
+    });
   document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
     var id = elm.getAttribute("id");
     styleFields[id] = new mdc.slider.MDCSlider(elm);
     styleFields[id].listen("MDCSlider:change", function() {
-      //renderSymbol();
+      renderSymbol();
     });
 
     //const slider = new MDCSlider(document.querySelector('.mdc-slider'));
