@@ -159,22 +159,30 @@
     .option-inputs {
         padding: 0px 20px 0px 20px;
         margin-top: 8px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        -webkit-column-width: 400px;
+        -moz-column-width: 400px;
+        column-width: 400px;
 
     }
 
     .option-inputs section {
         width: 400px;
+        display: inline-block;
+        height: 108px;
     }
 
     .style-inputs {
         padding: 0px 20px 0px 20px;
         margin-top: 48px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        -webkit-column-width: 400px;
+        -moz-column-width: 400px;
+        column-width: 400px;
+    }
+
+    .style-inputs section {
+        width: 380px;
+        display: inline-block;
+        height: 80px;
     }
 
     /*
@@ -205,19 +213,22 @@
     }
 
     .switch {
-        width: 370px;
+        width: 350px;
         height: 68px;
-        margin-right: 30px;
+        /*margin-right: 30px;*/
+        margin-top: 5px
     }
 
     .slider {
-        margin-bottom: 20px;
-        width: 370px;
-        margin-right: 30px;
+        /*margin-bottom: 20px;*/
+        width: 350px;
+        /*margin-right: 30px;
+        padding-right: 50px;*/
+        margin-top: 5px
     }
 
     .mdc-slider {
-        -webkit-user-select: none;
+        /*-webkit-user-select: none;*/
     }
 </style>
 <script>
@@ -569,8 +580,8 @@
                 <label for="altitudeDepth" class="mdc-text-field__label">Altitude/Depth</label>
             </div>
             <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
-                A text modifier for units, equipment, and installations, that displays either altitude flight level, depth for submerged
-                objects; or height of equipment or structures on the ground.
+                A text modifier for units, equipment, and installations, that displays altitude, depth; or height of equipment or structures
+                on the ground.
             </p>
         </section>
         <section id="demo-text-field-wrapper">
@@ -644,8 +655,7 @@
                 <label for="location" class="mdc-text-field__label">Location</label>
             </div>
             <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
-                A text modifier for units, equipment, and installations that displays a symbol's location in degrees, minutes, and seconds
-                (or in UTM or other applicable display format).
+                A text modifier for units, equipment, and installations that displays a symbol's location.
             </p>
         </section>
         <section id="demo-text-field-wrapper">
@@ -905,18 +915,20 @@
         </section>
 
 
-
-        infoColor
-
-    </div>
+        more style settings to come...
+        <br> infoColor </div>
 
     <br>
     <br>
 
     <div style="max-width:800px; margin:auto; padding:8px;">
         <small>
-            This page is built using
-            <a href="https://github.com/spatialillusions/milsymbol">milsymbol</a>. You can get the complete code for the
+            The Unit Symbol Generator supports all
+            <i>point</i> symbols from standards listed above. Tactical graphics, other than points are not supported and are
+            disabled in the select menues.
+            <br>
+            <br> The generator is using
+            <a href="https://github.com/spatialillusions/milsymbol">milsymbol</a> for rendering the points symbols. You can get the complete code for the
             <a href="https://github.com/spatialillusions/milsymbol-generator">unit symbol generator</a> on GitHub.
             <br>
             <br> This page and milsymbol is built and maintained by Måns Beckman. If you want to support the development or simply

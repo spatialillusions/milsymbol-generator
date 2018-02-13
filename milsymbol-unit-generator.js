@@ -11550,7 +11550,7 @@ function initGenerator() {
   document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
     var id = elm.getAttribute("id");
     styleFields[id] = new MDCSlider(elm);
-    styleFields[id].listen("MDCSlider:change", function() {
+    styleFields[id].listen("MDCSlider:input", function() {
       renderSymbol();
     });
 
