@@ -18,11 +18,9 @@ export default function(standard, sidc) {
           elm.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6"
       };
 
-      elm.innerHTML = new ms.Symbol(
-        elm.getAttribute("sidc"),
-        style,
-        options
-      ).asSVG();
+      elm.innerHTML = new ms.Symbol(elm.getAttribute("sidc"), style, options, {
+        symetric: true
+      }).asSVG();
     }
   });
 }

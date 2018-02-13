@@ -9,10 +9,12 @@ import renderSymbol from "./render-symbol.js";
 //Make sure symbol are centered
 ms.addSymbolPart(function squareIcon() {
   var gbbox = new ms.BBox();
-  var anchor = { x: 100, y: 100 };
-  var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
-  gbbox.x1 = anchor.x - maxx;
-  gbbox.x2 = anchor.x + maxx;
+  if (this.options.symetric) {
+    var anchor = { x: 100, y: 100 };
+    var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
+    gbbox.x1 = anchor.x - maxx;
+    gbbox.x2 = anchor.x + maxx;
+  }
   return { pre: [], post: [], bbox: gbbox };
 });
 
@@ -56,12 +58,23 @@ export default function initGenerator() {
     .forEach(function(elm) {
       var id = elm.querySelector(".mdc-text-field__input").getAttribute("id");
       //optionFields[id] = new mdc.textField.MDCTextField(elm);
-      window.elm = elm;
       optionFields[id] = elm.MDCTextField;
       optionFields[id].listen("keyup", function() {
         renderSymbol();
       });
     });
+  // Set up event listeners for all option inputs
+  var styleFields = {};
+  document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
+    var id = elm.getAttribute("id");
+    styleFields[id] = new mdc.slider.MDCSlider(elm);
+    styleFields[id].listen("MDCSlider:change", function() {
+      //renderSymbol();
+    });
+
+    //const slider = new MDCSlider(document.querySelector('.mdc-slider'));
+    //slider.listen('MDCSlider:change', () => console.log(`Value changed to ${slider.value}`));
+  });
 
   initLetterPanel("2525c");
   initLetterPanel("app6b");

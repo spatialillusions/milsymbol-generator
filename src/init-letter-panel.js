@@ -11,7 +11,8 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
   if (sidc) {
     var symbol = new ms.Symbol(sidc, {
       size: 20,
-      standard: standard.indexOf("2525") != -1 ? "2525" : "APP6"
+      standard: standard.indexOf("2525") != -1 ? "2525" : "APP6",
+      symetric: true
     });
     if (!symbol.isValid()) {
       item.setAttribute("aria-disabled", "true");

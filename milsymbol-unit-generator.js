@@ -11057,11 +11057,9 @@ function renderSymbol(standard, sidc) {
           elm.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6"
       };
 
-      elm.innerHTML = new milsymbol.Symbol(
-        elm.getAttribute("sidc"),
-        style,
-        options
-      ).asSVG();
+      elm.innerHTML = new milsymbol.Symbol(elm.getAttribute("sidc"), style, options, {
+        symetric: true
+      }).asSVG();
     }
   });
 }
@@ -11072,7 +11070,8 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
   if (sidc) {
     var symbol = new milsymbol.Symbol(sidc, {
       size: 20,
-      standard: standard.indexOf("2525") != -1 ? "2525" : "APP6"
+      standard: standard.indexOf("2525") != -1 ? "2525" : "APP6",
+      symetric: true
     });
     if (!symbol.isValid()) {
       item.setAttribute("aria-disabled", "true");
@@ -11479,10 +11478,12 @@ function initLetterPanel(standard) {
 //Make sure symbol are centered
 milsymbol.addSymbolPart(function squareIcon() {
   var gbbox = new milsymbol.BBox();
-  var anchor = { x: 100, y: 100 };
-  var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
-  gbbox.x1 = anchor.x - maxx;
-  gbbox.x2 = anchor.x + maxx;
+  if (this.options.symetric) {
+    var anchor = { x: 100, y: 100 };
+    var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
+    gbbox.x1 = anchor.x - maxx;
+    gbbox.x2 = anchor.x + maxx;
+  }
   return { pre: [], post: [], bbox: gbbox };
 });
 
@@ -11526,12 +11527,23 @@ function initGenerator() {
     .forEach(function(elm) {
       var id = elm.querySelector(".mdc-text-field__input").getAttribute("id");
       //optionFields[id] = new mdc.textField.MDCTextField(elm);
-      window.elm = elm;
       optionFields[id] = elm.MDCTextField;
       optionFields[id].listen("keyup", function() {
         renderSymbol();
       });
     });
+  // Set up event listeners for all option inputs
+  var styleFields = {};
+  document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
+    var id = elm.getAttribute("id");
+    styleFields[id] = new MDCSlider(elm);
+    styleFields[id].listen("MDCSlider:change", function() {
+      renderSymbol();
+    });
+
+    //const slider = new MDCSlider(document.querySelector('.mdc-slider'));
+    //slider.listen('MDCSlider:change', () => console.log(`Value changed to ${slider.value}`));
+  });
 
   initLetterPanel("2525c");
   initLetterPanel("app6b");
