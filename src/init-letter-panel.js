@@ -1,13 +1,15 @@
-import * as mdc from "material-components-web";
+import { select } from "material-components-web";
 
 import ms from "../../milsymbol/dist/milsymbol.js";
-import milstd from "../../milsymbol/dist/milstd.js";
+import { app6b, milstd2525c } from "../../milsymbol/dist/milstd.js";
 
 import renderSymbol from "./render-symbol.js";
 
+var milstd = { app6b: app6b, "2525c": milstd2525c };
+
 function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
-  var item = document.createElement("li");
-  item.classList.add("mdc-list-item");
+  var item = "<li ";
+  item += 'class="mdc-list-item" ';
   if (sidc) {
     var symbol = new ms.Symbol(sidc, {
       size: 20,
@@ -15,7 +17,7 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
       symetric: true
     });
     if (!symbol.isValid()) {
-      item.setAttribute("aria-disabled", "true");
+      item += "aria-disabled ";
     } else {
       text =
         '<figure><img src="' +
@@ -24,11 +26,11 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
         text;
     }
   }
-  item.innerHTML = text;
-  item.id = value;
-  item.setAttribute("role", "option");
-  item.setAttribute("tabindex", "0");
-  if (mdcSelect) mdcSelect.appendChild(item);
+  item += 'id="' + value + '" ';
+  item += 'role="option" ';
+  item += 'tabindex="0" ';
+  item += ">" + text + "</li>";
+  return item;
 }
 
 function modifier1(battledimension) {
@@ -118,7 +120,7 @@ function initSelect(
     selectedIndex = mdcSelect.selectedIndex;
     mdcSelect.selectedIndex = 0;
   } else {
-    var mdcSelect = new mdc.select.MDCSelect(selectElement);
+    var mdcSelect = new select.MDCSelect(selectElement);
     mdcSelects[className] = mdcSelect;
   }
 
@@ -132,6 +134,7 @@ function initSelect(
     selectItems.removeChild(selectItems.firstChild);
   }
 
+  var items = "";
   if (options.hasOwnProperty("main icon")) {
     for (var i = 0; i < options["main icon"].length; i++) {
       var sidc =
@@ -150,7 +153,7 @@ function initSelect(
         "</em>" +
         options["main icon"][i].name.slice(-1);
 
-      addSelectItem(
+      items += addSelectItem(
         selectItems,
         false,
         options["main icon"][i].code,
@@ -163,9 +166,17 @@ function initSelect(
     for (var key in options) {
       if (key == "name") continue;
       name = options[key].name == "-" ? "" : options[key].name;
-      addSelectItem(selectItems, false, key, name, options[key].sidc, standard);
+      items += addSelectItem(
+        selectItems,
+        false,
+        key,
+        name,
+        options[key].sidc,
+        standard
+      );
     }
   }
+  selectItems.innerHTML = items;
 
   if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
   mdcSelect.selectedIndex = selectedIndex || 0;

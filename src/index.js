@@ -1,4 +1,4 @@
-import * as mdc from "material-components-web";
+import { select, slider, tabs, textField } from "material-components-web";
 import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
 import ms from "../../milsymbol/dist/milsymbol.js";
@@ -21,7 +21,7 @@ ms.addSymbolPart(function squareIcon() {
 export default function initGenerator() {
   //
 
-  var tabBarScroller = new mdc.tabs.MDCTabBarScroller(
+  var tabBarScroller = new tabs.MDCTabBarScroller(
     document.querySelector("#tab-bar-scroller")
   );
 
@@ -49,7 +49,7 @@ export default function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
-  mdc.autoInit();
+  //mdc.autoInit();
 
   // Set up event listeners for all option inputs
   var optionFields = {};
@@ -57,8 +57,8 @@ export default function initGenerator() {
     .querySelectorAll(".option-inputs .mdc-text-field")
     .forEach(function(elm) {
       var id = elm.querySelector(".mdc-text-field__input").getAttribute("id");
-      //optionFields[id] = new mdc.textField.MDCTextField(elm);
-      optionFields[id] = elm.MDCTextField;
+      optionFields[id] = new textField.MDCTextField(elm);
+      //optionFields[id] = elm.MDCTextField;
       optionFields[id].listen("keyup", function() {
         renderSymbol();
       });
@@ -74,19 +74,20 @@ export default function initGenerator() {
     });
   document.querySelectorAll(".style-inputs .mdc-slider").forEach(function(elm) {
     var id = elm.getAttribute("id");
-    styleFields[id] = new mdc.slider.MDCSlider(elm);
+    styleFields[id] = new slider.MDCSlider(elm);
     styleFields[id].listen("MDCSlider:input", function() {
       renderSymbol();
     });
   });
   document.querySelectorAll(".style-inputs .mdc-select").forEach(function(elm) {
     var id = elm.getAttribute("id");
-    styleFields[id] = new mdc.select.MDCSelect(elm);
+    styleFields[id] = new select.MDCSelect(elm);
     styleFields[id].listen("MDCSelect:change", function() {
       renderSymbol();
     });
   });
 
+  //TODO, initiate panels when they are shown.
   initLetterPanel("2525c");
   initLetterPanel("app6b");
 }
