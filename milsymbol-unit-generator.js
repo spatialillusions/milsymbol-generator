@@ -10657,6 +10657,19 @@ var app6b = {
   TACGRP: tacticalgraphics_app6b
 };
 
+//Make sure symbol are centered
+milsymbol.addSymbolPart(function squareIcon() {
+  var gbbox = new milsymbol.BBox();
+  if (this.options.symetric) {
+    var anchor = { x: 100, y: 100 };
+    var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
+    gbbox.x1 = anchor.x - maxx;
+    gbbox.x2 = anchor.x + maxx;
+  }
+  //Post is set to an array of an empty array, because otherwise milsymbol will ignore the boundingbox
+  return { pre: [], post: [[]], bbox: gbbox };
+});
+
 function renderSymbol(standard, sidc) {
   var options = {};
   document
@@ -10678,16 +10691,59 @@ function renderSymbol(standard, sidc) {
   document.querySelectorAll(".style-inputs .mdc-select").forEach(function(elm) {
     var id = elm.getAttribute("id");
     elm = elm.querySelector("li[aria-selected]");
-    if (elm) style[id] = elm.textContent.replace(/\n\s*/g, "");
+    if (elm) {
+      if (elm.hasAttribute("id")) {
+        style[id] = elm.getAttribute("id");
+      } else {
+        style[id] = elm.textContent.replace(/\n\s*/g, "");
+      }
+    }
   });
   document.querySelectorAll(".symbol").forEach(function(elm) {
-    if (elm.hasAttribute("sidc") && elm.hasAttribute("standard")) {
+    var sym = elm.querySelector(".svg-symbol");
+    if (sym.hasAttribute("sidc") && sym.hasAttribute("standard")) {
       style.standard =
-        elm.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6";
+        sym.getAttribute("standard").indexOf("2525") != -1 ? "2525" : "APP6";
 
-      elm.innerHTML = new milsymbol.Symbol(elm.getAttribute("sidc"), options, style, {
+      var ua = window.navigator.userAgent;
+      var isIE =
+        ua.indexOf("MSIE ") > 0 ||
+        ua.indexOf("Trident/") > 0 ||
+        ua.indexOf("Edge/") > 0
+          ? true
+          : false;
+
+      var symbol = new milsymbol.Symbol(sym.getAttribute("sidc"), options, style, {
         symetric: true
-      }).asSVG();
+      });
+
+      //if (isIE) {
+      sym.innerHTML = symbol.asSVG();
+      /*
+      } else {
+        sym.innerHTML =
+          '<img src="' +
+          symbol.asCanvas(window.devicePixelRatio).toDataURL() +
+          '" style="width:' +
+          symbol.getSize().width +
+          'px;">';
+      }
+      //*/
+      var downloadSymbol = new milsymbol.Symbol(
+        sym.getAttribute("sidc"),
+        options,
+        style,
+        {
+          symetric: false
+        }
+      );
+
+      elm.querySelector("a").href = downloadSymbol.asCanvas().toDataURL();
+      var fileName = [];
+      if (options.uniqueDesignation) fileName.push(options.uniqueDesignation);
+      fileName.push(sym.getAttribute("sidc"));
+      elm.querySelector("a").download = fileName.join(" ") + ".png";
+      if (isIE) elm.querySelector("a").style = "display:none;";
     }
   });
 }
@@ -10704,7 +10760,7 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
       symetric: true
     });
     if (!symbol.isValid()) {
-      item += "aria-disabled ";
+      item += 'aria-disabled="true" ';
     } else {
       text =
         '<figure><img src="' +
@@ -10890,10 +10946,13 @@ function initLetterPanel(standard) {
       mdcSelects[".symbol-modifier-2"].value;
 
     var symbolElement = document.querySelector(
-      ".panel-" + standard + " .symbol"
+      ".panel-" + standard + " .svg-symbol"
     );
     symbolElement.setAttribute("sidc", sidc);
     symbolElement.setAttribute("standard", standard);
+
+    document.querySelector(".panel-" + standard + " .sidc").textContent = sidc;
+
     renderSymbol();
   }
 
@@ -11114,17 +11173,7 @@ function initLetterPanel(standard) {
 }
 
 // At the moment use our development version of milsymbol
-//Make sure symbol are centered
-milsymbol.addSymbolPart(function squareIcon() {
-  var gbbox = new milsymbol.BBox();
-  if (this.options.symetric) {
-    var anchor = { x: 100, y: 100 };
-    var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
-    gbbox.x1 = anchor.x - maxx;
-    gbbox.x2 = anchor.x + maxx;
-  }
-  return { pre: [], post: [], bbox: gbbox };
-});
+//import ms from "../../milsymbol/dist/milsymbol.js";
 
 function initGenerator() {
   //

@@ -110,13 +110,12 @@
     }
 
     .content.scroll {
-        margin-top: 366px;
+        margin-top: 398px;
     }
 
     .panels {
-        padding: 20px;
+        padding: 0px 20px 20px 20px;
         margin-top: 8px;
-
         margin-top: 8px
     }
 
@@ -129,26 +128,31 @@
     }
 
     .symbol {
-        height: 200px;
+        height: 250px;
         margin-left: -20px;
         margin-right: -20px;
-        padding: 20px;
+        margin-bottom: 20px;
+        padding: 0.1px 0px 0px 0px;
         transition: box-shadow 0.2s ease;
+        border-bottom: 1px solid #e5e5e5;
     }
 
     .symbol.scroll {
         box-shadow: rgba(0, 0, 0, 0.258824) 0px 2px 5px 0px;
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
+        top: -2px;
+        left: 20px;
+        right: 20px;
         background-color: white;
         z-index: 2;
     }
 
-    .symbol svg {
-        max-width: 100%;
-        max-height: 200px;
+    .symbol svg,
+    .symbol img {
+        /*max-width: 100%;*/
+        max-height: 180px;
+        /*width: auto;
+        height: auto;*/
     }
 
     .mdc-select {
@@ -246,7 +250,7 @@
 </style>
 <script>
     function symbolOverlay() {
-        if (window.pageYOffset > 146 && window.innerHeight > 600) {
+        if (window.pageYOffset > 128 && window.innerHeight > 600) {
             document.querySelectorAll(".symbol").forEach(function (elm) { elm.classList.add("scroll") });
             document.querySelector(".content").classList.add("scroll");
         } else {
@@ -324,7 +328,11 @@
                 <div id="tab-bar-scroller" class="mdc-tab-bar-scroller">
                     <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--back">
                         <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="scroll back button">
-                            < </a>
+                            <svg fill="rgba(0, 0, 0, .54)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z" />
+                                <path d="M0-.5h24v24H0z" fill="none" />
+                            </svg>
+                        </a>
                     </div>
                     <div class="mdc-tab-bar-scroller__scroll-frame">
                         <nav id="scrollable-tab-bar" class="mdc-tab-bar mdc-tab-bar-scroller__scroll-frame__tabs custom-indicator-tab-bar">
@@ -337,7 +345,10 @@
                     </div>
                     <div class="mdc-tab-bar-scroller__indicator mdc-tab-bar-scroller__indicator--forward">
                         <a class="mdc-tab-bar-scroller__indicator__inner material-icons" href="#" aria-label="scroll forward button">
-                            >
+                            <svg fill="rgba(0, 0, 0, .54)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z" />
+                                <path d="M0-.25h24v24H0z" fill="none" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -349,40 +360,25 @@
     <section class="content">
         <div class="panels">
             <div class="panel active panel-2525c" id="panel-1" role="tabpanel" aria-hidden="false">
-                <center>
-                    <div class="symbol">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="158" height="108" viewBox="21 46 158 108">
-                            <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
-                        </svg>
-                    </div>
-                </center>
 
-                <div class="affiliation">
-                    <div class="mdc-select" role="listbox">
-                        <div class="mdc-select__surface" tabindex="0">
-                            <div class="mdc-select__label">Affiliation</div>
-                            <div class="mdc-select__selected-text"></div>
-                            <div class="mdc-select__bottom-line"></div>
-                        </div>
-                        <div class="mdc-menu mdc-select__menu">
-                            <ul class="mdc-list mdc-menu__items">
-                            </ul>
-                        </div>
+                <div class="symbol">
+                    <div>
+                        <h2 style="display: inline-block;" class="mdc-typography--title sidc">&nbsp;</h2>
+                        <a href="" title="Download as PNG">
+                            <svg style="float:right;margin:20px;" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                                <path d="M0 0h24v24H0z" fill="none" />
+                            </svg>
+                        </a>
                     </div>
-                </div>
 
-                <div class="status">
-                    <div class="mdc-select" role="listbox">
-                        <div class="mdc-select__surface" tabindex="0">
-                            <div class="mdc-select__label">Status</div>
-                            <div class="mdc-select__selected-text"></div>
-                            <div class="mdc-select__bottom-line"></div>
+                    <center>
+                        <div class="svg-symbol">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="158" height="108" viewBox="21 46 158 108">
+                                <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                            </svg>
                         </div>
-                        <div class="mdc-menu mdc-select__menu">
-                            <ul class="mdc-list mdc-menu__items">
-                            </ul>
-                        </div>
-                    </div>
+                    </center>
                 </div>
 
                 <div class="coding-scheme">
@@ -399,10 +395,38 @@
                     </div>
                 </div>
 
+                <div class="affiliation">
+                    <div class="mdc-select" role="listbox">
+                        <div class="mdc-select__surface" tabindex="0">
+                            <div class="mdc-select__label">Affiliation</div>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__bottom-line"></div>
+                        </div>
+                        <div class="mdc-menu mdc-select__menu">
+                            <ul class="mdc-list mdc-menu__items">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="battle-dimension">
                     <div class="mdc-select" role="listbox">
                         <div class="mdc-select__surface" tabindex="0">
                             <div class="mdc-select__label">Battle Dimension</div>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__bottom-line"></div>
+                        </div>
+                        <div class="mdc-menu mdc-select__menu">
+                            <ul class="mdc-list mdc-menu__items">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status">
+                    <div class="mdc-select" role="listbox">
+                        <div class="mdc-select__surface" tabindex="0">
+                            <div class="mdc-select__label">Status</div>
                             <div class="mdc-select__selected-text"></div>
                             <div class="mdc-select__bottom-line"></div>
                         </div>
@@ -458,14 +482,26 @@
             </div>
 
             <div class="panel panel-app6b" id="panel-2" role="tabpanel" aria-hidden="true">
-                <center>
-                    <div class="symbol">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="158" height="108" viewBox="21 46 158 108">
-                            <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
-                        </svg>
-                    </div>
-                </center>
 
+                <div class="symbol">
+                    <div>
+                        <h2 style="display: inline-block;" class="mdc-typography--title sidc">&nbsp;</h2>
+                        <a href="" title="Download as PNG">
+                            <svg style="float:right;margin:20px;" fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" />
+                                <path d="M0 0h24v24H0z" fill="none" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <center>
+                        <div class="svg-symbol">
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny" width="158" height="108" viewBox="21 46 158 108">
+                                <path d="M25,50 l150,0 0,100 -150,0 z" stroke-width="4" stroke="black" fill="rgb(128,224,255)" fill-opacity="1"></path>
+                            </svg>
+                        </div>
+                    </center>
+                </div>
 
                 <div class="coding-scheme">
                     <div class="mdc-select" role="listbox">
@@ -811,26 +847,9 @@
         </section>
 
         <section class="slider">
-            Fill opacity
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Opacity of the fill in the frame.</p>
-            <div id="fillOpacity" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="1"
-                aria-label="Select Value">
-                <div class="mdc-slider__track-container">
-                    <div class="mdc-slider__track"></div>
-                </div>
-                <div class="mdc-slider__thumb-container">
-                    <svg class="mdc-slider__thumb" width="21" height="21">
-                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
-                    </svg>
-                    <div class="mdc-slider__focus-ring"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="slider">
-            HQ staf length
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Length of the HQ staf.</p>
-            <div id="hqStafLength" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100"
+            Symbol size
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of the symbol.</p>
+            <div id="size" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="20" aria-valuemax="250"
                 aria-valuenow="100" data-step="10" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
@@ -848,10 +867,27 @@
         </section>
 
         <section class="slider">
-            Information size
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of texts around symbol.</p>
-            <div id="infoSize" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="10" aria-valuemax="100"
-                aria-valuenow="40" data-step="5" aria-label="Select Value">
+            Fill opacity
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Opacity of the fill in the frame.</p>
+            <div id="fillOpacity" class="mdc-slider" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="1"
+                aria-label="Select Value">
+                <div class="mdc-slider__track-container">
+                    <div class="mdc-slider__track"></div>
+                </div>
+                <div class="mdc-slider__thumb-container">
+                    <svg class="mdc-slider__thumb" width="21" height="21">
+                        <circle cx="10.5" cy="10.5" r="7.875"></circle>
+                    </svg>
+                    <div class="mdc-slider__focus-ring"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slider">
+            Stroke width
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">The stroke width for lines in the symbol.</p>
+            <div id="strokeWidth" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="1" aria-valuemax="10"
+                aria-valuenow="4" data-step="1" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
                 </div>
@@ -888,10 +924,10 @@
         </section>
 
         <section class="slider">
-            Symbol size
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of the symbol.</p>
-            <div id="size" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="20" aria-valuemax="250"
-                aria-valuenow="100" data-step="10" aria-label="Select Value">
+            Information size
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Size of texts around symbol.</p>
+            <div id="infoSize" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="10" aria-valuemax="100"
+                aria-valuenow="40" data-step="5" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
                 </div>
@@ -908,10 +944,10 @@
         </section>
 
         <section class="slider">
-            Stroke width
-            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">The stroke width for lines in the symbol.</p>
-            <div id="strokeWidth" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="1" aria-valuemax="10"
-                aria-valuenow="3" data-step="1" aria-label="Select Value">
+            HQ staf length
+            <p class="mdc-text-field-helper-text" style="opacity:1;color: rgba(0, 0, 0, .38);">Length of the HQ staf.</p>
+            <div id="hqStafLength" class="mdc-slider mdc-slider--discrete" tabindex="0" role="slider" aria-valuemin="0" aria-valuemax="100"
+                aria-valuenow="100" data-step="10" aria-label="Select Value">
                 <div class="mdc-slider__track-container">
                     <div class="mdc-slider__track"></div>
                 </div>
@@ -1012,6 +1048,9 @@
                         <li class="mdc-list-item" role="option" tabindex="0">
                             Gray
                         </li>
+                        <li id="LightGray" class="mdc-list-item" role="option" tabindex="0">
+                            Light Gray
+                        </li>
                         <li class="mdc-list-item" role="option" tabindex="0">
                             Green
                         </li>
@@ -1039,9 +1078,6 @@
                 </div>
                 <div class="mdc-menu mdc-select__menu">
                     <ul class="mdc-list mdc-menu__items">
-                        <li class="mdc-list-item" role="option" aria-selected tabindex="0">
-                            rgb(239, 239, 239)
-                        </li>
                         <li class="mdc-list-item" role="option" tabindex="0">
                             Aqua
                         </li>
@@ -1062,6 +1098,12 @@
                         </li>
                         <li class="mdc-list-item" role="option" tabindex="0">
                             Yellow
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            White
+                        </li>
+                        <li id="rgb(239, 239, 239)" class="mdc-list-item" role="option" aria-selected tabindex="0">
+                            Offwhite
                         </li>
                     </ul>
                 </div>

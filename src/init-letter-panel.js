@@ -17,7 +17,7 @@ function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
       symetric: true
     });
     if (!symbol.isValid()) {
-      item += "aria-disabled ";
+      item += 'aria-disabled="true" ';
     } else {
       text =
         '<figure><img src="' +
@@ -203,10 +203,13 @@ export default function(standard) {
       mdcSelects[".symbol-modifier-2"].value;
 
     var symbolElement = document.querySelector(
-      ".panel-" + standard + " .symbol"
+      ".panel-" + standard + " .svg-symbol"
     );
     symbolElement.setAttribute("sidc", sidc);
     symbolElement.setAttribute("standard", standard);
+
+    document.querySelector(".panel-" + standard + " .sidc").textContent = sidc;
+
     renderSymbol();
   }
 

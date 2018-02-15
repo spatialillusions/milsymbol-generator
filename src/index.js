@@ -1,22 +1,10 @@
 import { select, slider, tabs, textField } from "material-components-web";
 import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
-import ms from "../../milsymbol/dist/milsymbol.js";
+//import ms from "../../milsymbol/dist/milsymbol.js";
 
 import initLetterPanel from "./init-letter-panel.js";
 import renderSymbol from "./render-symbol.js";
-
-//Make sure symbol are centered
-ms.addSymbolPart(function squareIcon() {
-  var gbbox = new ms.BBox();
-  if (this.options.symetric) {
-    var anchor = { x: 100, y: 100 };
-    var maxx = Math.max(anchor.x - this.bbox.x1, this.bbox.x2 - anchor.x);
-    gbbox.x1 = anchor.x - maxx;
-    gbbox.x2 = anchor.x + maxx;
-  }
-  return { pre: [], post: [], bbox: gbbox };
-});
 
 export default function initGenerator() {
   //
