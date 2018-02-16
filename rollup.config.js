@@ -1,6 +1,7 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import css from "rollup-plugin-css-only";
+import html from "rollup-plugin-html";
 
 export default [
   {
@@ -13,7 +14,10 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      css({ output: "milsymbol-unit-generator.css" })
+      css({ output: "milsymbol-unit-generator.css" }),
+      html({
+        include: "**/*.html"
+      })
     ]
   }
 ];

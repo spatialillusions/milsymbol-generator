@@ -1,37 +1,7 @@
 import { select } from "material-components-web";
-
-import ms from "../../milsymbol/dist/milsymbol.js";
-import { app6b, milstd2525c } from "../../milsymbol/dist/milstd.js";
-
 import renderSymbol from "./render-symbol.js";
-
-var milstd = { app6b: app6b, "2525c": milstd2525c };
-
-function addSelectItem(mdcSelect, htmlSelect, value, text, sidc, standard) {
-  var item = "<li ";
-  item += 'class="mdc-list-item" ';
-  if (sidc) {
-    var symbol = new ms.Symbol(sidc, {
-      size: 20,
-      standard: standard.indexOf("2525") != -1 ? "2525" : "APP6",
-      symetric: true
-    });
-    if (!symbol.isValid()) {
-      item += 'aria-disabled="true" ';
-    } else {
-      text =
-        '<figure><img src="' +
-        symbol.asCanvas(2).toDataURL() +
-        '"></figure>' +
-        text;
-    }
-  }
-  item += 'id="' + value + '" ';
-  item += 'role="option" ';
-  item += 'tabindex="0" ';
-  item += ">" + text + "</li>";
-  return item;
-}
+import addSelectItem from "./add-select-item.js";
+import template from "./letter-panel-template.html";
 
 function modifier1(battledimension) {
   if (battledimension == "GRDTRK_UNT") {
@@ -57,8 +27,14 @@ function modifier1(battledimension) {
       H: { name: "Installation", sidc: "SFGP------H" }
     };
   }
+  if (battledimension == "SSUF" || battledimension == "SBSUF") {
+    return {
+      "-": { name: "-" },
+      N: { name: "Towed array" }
+    };
+  }
 
-  return { "-": { name: "-" } };
+  return undefined; //{ "-": { name: "-" } };
 }
 
 function modifier2(battledimension, modifier1) {
@@ -96,13 +72,17 @@ function modifier2(battledimension, modifier1) {
       Z: { name: "Amphibious", sidc: "SFGPE-----MZ" }
     };
   }
-  /*if (battledimension == "GRDTRK_INS") {
+  if (
+    (battledimension == "SSUF" || battledimension == "SBSUF") &&
+    modifier1 == "N"
+  ) {
     return {
-      H: { name: "Installation" }
+      S: { name: "Towed Array (short)", sidc: "SFSPE-----NS" },
+      L: { name: "Towed Array (long)", sidc: "SFSPE-----NL" }
     };
-  }*/
+  }
 
-  return { "-": { name: "-" } };
+  return undefined; //{ "-": { name: "-" } };
 }
 
 function initSelect(
@@ -124,10 +104,14 @@ function initSelect(
     mdcSelects[className] = mdcSelect;
   }
 
-  // TODO remove this code when the fix is in place in mdc
-  selectElement
-    .querySelector(".mdc-select__label")
-    .classList.add("mdc-select__label--float-above");
+  if (typeof options == "undefined") {
+    selectElement
+      .querySelector(".mdc-select__label")
+      .classList.remove("mdc-select__label--float-above");
+    mdcSelect.selectedIndex = -1;
+    mdcSelect.disabled = true;
+    return mdcSelect;
+  }
 
   var selectItems = panel.querySelector(className + " .mdc-menu__items");
   while (selectItems.firstChild) {
@@ -176,21 +160,38 @@ function initSelect(
       );
     }
   }
+
+  // TODO remove this code when the fix is in place in mdc
+  selectElement
+    .querySelector(".mdc-select__label")
+    .classList.add("mdc-select__label--float-above");
+  mdcSelect.disabled = false;
+
   selectItems.innerHTML = items;
 
+  if (selectedIndex == -1) selectedIndex = 0;
   if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
   mdcSelect.selectedIndex = selectedIndex || 0;
+
+  if (mdcSelect.value == "-") {
+    // For modifier 1 and 2
+    selectElement
+      .querySelector(".mdc-select__label")
+      .classList.remove("mdc-select__label--float-above");
+  }
 
   return mdcSelect;
 }
 
-export default function(standard) {
+export default function(element, standardJSON, standard) {
   var className;
   var mdcSelects = {};
+  //First add the template to the element
+  document.querySelector(element).innerHTML = template;
 
-  function _preRenderSymbol(milstd, standard, mdcSelects) {
+  function _preRenderSymbol(standardJSON, standard, mdcSelects) {
     var options =
-      milstd[standard][mdcSelects[".coding-scheme"].value][
+      standardJSON[mdcSelects[".coding-scheme"].value][
         mdcSelects[".battle-dimension"].value
       ]["main icon"][mdcSelects[".function-id"].selectedIndex];
     var sidc =
@@ -202,67 +203,39 @@ export default function(standard) {
       mdcSelects[".symbol-modifier-1"].value +
       mdcSelects[".symbol-modifier-2"].value;
 
-    var symbolElement = document.querySelector(
-      ".panel-" + standard + " .svg-symbol"
-    );
+    var symbolElement = document.querySelector(element + " .svg-symbol");
     symbolElement.setAttribute("sidc", sidc);
     symbolElement.setAttribute("standard", standard);
 
-    document.querySelector(".panel-" + standard + " .sidc").textContent = sidc;
+    document.querySelector(element + " .sidc").textContent = sidc;
 
     renderSymbol();
   }
 
   //Set a generic SIDC for all battle dimensions
-  for (var i in milstd[standard]) {
-    for (var j in milstd[standard][i]) {
-      if (typeof milstd[standard][i][j] == "object") {
-        var firstSymbol = milstd[standard][i][j]["main icon"][0];
-        milstd[standard][i][j].sidc =
+  for (var i in standardJSON) {
+    for (var j in standardJSON[i]) {
+      if (typeof standardJSON[i][j] == "object") {
+        var firstSymbol = standardJSON[i][j]["main icon"][0];
+        standardJSON[i][j].sidc =
           firstSymbol["code scheme"] +
           "F" +
           firstSymbol["battle dimension"] +
           "-";
-        if (j == "GRDTRK_EQT") milstd[standard][i][j].sidc += "E-----";
-        if (j == "GRDTRK_INS") milstd[standard][i][j].sidc += "------" + "H-";
-        /*if (milstd[standard][i][j].hasOwnProperty("modifier 1")) {
-          for (var key in milstd[standard][i][j]["modifier 1"]) {
-            var sidc =
-              firstSymbol["code scheme"] +
-              "F" +
-              firstSymbol["battle dimension"] +
-              "-" +
-              "------" +
-              key;
-            milstd[standard][i][j]["modifier 1"][key].sidc = sidc;
-          }
-        }
-        if (milstd[standard][i][j].hasOwnProperty("modifier 2")) {
-          for (var key in milstd[standard][i][j]["modifier 2"]) {
-            var sidc =
-              firstSymbol["code scheme"] +
-              "F" +
-              firstSymbol["battle dimension"] +
-              "-" +
-              "------" +
-              "-" +
-              key;
-            milstd[standard][i][j]["modifier 2"][key].sidc = sidc;
-          }
-        }*/
+        if (j == "GRDTRK_EQT") standardJSON[i][j].sidc += "E-----";
+        if (j == "GRDTRK_INS") standardJSON[i][j].sidc += "------" + "H-";
       }
     }
   }
 
-  //console.log(milstd["2525c"]);
   var selectElement, selectItems, mdcSelect;
-  var panel = document.querySelector(".panel-" + standard);
+  var panel = document.querySelector(element);
 
   className = ".coding-scheme";
   mdcSelects[className] = initSelect(
     panel,
     className,
-    milstd[standard],
+    standardJSON,
     standard,
     mdcSelects,
     0
@@ -277,7 +250,7 @@ export default function(standard) {
     initSelect(
       panel,
       ".battle-dimension",
-      milstd[standard][mdcSelects[".coding-scheme"].value],
+      standardJSON[mdcSelects[".coding-scheme"].value],
       standard,
       mdcSelects
     ).emit("MDCSelect:change");
@@ -309,14 +282,14 @@ export default function(standard) {
     3
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(milstd, standard, mdcSelects);
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
   className = ".battle-dimension";
   mdcSelects[className] = initSelect(
     panel,
     className,
-    milstd[standard].WAR,
+    standardJSON.WAR,
     standard,
     mdcSelects,
     2
@@ -325,7 +298,7 @@ export default function(standard) {
     initSelect(
       panel,
       ".function-id",
-      milstd[standard][mdcSelects[".coding-scheme"].value][
+      standardJSON[mdcSelects[".coding-scheme"].value][
         mdcSelects[".battle-dimension"].value
       ],
       standard,
@@ -369,14 +342,14 @@ export default function(standard) {
     1
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(milstd, standard, mdcSelects);
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
   className = ".function-id";
   mdcSelects[className] = initSelect(
     panel,
     className,
-    milstd[standard][mdcSelects[".coding-scheme"].value][
+    standardJSON[mdcSelects[".coding-scheme"].value][
       mdcSelects[".battle-dimension"].value
     ],
     standard,
@@ -384,7 +357,7 @@ export default function(standard) {
     0
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(milstd, standard, mdcSelects);
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
   className = ".symbol-modifier-1";
@@ -407,7 +380,7 @@ export default function(standard) {
       standard,
       mdcSelects
     );
-    _preRenderSymbol(milstd, standard, mdcSelects);
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
   className = ".symbol-modifier-2";
@@ -423,7 +396,7 @@ export default function(standard) {
     0
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(milstd, standard, mdcSelects);
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
   // Now emit a change to render first symbol
