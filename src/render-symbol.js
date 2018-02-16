@@ -60,18 +60,20 @@ export default function(standard, sidc) {
         symetric: true
       });
 
-      //if (isIE) {
-      sym.innerHTML = symbol.asSVG();
-      /*
+      if (isIE || true) {
+        sym.innerHTML = symbol.asSVG();
       } else {
+        // The image won't resize correctly, need to look into this...
         sym.innerHTML =
           '<img src="' +
           symbol.asCanvas(window.devicePixelRatio).toDataURL() +
-          '" style="width:' +
+          '" width="' +
           symbol.getSize().width +
-          'px;">';
+          '" height="' +
+          symbol.getSize().height +
+          '">';
       }
-      //*/
+
       var downloadSymbol = new ms.Symbol(
         sym.getAttribute("sidc"),
         options,
