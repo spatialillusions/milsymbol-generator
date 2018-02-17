@@ -58,7 +58,7 @@ export default function echelonMobilityTowedarray(symbolset) {
   // add signals intelligence
   if (symbolset == "15") {
     return [
-      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "00", name: "Unspecified", sidc: "10031500000000000000" },
       {
         code: "31",
         name: "Wheeled limited cross country",
@@ -88,9 +88,15 @@ export default function echelonMobilityTowedarray(symbolset) {
       { code: "52", name: "Amphibious", sidc: "10031500520000000000" }
     ];
   }
+  if (symbolset == "27") {
+    return [
+      { code: "00", name: "Unspecified", sidc: "10032700000000000000" },
+      { code: "71", name: "Leader", sidc: "10032700710000000000" }
+    ];
+  }
   if (symbolset == "30" || symbolset == "35") {
     return [
-      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "00", name: "Unspecified", sidc: "10033000000000000000" },
       { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
       { code: "62", name: "Long towed array", sidc: "10033000620000000000" }
     ];

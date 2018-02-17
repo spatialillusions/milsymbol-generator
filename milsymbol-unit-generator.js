@@ -10775,7 +10775,7 @@ var tacticalgraphics_app6b = {
 };
 
 var symbolset$15 = "01";
-var name$22 = "AIR";
+var name$22 = "Air";
 var air_app6d = {
 	symbolset: symbolset$15,
 	name: name$22,
@@ -10785,7 +10785,7 @@ var air_app6d = {
 };
 
 var symbolset$16 = "02";
-var name$23 = "AIR MISSILE";
+var name$23 = "Air missile";
 var airmissile_app6d = {
 	symbolset: symbolset$16,
 	name: name$23,
@@ -10795,7 +10795,7 @@ var airmissile_app6d = {
 };
 
 var symbolset$17 = "05";
-var name$24 = "SPACE";
+var name$24 = "Space";
 var space_app6d = {
 	symbolset: symbolset$17,
 	name: name$24,
@@ -10805,7 +10805,7 @@ var space_app6d = {
 };
 
 var symbolset$18 = "10";
-var name$25 = "LAND UNIT";
+var name$25 = "Land unit";
 var landunit_app6d = {
 	symbolset: symbolset$18,
 	name: name$25,
@@ -10815,7 +10815,7 @@ var landunit_app6d = {
 };
 
 var symbolset$19 = "11";
-var name$26 = "LAND CIVILIAN UNIT/ORGANIZATION";
+var name$26 = "Land civilian unit/Organization";
 var landcivilian_app6d = {
 	symbolset: symbolset$19,
 	name: name$26,
@@ -10825,7 +10825,7 @@ var landcivilian_app6d = {
 };
 
 var symbolset$20 = "15";
-var name$27 = "LAND EQUIPMENT";
+var name$27 = "Land equipment";
 var landequipment_app6d = {
 	symbolset: symbolset$20,
 	name: name$27,
@@ -10835,7 +10835,7 @@ var landequipment_app6d = {
 };
 
 var symbolset$21 = "20";
-var name$28 = "LAND INSTALLATIONS";
+var name$28 = "Land installations";
 var landinstallation_app6d = {
 	symbolset: symbolset$21,
 	name: name$28,
@@ -10845,7 +10845,7 @@ var landinstallation_app6d = {
 };
 
 var symbolset$22 = "25";
-var name$29 = "CONTROL MEASURE";
+var name$29 = "Control measure";
 var controlmeasure_app6d = {
 	symbolset: symbolset$22,
 	name: name$29,
@@ -10855,7 +10855,7 @@ var controlmeasure_app6d = {
 };
 
 var symbolset$23 = "27";
-var name$30 = "DISMOUNTED INDIVIDUAL";
+var name$30 = "Dismounted individual";
 var dismountedindividual_app6d = {
 	symbolset: symbolset$23,
 	name: name$30,
@@ -10865,7 +10865,7 @@ var dismountedindividual_app6d = {
 };
 
 var symbolset$24 = "30";
-var name$31 = "SEA SURFACE";
+var name$31 = "Sea surface";
 var seasurface_app6d = {
 	symbolset: symbolset$24,
 	name: name$31,
@@ -10875,7 +10875,7 @@ var seasurface_app6d = {
 };
 
 var symbolset$25 = "35";
-var name$32 = "SEA SUBSURFACE";
+var name$32 = "Sea subsurface";
 var seasubsurface_app6d = {
 	symbolset: symbolset$25,
 	name: name$32,
@@ -10885,7 +10885,7 @@ var seasubsurface_app6d = {
 };
 
 var symbolset$26 = "36";
-var name$33 = "MINE WARFARE";
+var name$33 = "Mine warfare";
 var minewarfare_app6d = {
 	symbolset: symbolset$26,
 	name: name$33,
@@ -10895,7 +10895,7 @@ var minewarfare_app6d = {
 };
 
 var symbolset$27 = "40";
-var name$34 = "ACTIVITY/EVENT";
+var name$34 = "Activity/Event";
 var activities_app6d = {
 	symbolset: symbolset$27,
 	name: name$34,
@@ -11671,7 +11671,7 @@ function echelonMobilityTowedarray(symbolset) {
   // add signals intelligence
   if (symbolset == "15") {
     return [
-      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "00", name: "Unspecified", sidc: "10031500000000000000" },
       {
         code: "31",
         name: "Wheeled limited cross country",
@@ -11701,9 +11701,15 @@ function echelonMobilityTowedarray(symbolset) {
       { code: "52", name: "Amphibious", sidc: "10031500520000000000" }
     ];
   }
+  if (symbolset == "27") {
+    return [
+      { code: "00", name: "Unspecified", sidc: "10032700000000000000" },
+      { code: "71", name: "Leader", sidc: "10032700710000000000" }
+    ];
+  }
   if (symbolset == "30" || symbolset == "35") {
     return [
-      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "00", name: "Unspecified", sidc: "10033000000000000000" },
       { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
       { code: "62", name: "Long towed array", sidc: "10033000620000000000" }
     ];
