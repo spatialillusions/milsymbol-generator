@@ -11557,7 +11557,7 @@ function initSelect$1(
         var name =
           "<em>" +
           options[i].name
-            .slice(1, -1)
+            .slice(0, -1)
             .concat([""])
             .join(" -&nbsp;") +
           "</em>" +
