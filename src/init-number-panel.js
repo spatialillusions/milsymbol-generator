@@ -16,11 +16,11 @@ export default function(element, standardJSON, standard) {
       mdcSelects[".standard-identity-2"].value +
       mdcSelects[".symbol-set"].value +
       mdcSelects[".status"].value +
-      mdcSelects[".headquarters-taskforce-dummy"].value +
-      mdcSelects[".echelon-mobility-towedarray"].value +
+      (mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
+      (mdcSelects[".echelon-mobility-towedarray"].value || "00") +
       mdcSelects[".icon"].value +
-      mdcSelects[".icon-modifier-1"].value +
-      mdcSelects[".icon-modifier-2"].value;
+      (mdcSelects[".icon-modifier-1"].value || "00") +
+      (mdcSelects[".icon-modifier-2"].value || "00");
 
     var symbolElement = document.querySelector(element + " .svg-symbol");
     symbolElement.setAttribute("sidc", sidc);
@@ -138,7 +138,7 @@ export default function(element, standardJSON, standard) {
     );
     initSelect(
       panel,
-      className,
+      ".icon-modifier-1",
       standardJSON[mdcSelects[".symbol-set"].value]["modifier 1"],
       standard,
       mdcSelects,
@@ -146,7 +146,7 @@ export default function(element, standardJSON, standard) {
     );
     initSelect(
       panel,
-      className,
+      ".icon-modifier-2",
       standardJSON[mdcSelects[".symbol-set"].value]["modifier 2"],
       standard,
       mdcSelects,
