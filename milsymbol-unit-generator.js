@@ -10672,7 +10672,7 @@ var landinstallation_2525d = {
 	"modifier 2": [{"modifier":"Unspecified","category":"","code":"00","remarks":""},{"modifier":"Biological Warfare Production","category":"CBRN","code":"01","remarks":""},{"modifier":"Chemical Warfare Production","category":"CBRN","code":"02","remarks":""},{"modifier":"Nuclear Warfare Production","category":"CBRN","code":"03","remarks":""},{"modifier":"Radiological Warfare Production","category":"CBRN","code":"04","remarks":""},{"modifier":"Atomic Energy Reactor","category":"CBRN","code":"05","remarks":""},{"modifier":"Nuclear Material Production","category":"CBRN","code":"06","remarks":""},{"modifier":"Nuclear Material Storage","category":"CBRN","code":"07","remarks":""},{"modifier":"Weapons Grade Production","category":"CBRN","code":"08","remarks":""},{"modifier":"Cyberspace","category":"Capability","code":"09","remarks":""},{"modifier":"{Reserved for future use}","category":"","code":"10-98","remarks":""}]
 };
 
-var symbolset$8 = 25;
+var symbolset$8 = "25";
 var name$13 = "Control Measure";
 var controlmeasure_2525d = {
 	symbolset: symbolset$8,
@@ -10927,6 +10927,10 @@ var milstd2525d = {
   "36": minewarfare_2525d,
   "40": activities_2525d,
   "50": signalsintelligence_2525d,
+  "51": signalsintelligence_2525d,
+  "52": signalsintelligence_2525d,
+  "53": signalsintelligence_2525d,
+  "54": signalsintelligence_2525d,
   "60": cyberspace_2525d
 };
 
@@ -11064,6 +11068,8 @@ function renderSymbol(standard, sidc) {
   });
 }
 
+var template = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a href=\"\" title=\"Download as PNG\">\n            <svg style=\"float:right;margin:20px;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"coding-scheme\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Coding Scheme</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"affiliation\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Affiliation</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"battle-dimension\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Battle Dimension</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"function-id\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Function ID</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
+
 function addSelectItem(
   mdcSelect,
   htmlSelect,
@@ -11095,90 +11101,6 @@ function addSelectItem(
   item += 'tabindex="0" ';
   item += ">" + text + "</li>";
   return item;
-}
-
-var template = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a href=\"\" title=\"Download as PNG\">\n            <svg style=\"float:right;margin:20px;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"coding-scheme\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Coding Scheme</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"affiliation\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Affiliation</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"battle-dimension\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Battle Dimension</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"function-id\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Function ID</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
-
-function modifier1(battledimension) {
-  if (battledimension == "GRDTRK_UNT") {
-    return {
-      "-": { name: "-" },
-      A: { name: "Headquarters", sidc: "SFGP------A" },
-      B: { name: "Task Force HQ", sidc: "SFGP------B" },
-      C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },
-      D: { name: "Feint Dummy/Task Force HQ", sidc: "SFGP------D" },
-      E: { name: "Task Force", sidc: "SFGP------E" },
-      F: { name: "Feint Dummy", sidc: "SFGP------F" },
-      G: { name: "Feint Dummy/Task Force", sidc: "SFGP------G" }
-    };
-  }
-  if (battledimension == "GRDTRK_EQT") {
-    return {
-      "-": { name: "-" },
-      M: { name: "Mobility" }
-    };
-  }
-  if (battledimension == "GRDTRK_INS") {
-    return {
-      H: { name: "Installation", sidc: "SFGP------H" }
-    };
-  }
-  if (battledimension == "SSUF" || battledimension == "SBSUF") {
-    return {
-      "-": { name: "-" },
-      N: { name: "Towed array" }
-    };
-  }
-
-  return undefined; //{ "-": { name: "-" } };
-}
-
-function modifier2(battledimension, modifier1) {
-  if (battledimension == "GRDTRK_UNT") {
-    return {
-      "-": { name: "-" },
-      A: { name: "Team/Crew", sidc: "SFGP-------A" },
-      B: { name: "Squad", sidc: "SFGP-------B" },
-      C: { name: "Section", sidc: "SFGP-------C" },
-      D: { name: "Platoon/Detachment", sidc: "SFGP-------D" },
-      E: { name: "Company/Battery/Troop", sidc: "SFGP-------E" },
-      F: { name: "Battalion/Squadron", sidc: "SFGP-------F" },
-      G: { name: "Regiment/Group", sidc: "SFGP-------G" },
-      H: { name: "Brigade", sidc: "SFGP-------H" },
-      I: { name: "Division", sidc: "SFGP-------I" },
-      J: { name: "Corps/Mef", sidc: "SFGP-------J" },
-      K: { name: "Army", sidc: "SFGP-------K" },
-      L: { name: "Army Group/Front", sidc: "SFGP-------L" },
-      M: { name: "Region", sidc: "SFGP-------M" },
-      N: { name: "Command", sidc: "SFGP-------N" }
-    };
-  }
-  if (battledimension == "GRDTRK_EQT" && modifier1 == "M") {
-    return {
-      O: { name: "Wheeled/Limited", sidc: "SFGPE-----MO" },
-      P: { name: "Wheeled", sidc: "SFGPE-----MP" },
-      Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
-      R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
-      S: { name: "Towed", sidc: "SFGPE-----MS" },
-      T: { name: "Rail", sidc: "SFGPE-----MT" },
-      U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
-      V: { name: "Sled", sidc: "SFGPE-----MV" },
-      W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
-      Y: { name: "Barge", sidc: "SFGPE-----MY" },
-      Z: { name: "Amphibious", sidc: "SFGPE-----MZ" }
-    };
-  }
-  if (
-    (battledimension == "SSUF" || battledimension == "SBSUF") &&
-    modifier1 == "N"
-  ) {
-    return {
-      S: { name: "Towed Array (short)", sidc: "SFSPE-----NS" },
-      L: { name: "Towed Array (long)", sidc: "SFSPE-----NL" }
-    };
-  }
-
-  return undefined; //{ "-": { name: "-" } };
 }
 
 function initSelect(
@@ -11265,25 +11187,105 @@ function initSelect(
 
   selectItems.innerHTML = items;
 
-  if (selectedIndex == -1) selectedIndex = 0;
-  if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
+  if (selectedIndex == -1 || selectedIndex > mdcSelect.options.length)
+    selectedIndex = 0;
   mdcSelect.selectedIndex = selectedIndex || 0;
 
-  if (mdcSelect.value == "-") {
+  /*if (mdcSelect.value == "-") {
     // For modifier 1 and 2
     selectElement
       .querySelector(".mdc-select__label")
       .classList.remove("mdc-select__label--float-above");
-  }
+  }*/
 
   return mdcSelect;
+}
+
+function modifier1(battledimension) {
+  if (battledimension == "GRDTRK_UNT") {
+    return {
+      "-": { name: "Unspecified" },
+      A: { name: "Headquarters", sidc: "SFGP------A" },
+      B: { name: "Task Force HQ", sidc: "SFGP------B" },
+      C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },
+      D: { name: "Feint Dummy/Task Force HQ", sidc: "SFGP------D" },
+      E: { name: "Task Force", sidc: "SFGP------E" },
+      F: { name: "Feint Dummy", sidc: "SFGP------F" },
+      G: { name: "Feint Dummy/Task Force", sidc: "SFGP------G" }
+    };
+  }
+  if (battledimension == "GRDTRK_EQT") {
+    return {
+      "-": { name: "Unspecified" },
+      M: { name: "Mobility" }
+    };
+  }
+  if (battledimension == "GRDTRK_INS") {
+    return {
+      H: { name: "Installation", sidc: "SFGP------H" }
+    };
+  }
+  if (battledimension == "SSUF" || battledimension == "SBSUF") {
+    return {
+      "-": { name: "Unspecified" },
+      N: { name: "Towed array" }
+    };
+  }
+
+  return undefined; //{ "-": { name: "-" } };
+}
+
+function modifier2(battledimension, modifier1) {
+  if (battledimension == "GRDTRK_UNT") {
+    return {
+      "-": { name: "Unspecified" },
+      A: { name: "Team/Crew", sidc: "SFGP-------A" },
+      B: { name: "Squad", sidc: "SFGP-------B" },
+      C: { name: "Section", sidc: "SFGP-------C" },
+      D: { name: "Platoon/Detachment", sidc: "SFGP-------D" },
+      E: { name: "Company/Battery/Troop", sidc: "SFGP-------E" },
+      F: { name: "Battalion/Squadron", sidc: "SFGP-------F" },
+      G: { name: "Regiment/Group", sidc: "SFGP-------G" },
+      H: { name: "Brigade", sidc: "SFGP-------H" },
+      I: { name: "Division", sidc: "SFGP-------I" },
+      J: { name: "Corps/Mef", sidc: "SFGP-------J" },
+      K: { name: "Army", sidc: "SFGP-------K" },
+      L: { name: "Army Group/Front", sidc: "SFGP-------L" },
+      M: { name: "Region", sidc: "SFGP-------M" },
+      N: { name: "Command", sidc: "SFGP-------N" }
+    };
+  }
+  if (battledimension == "GRDTRK_EQT" && modifier1 == "M") {
+    return {
+      O: { name: "Wheeled/Limited", sidc: "SFGPE-----MO" },
+      P: { name: "Wheeled", sidc: "SFGPE-----MP" },
+      Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
+      R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
+      S: { name: "Towed", sidc: "SFGPE-----MS" },
+      T: { name: "Rail", sidc: "SFGPE-----MT" },
+      U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
+      V: { name: "Sled", sidc: "SFGPE-----MV" },
+      W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
+      Y: { name: "Barge", sidc: "SFGPE-----MY" },
+      Z: { name: "Amphibious", sidc: "SFGPE-----MZ" }
+    };
+  }
+  if (
+    (battledimension == "SSUF" || battledimension == "SBSUF") &&
+    modifier1 == "N"
+  ) {
+    return {
+      S: { name: "Towed Array (short)", sidc: "SFSPE-----NS" },
+      L: { name: "Towed Array (long)", sidc: "SFSPE-----NL" }
+    };
+  }
+
+  return undefined; //{ "-": { name: "-" } };
 }
 
 function initLetterPanel(element, standardJSON, standard) {
   var className;
   var mdcSelects = {};
-  //First add the template to the element
-  document.querySelector(element).innerHTML = template;
 
   function _preRenderSymbol(standardJSON, standard, mdcSelects) {
     var options =
@@ -11325,6 +11327,8 @@ function initLetterPanel(element, standardJSON, standard) {
   }
 
   var panel = document.querySelector(element);
+  //First add the template to the element
+  panel.innerHTML = template;
 
   className = ".coding-scheme";
   mdcSelects[className] = initSelect(
@@ -11496,27 +11500,234 @@ function initLetterPanel(element, standardJSON, standard) {
 
   // Now emit a change to render first symbol
   mdcSelects[className].emit("MDCSelect:change");
+
+  return panel;
 }
 
-var template$1 = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a href=\"\" title=\"Download as PNG\">\n            <svg style=\"float:right;margin:20px;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"standard-identity-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"standard-identity-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-set\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol set</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"headquarters-taskforce-dummy\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Headquarters/Task force/Dummy</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"echelon-mobility-towed array\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Echelon/Mobility/Towed array</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
+var template$1 = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a href=\"\" title=\"Download as PNG\">\n            <svg style=\"float:right;margin:20px;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"standard-identity-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"standard-identity-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-set\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol set</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"headquarters-taskforce-dummy\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Headquarters/Task force/Dummy</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"echelon-mobility-towedarray\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Echelon/Mobility/Towed array</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
+
+function initSelect$1(
+  panel,
+  className,
+  options,
+  standard,
+  mdcSelects,
+  selectedIndex
+) {
+  var selectElement = panel.querySelector(className + " .mdc-select");
+  //var selectedIndex = 0;
+  if (mdcSelects.hasOwnProperty(className)) {
+    var mdcSelect = mdcSelects[className];
+    selectedIndex = mdcSelect.selectedIndex;
+    mdcSelect.selectedIndex = 0;
+  } else {
+    var mdcSelect = new MDCSelect(selectElement);
+    mdcSelects[className] = mdcSelect;
+  }
+
+  if (typeof options == "undefined") {
+    selectElement
+      .querySelector(".mdc-select__label")
+      .classList.remove("mdc-select__label--float-above");
+    mdcSelect.selectedIndex = -1;
+    mdcSelect.disabled = true;
+    return mdcSelect;
+  }
+
+  var selectItems = panel.querySelector(className + " .mdc-menu__items");
+  while (selectItems.firstChild) {
+    selectItems.removeChild(selectItems.firstChild);
+  }
+
+  var items = "";
+  if (Array.isArray(options)) {
+    for (var i = 0; i < options.length; i++) {
+      var name = options[i].name;
+      if (options[i].hasOwnProperty("entity")) {
+        options[i].name = [options[i]["entity"]];
+        if (options[i].hasOwnProperty("entity type"))
+          options[i].name.push(options[i]["entity type"]);
+        if (options[i].hasOwnProperty("entity subtype"))
+          options[i].name.push(options[i]["entity subtype"]);
+
+        var name =
+          "<em>" +
+          options[i].name
+            .slice(1, -1)
+            .concat([""])
+            .join(" -&nbsp;") +
+          "</em>" +
+          options[i].name.slice(-1);
+      }
+      if (options[i].hasOwnProperty("modifier")) {
+        var name = options[i].modifier;
+      }
+
+      var sidc = options[i].sidc;
+
+      items += addSelectItem(
+        selectItems,
+        false,
+        options[i].code,
+        name,
+        sidc,
+        standard
+      );
+    }
+  } else {
+    for (var key in options) {
+      if (key == "name") continue;
+      name = options[key].name == "-" ? "" : options[key].name;
+      items += addSelectItem(
+        selectItems,
+        false,
+        key,
+        name,
+        options[key].sidc,
+        standard
+      );
+    }
+  }
+
+  // TODO remove this code when the fix is in place in mdc
+  selectElement
+    .querySelector(".mdc-select__label")
+    .classList.add("mdc-select__label--float-above");
+  mdcSelect.disabled = false;
+
+  selectItems.innerHTML = items;
+
+  if (selectedIndex == -1) selectedIndex = 0;
+  if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
+  mdcSelect.selectedIndex = selectedIndex || 0;
+
+  if (mdcSelect.value == "-") {
+    // For modifier 1 and 2
+    selectElement
+      .querySelector(".mdc-select__label")
+      .classList.remove("mdc-select__label--float-above");
+  }
+
+  return mdcSelect;
+}
+
+function echelonMobilityTowedarray(symbolset) {
+  if (symbolset == "10") {
+    return [
+      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "11", name: "Team/Crew", sidc: "10031000110000000000" },
+      { code: "12", name: "Squad", sidc: "10031000120000000000" },
+      { code: "13", name: "Section", sidc: "10031000130000000000" },
+      { code: "14", name: "Platoon/Detachment", sidc: "10031000140000000000" },
+      {
+        code: "15",
+        name: "Company/Battery/Troop",
+        sidc: "10031000150000000000"
+      },
+      { code: "16", name: "Battalion/Squadron", sidc: "10031000160000000000" },
+      { code: "17", name: "Regiment/Group", sidc: "10031000170000000000" },
+      { code: "18", name: "Brigade", sidc: "10031000180000000000" },
+      { code: "21", name: "Division", sidc: "10031000210000000000" },
+      { code: "22", name: "Corps/MEF", sidc: "10031000220000000000" },
+      { code: "23", name: "Army", sidc: "10031000230000000000" },
+      { code: "24", name: "Army Group/Front", sidc: "10031000240000000000" },
+      { code: "25", name: "Region/Theater", sidc: "10031000250000000000" },
+      {
+        code: "26",
+        name: "Command",
+        sidc: "10031000260000000000"
+      } /*,
+      {
+        code: "31",
+        name: "Wheeled limited cross country",
+        sidc: "10031500310000000000"
+      },
+      {
+        code: "32",
+        name: "Wheeled cross country",
+        sidc: "10031500320000000000"
+      },
+      { code: "33", name: "Tracked", sidc: "10031500330000000000" },
+      {
+        code: "34",
+        name: "Wheeled and tracked combination",
+        sidc: "10031500340000000000"
+      },
+      { code: "35", name: "Towed", sidc: "10031500350000000000" },
+      { code: "36", name: "Rail", sidc: "10031500360000000000" },
+      { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
+      {
+        code: "41",
+        name: "Over snow (prime mover)",
+        sidc: "10031500410000000000"
+      },
+      { code: "42", name: "Sled", sidc: "10031500420000000000" },
+      { code: "51", name: "Barge", sidc: "10031500510000000000" },
+      { code: "52", name: "Amphibious", sidc: "10031500520000000000" },
+      { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
+      { code: "62", name: "Long towed array", sidc: "10033000620000000000" }*/
+    ];
+  }
+  // add signals intelligence
+  if (symbolset == "15") {
+    return [
+      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      {
+        code: "31",
+        name: "Wheeled limited cross country",
+        sidc: "10031500310000000000"
+      },
+      {
+        code: "32",
+        name: "Wheeled cross country",
+        sidc: "10031500320000000000"
+      },
+      { code: "33", name: "Tracked", sidc: "10031500330000000000" },
+      {
+        code: "34",
+        name: "Wheeled and tracked combination",
+        sidc: "10031500340000000000"
+      },
+      { code: "35", name: "Towed", sidc: "10031500350000000000" },
+      { code: "36", name: "Rail", sidc: "10031500360000000000" },
+      { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
+      {
+        code: "41",
+        name: "Over snow (prime mover)",
+        sidc: "10031500410000000000"
+      },
+      { code: "42", name: "Sled", sidc: "10031500420000000000" },
+      { code: "51", name: "Barge", sidc: "10031500510000000000" },
+      { code: "52", name: "Amphibious", sidc: "10031500520000000000" }
+    ];
+  }
+  if (symbolset == "30" || symbolset == "35") {
+    return [
+      { code: "00", name: "Unspecified", sidc: "10031000000000000000" },
+      { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
+      { code: "62", name: "Long towed array", sidc: "10033000620000000000" }
+    ];
+  }
+
+  return undefined;
+}
 
 function initNumberPanel(element, standardJSON, standard) {
-  console.log(template$1);
-  document.querySelector(element).innerHTML = template$1;
-  /*
+  var className;
+  var mdcSelects = {};
+
   function _preRenderSymbol(standardJSON, standard, mdcSelects) {
-    var options =
-      standardJSON[mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ]["main icon"][mdcSelects[".function-id"].selectedIndex];
     var sidc =
-      options["code scheme"] +
-      mdcSelects[".affiliation"].value +
-      options["battle dimension"] +
+      "10" +
+      mdcSelects[".standard-identity-1"].value +
+      mdcSelects[".standard-identity-2"].value +
+      mdcSelects[".symbol-set"].value +
       mdcSelects[".status"].value +
-      options["code"] +
-      mdcSelects[".symbol-modifier-1"].value +
-      mdcSelects[".symbol-modifier-2"].value;
+      mdcSelects[".headquarters-taskforce-dummy"].value +
+      mdcSelects[".echelon-mobility-towedarray"].value +
+      mdcSelects[".icon"].value +
+      mdcSelects[".icon-modifier-1"].value +
+      mdcSelects[".icon-modifier-2"].value;
 
     var symbolElement = document.querySelector(element + " .svg-symbol");
     symbolElement.setAttribute("sidc", sidc);
@@ -11528,138 +11739,54 @@ function initNumberPanel(element, standardJSON, standard) {
   }
 
   //Set a generic SIDC for all battle dimensions
+  var symbolsets = [];
   for (var i in standardJSON) {
-    for (var j in standardJSON[i]) {
-      if (typeof standardJSON[i][j] == "object") {
-        var firstSymbol = standardJSON[i][j]["main icon"][0];
-        standardJSON[i][j].sidc =
-          firstSymbol["code scheme"] +
-          "F" +
-          firstSymbol["battle dimension"] +
-          "-";
-        if (j == "GRDTRK_EQT") standardJSON[i][j].sidc += "E-----";
-        if (j == "GRDTRK_INS") standardJSON[i][j].sidc += "------" + "H-";
-      }
+    symbolsets.push(i);
+    standardJSON[i].code = i;
+    standardJSON[i].sidc =
+      "1003" + standardJSON[i].symbolset + "00000000000000";
+    for (var j in standardJSON[i]["main icon"]) {
+      standardJSON[i]["main icon"][j]["symbol set"] = i;
+      standardJSON[i]["main icon"][j].sidc =
+        "1003" + i + "0000" + standardJSON[i]["main icon"][j]["code"] + "0000";
+    }
+    for (var j in standardJSON[i]["modifier 1"]) {
+      standardJSON[i]["modifier 1"][j].sidc =
+        "1003" +
+        i +
+        "0000" +
+        "000000" +
+        standardJSON[i]["modifier 1"][j]["code"] +
+        "00";
+    }
+    for (var j in standardJSON[i]["modifier 2"]) {
+      standardJSON[i]["modifier 2"][j].sidc =
+        "1003" +
+        i +
+        "0000" +
+        "000000" +
+        "00" +
+        standardJSON[i]["modifier 2"][j]["code"];
     }
   }
+  // Make an ordered array of the symbol sets
+  symbolsets = symbolsets.sort();
+  for (var i = 0; i < symbolsets.length; i++) {
+    symbolsets[i] = standardJSON[symbolsets[i]];
+  }
 
-  var selectElement, selectItems, mdcSelect;
   var panel = document.querySelector(element);
+  //First add the template to the element
+  panel.innerHTML = template$1;
 
-  className = ".coding-scheme";
-  mdcSelects[className] = initSelect(
+  className = ".standard-identity-1";
+  mdcSelects[className] = initSelect$1(
     panel,
     className,
-    standardJSON,
-    standard,
-    mdcSelects,
-    0
-  );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".battle-dimension",
-      standardJSON[mdcSelects[".coding-scheme"].value],
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-  });
-
-  className = ".affiliation";
-  mdcSelects[className] = initSelect(
-    panel,
-    className,
-    {
-      P: { name: "Pending", sidc: "SPGP" },
-      U: { name: "Unknown", sidc: "SUGP" },
-      A: { name: "Assumed Friend", sidc: "SAGP" },
-      F: { name: "Friend", sidc: "SFGP" },
-      N: { name: "Neutral", sidc: "SNGP" },
-      S: { name: "Suspect", sidc: "SSGP" },
-      H: { name: "Hostile", sidc: "SHGP" },
-      G: { name: "Exercise Pending", sidc: "SGGP" },
-      W: { name: "Exercise Unknown", sidc: "SWGP" },
-      D: { name: "Exercise Friend", sidc: "SDGP" },
-      L: { name: "Exercise Neutral", sidc: "SLGP" },
-      M: { name: "Exercise Assumed Friend", sidc: "SMGP" },
-      J: { name: "Joker", sidc: "SJGP" },
-      K: { name: "Faker", sidc: "SKGP" },
-      O: { name: "None Specified", sidc: "SOGP" }
-    },
-    standard,
-    mdcSelects,
-    3
-  );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
-
-  className = ".battle-dimension";
-  mdcSelects[className] = initSelect(
-    panel,
-    className,
-    standardJSON.WAR,
-    standard,
-    mdcSelects,
-    2
-  );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".function-id",
-      standardJSON[mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ],
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-
-    initSelect(
-      panel,
-      ".symbol-modifier-1",
-      modifier1(mdcSelects[".battle-dimension"].value),
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-
-    initSelect(
-      panel,
-      ".symbol-modifier-2",
-      modifier2(
-        mdcSelects[".battle-dimension"].value,
-        mdcSelects[".symbol-modifier-1"].value
-      ),
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-  });
-
-  className = ".status";
-  mdcSelects[className] = initSelect(
-    panel,
-    className,
-    {
-      A: { name: "Anticipated/Planned", sidc: "SFGA" },
-      P: { name: "Present", sidc: "SFGP" },
-      C: { name: "Present/Fully Capable", sidc: "SFGC" },
-      D: { name: "Present/Damaged", sidc: "SFGD" },
-      X: { name: "Present/Destroyed", sidc: "SFGX" },
-      F: { name: "Present/Full To Capacity", sidc: "SFGF" }
-    },
-    standard,
-    mdcSelects,
-    1
-  );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
-
-  className = ".function-id";
-  mdcSelects[className] = initSelect(
-    panel,
-    className,
-    standardJSON[mdcSelects[".coding-scheme"].value][
-      mdcSelects[".battle-dimension"].value
+    [
+      { code: 0, name: "Reality" },
+      { code: 1, name: "Exercise" },
+      { code: 2, name: "Simulation" }
     ],
     standard,
     mdcSelects,
@@ -11669,37 +11796,178 @@ function initNumberPanel(element, standardJSON, standard) {
     _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
-  className = ".symbol-modifier-1";
-  mdcSelects[className] = initSelect(
+  className = ".standard-identity-2";
+  mdcSelects[className] = initSelect$1(
     panel,
     className,
-    modifier1(mdcSelects[".battle-dimension"].value),
+    [
+      { code: 0, name: "Pending", sidc: "10001000000000000000" },
+      { code: 1, name: "Unknown", sidc: "10011000000000000000" },
+      { code: 2, name: "Assumed Friend", sidc: "10021000000000000000" },
+      { code: 3, name: "Friend", sidc: "10031000000000000000" },
+      { code: 4, name: "Neutral", sidc: "10041000000000000000" },
+      { code: 5, name: "Suspect/Joker", sidc: "10051000000000000000" },
+      { code: 6, name: "Hostile/Faker", sidc: "10061000000000000000" }
+    ],
+    standard,
+    mdcSelects,
+    3
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".symbol-set";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    symbolsets,
+    standard,
+    mdcSelects,
+    4
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    initSelect$1(
+      panel,
+      ".echelon-mobility-towedarray",
+      echelonMobilityTowedarray(mdcSelects[".symbol-set"].value),
+      standard,
+      mdcSelects,
+      0
+    );
+    initSelect$1(
+      panel,
+      ".icon",
+      standardJSON[mdcSelects[".symbol-set"].value]["main icon"],
+      standard,
+      mdcSelects
+    );
+    initSelect$1(
+      panel,
+      className,
+      standardJSON[mdcSelects[".symbol-set"].value]["modifier 1"],
+      standard,
+      mdcSelects,
+      0
+    );
+    initSelect$1(
+      panel,
+      className,
+      standardJSON[mdcSelects[".symbol-set"].value]["modifier 2"],
+      standard,
+      mdcSelects,
+      0
+    ).emit("MDCSelect:change");
+
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".status";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    [
+      { code: 0, name: "Present", sidc: "10031000000000000000" },
+      {
+        code: 1,
+        name: "Planned/Anticipated/Suspect",
+        sidc: "10031010000000000000"
+      },
+      { code: 2, name: "Present/Fully capable", sidc: "10031020000000000000" },
+      { code: 3, name: "Present/Damaged", sidc: "10031030000000000000" },
+      { code: 4, name: "Present/Destroyed", sidc: "10031040000000000000" },
+      {
+        code: 5,
+        name: "Present/Full to capacity",
+        sidc: "10031050000000000000"
+      }
+    ],
     standard,
     mdcSelects,
     0
   );
   mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".symbol-modifier-2",
-      modifier2(
-        mdcSelects[".battle-dimension"].value,
-        mdcSelects[".symbol-modifier-1"].value
-      ),
-      standard,
-      mdcSelects
-    );
     _preRenderSymbol(standardJSON, standard, mdcSelects);
   });
 
-  className = ".symbol-modifier-2";
-  mdcSelects[className] = initSelect(
+  className = ".headquarters-taskforce-dummy";
+  mdcSelects[className] = initSelect$1(
     panel,
     className,
-    modifier2(
-      mdcSelects[".battle-dimension"].value,
-      mdcSelects[".symbol-modifier-1"].value
-    ),
+    [
+      { code: 0, name: "Unspecified", sidc: "10031000000000000000" },
+      { code: 1, name: "Feint/Dummy", sidc: "10031001000000000000" },
+      { code: 2, name: "Headquarters", sidc: "10031002000000000000" },
+      {
+        code: 3,
+        name: "Feint/Dummy Headquarters",
+        sidc: "10031003000000000000"
+      },
+      { code: 4, name: "Task Force", sidc: "10031004000000000000" },
+      { code: 5, name: "Feint/Dummy Task Force", sidc: "10031005000000000000" },
+      {
+        code: 6,
+        name: "Task Force Headquarters",
+        sidc: "10031006000000000000"
+      },
+      {
+        code: 7,
+        name: "Feint/Dummy Task Force Headquarters",
+        sidc: "10031007000000000000"
+      }
+    ],
+    standard,
+    mdcSelects,
+    0
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".echelon-mobility-towedarray";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    echelonMobilityTowedarray(mdcSelects[".symbol-set"].value),
+    standard,
+    mdcSelects,
+    0
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".icon";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    standardJSON[mdcSelects[".symbol-set"].value]["main icon"],
+    standard,
+    mdcSelects,
+    0
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".icon-modifier-1";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    standardJSON[mdcSelects[".symbol-set"].value]["modifier 1"],
+    standard,
+    mdcSelects,
+    0
+  );
+  mdcSelects[className].listen("MDCSelect:change", function() {
+    _preRenderSymbol(standardJSON, standard, mdcSelects);
+  });
+
+  className = ".icon-modifier-2";
+  mdcSelects[className] = initSelect$1(
+    panel,
+    className,
+    standardJSON[mdcSelects[".symbol-set"].value]["modifier 2"],
     standard,
     mdcSelects,
     0
@@ -11709,12 +11977,14 @@ function initNumberPanel(element, standardJSON, standard) {
   });
 
   // Now emit a change to render first symbol
-  mdcSelects[className].emit("MDCSelect:change");*/
+  mdcSelects[className].emit("MDCSelect:change");
+
+  return panel;
 }
 
 // At the moment use our development version of milsymbol
 function initGenerator() {
-  //
+  var panelInitialized = [];
 
   var tabBarScroller = new MDCTabBarScroller(
     document.querySelector("#tab-bar-scroller")
@@ -11727,6 +11997,39 @@ function initGenerator() {
   });
 
   function updatePanel(index$$1) {
+    if (!panelInitialized[index$$1]) {
+      // The panel has never been used so let's start it up
+      switch (index$$1) {
+        case 0:
+          panelInitialized[index$$1] = initLetterPanel(
+            ".panel-2525c",
+            milstd2525c,
+            "2525"
+          );
+          break;
+        case 1:
+          panelInitialized[index$$1] = initLetterPanel(
+            ".panel-app6b",
+            app6b,
+            "APP6"
+          );
+          break;
+        case 2:
+          panelInitialized[index$$1] = initNumberPanel(
+            ".panel-2525d",
+            milstd2525d,
+            "2525"
+          );
+          break;
+        case 3:
+          panelInitialized[index$$1] = initNumberPanel(
+            ".panel-app6d",
+            app6d,
+            "APP6"
+          );
+          break;
+      }
+    }
     var activePanel = panels.querySelector(".panel.active");
     if (activePanel) {
       activePanel.classList.remove("active");
@@ -11744,7 +12047,9 @@ function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
-  //mdc.autoInit();
+  // Activate 2525C by default
+  // TODO add cookie so that we start up at last used panel
+  updatePanel(0);
 
   // Set up event listeners for all option inputs
   var optionFields = {};
@@ -11758,7 +12063,7 @@ function initGenerator() {
         renderSymbol();
       });
     });
-  // Set up event listeners for all option inputs
+  // Set up event listeners for all style inputs
   var styleFields = {};
   document
     .querySelectorAll(".style-inputs .mdc-switch input")
@@ -11781,12 +12086,6 @@ function initGenerator() {
       renderSymbol();
     });
   });
-
-  //TODO, initiate panels when they are shown.
-  initLetterPanel(".panel-2525c", milstd2525c, "2525");
-  initLetterPanel(".panel-app6b", app6b, "APP6");
-  initNumberPanel(".panel-2525d", milstd2525d, "2525");
-  initNumberPanel(".panel-app6d", app6d, "APP6");
 }
 
 return initGenerator;

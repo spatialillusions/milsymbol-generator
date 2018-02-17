@@ -1,193 +1,13 @@
-import { select } from "material-components-web";
 import renderSymbol from "./render-symbol.js";
-import addSelectItem from "./add-select-item.js";
 import template from "./letter-panel-template.html";
 
-function modifier1(battledimension) {
-  if (battledimension == "GRDTRK_UNT") {
-    return {
-      "-": { name: "-" },
-      A: { name: "Headquarters", sidc: "SFGP------A" },
-      B: { name: "Task Force HQ", sidc: "SFGP------B" },
-      C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },
-      D: { name: "Feint Dummy/Task Force HQ", sidc: "SFGP------D" },
-      E: { name: "Task Force", sidc: "SFGP------E" },
-      F: { name: "Feint Dummy", sidc: "SFGP------F" },
-      G: { name: "Feint Dummy/Task Force", sidc: "SFGP------G" }
-    };
-  }
-  if (battledimension == "GRDTRK_EQT") {
-    return {
-      "-": { name: "-" },
-      M: { name: "Mobility" }
-    };
-  }
-  if (battledimension == "GRDTRK_INS") {
-    return {
-      H: { name: "Installation", sidc: "SFGP------H" }
-    };
-  }
-  if (battledimension == "SSUF" || battledimension == "SBSUF") {
-    return {
-      "-": { name: "-" },
-      N: { name: "Towed array" }
-    };
-  }
-
-  return undefined; //{ "-": { name: "-" } };
-}
-
-function modifier2(battledimension, modifier1) {
-  if (battledimension == "GRDTRK_UNT") {
-    return {
-      "-": { name: "-" },
-      A: { name: "Team/Crew", sidc: "SFGP-------A" },
-      B: { name: "Squad", sidc: "SFGP-------B" },
-      C: { name: "Section", sidc: "SFGP-------C" },
-      D: { name: "Platoon/Detachment", sidc: "SFGP-------D" },
-      E: { name: "Company/Battery/Troop", sidc: "SFGP-------E" },
-      F: { name: "Battalion/Squadron", sidc: "SFGP-------F" },
-      G: { name: "Regiment/Group", sidc: "SFGP-------G" },
-      H: { name: "Brigade", sidc: "SFGP-------H" },
-      I: { name: "Division", sidc: "SFGP-------I" },
-      J: { name: "Corps/Mef", sidc: "SFGP-------J" },
-      K: { name: "Army", sidc: "SFGP-------K" },
-      L: { name: "Army Group/Front", sidc: "SFGP-------L" },
-      M: { name: "Region", sidc: "SFGP-------M" },
-      N: { name: "Command", sidc: "SFGP-------N" }
-    };
-  }
-  if (battledimension == "GRDTRK_EQT" && modifier1 == "M") {
-    return {
-      O: { name: "Wheeled/Limited", sidc: "SFGPE-----MO" },
-      P: { name: "Wheeled", sidc: "SFGPE-----MP" },
-      Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
-      R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
-      S: { name: "Towed", sidc: "SFGPE-----MS" },
-      T: { name: "Rail", sidc: "SFGPE-----MT" },
-      U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
-      V: { name: "Sled", sidc: "SFGPE-----MV" },
-      W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
-      Y: { name: "Barge", sidc: "SFGPE-----MY" },
-      Z: { name: "Amphibious", sidc: "SFGPE-----MZ" }
-    };
-  }
-  if (
-    (battledimension == "SSUF" || battledimension == "SBSUF") &&
-    modifier1 == "N"
-  ) {
-    return {
-      S: { name: "Towed Array (short)", sidc: "SFSPE-----NS" },
-      L: { name: "Towed Array (long)", sidc: "SFSPE-----NL" }
-    };
-  }
-
-  return undefined; //{ "-": { name: "-" } };
-}
-
-function initSelect(
-  panel,
-  className,
-  options,
-  standard,
-  mdcSelects,
-  selectedIndex
-) {
-  var selectElement = panel.querySelector(className + " .mdc-select");
-  //var selectedIndex = 0;
-  if (mdcSelects.hasOwnProperty(className)) {
-    var mdcSelect = mdcSelects[className];
-    selectedIndex = mdcSelect.selectedIndex;
-    mdcSelect.selectedIndex = 0;
-  } else {
-    var mdcSelect = new select.MDCSelect(selectElement);
-    mdcSelects[className] = mdcSelect;
-  }
-
-  if (typeof options == "undefined") {
-    selectElement
-      .querySelector(".mdc-select__label")
-      .classList.remove("mdc-select__label--float-above");
-    mdcSelect.selectedIndex = -1;
-    mdcSelect.disabled = true;
-    return mdcSelect;
-  }
-
-  var selectItems = panel.querySelector(className + " .mdc-menu__items");
-  while (selectItems.firstChild) {
-    selectItems.removeChild(selectItems.firstChild);
-  }
-
-  var items = "";
-  if (options.hasOwnProperty("main icon")) {
-    for (var i = 0; i < options["main icon"].length; i++) {
-      var sidc =
-        options["main icon"][i]["code scheme"] +
-        "F" +
-        options["main icon"][i]["battle dimension"] +
-        "P" +
-        options["main icon"][i]["code"];
-
-      var name =
-        "<em>" +
-        options["main icon"][i].name
-          .slice(1, -1)
-          .concat([""])
-          .join(" -&nbsp;") +
-        "</em>" +
-        options["main icon"][i].name.slice(-1);
-
-      items += addSelectItem(
-        selectItems,
-        false,
-        options["main icon"][i].code,
-        name,
-        sidc,
-        standard
-      );
-    }
-  } else {
-    for (var key in options) {
-      if (key == "name") continue;
-      name = options[key].name == "-" ? "" : options[key].name;
-      items += addSelectItem(
-        selectItems,
-        false,
-        key,
-        name,
-        options[key].sidc,
-        standard
-      );
-    }
-  }
-
-  // TODO remove this code when the fix is in place in mdc
-  selectElement
-    .querySelector(".mdc-select__label")
-    .classList.add("mdc-select__label--float-above");
-  mdcSelect.disabled = false;
-
-  selectItems.innerHTML = items;
-
-  if (selectedIndex == -1) selectedIndex = 0;
-  if (selectedIndex > mdcSelect.options.length) selectedIndex = 0;
-  mdcSelect.selectedIndex = selectedIndex || 0;
-
-  if (mdcSelect.value == "-") {
-    // For modifier 1 and 2
-    selectElement
-      .querySelector(".mdc-select__label")
-      .classList.remove("mdc-select__label--float-above");
-  }
-
-  return mdcSelect;
-}
+import initSelect from "./letter-sidc/init-select.js";
+import modifier1 from "./letter-sidc/modifier1.js";
+import modifier2 from "./letter-sidc/modifier2.js";
 
 export default function(element, standardJSON, standard) {
   var className;
   var mdcSelects = {};
-  //First add the template to the element
-  document.querySelector(element).innerHTML = template;
 
   function _preRenderSymbol(standardJSON, standard, mdcSelects) {
     var options =
@@ -230,6 +50,8 @@ export default function(element, standardJSON, standard) {
 
   var selectElement, selectItems, mdcSelect;
   var panel = document.querySelector(element);
+  //First add the template to the element
+  panel.innerHTML = template;
 
   className = ".coding-scheme";
   mdcSelects[className] = initSelect(
@@ -401,4 +223,6 @@ export default function(element, standardJSON, standard) {
 
   // Now emit a change to render first symbol
   mdcSelects[className].emit("MDCSelect:change");
+
+  return panel;
 }

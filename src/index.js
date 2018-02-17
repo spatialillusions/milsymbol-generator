@@ -13,7 +13,7 @@ import initNumberPanel from "./init-number-panel.js";
 import renderSymbol from "./render-symbol.js";
 
 export default function initGenerator() {
-  //
+  var panelInitialized = [];
 
   var tabBarScroller = new tabs.MDCTabBarScroller(
     document.querySelector("#tab-bar-scroller")
@@ -26,6 +26,39 @@ export default function initGenerator() {
   });
 
   function updatePanel(index) {
+    if (!panelInitialized[index]) {
+      // The panel has never been used so let's start it up
+      switch (index) {
+        case 0:
+          panelInitialized[index] = initLetterPanel(
+            ".panel-2525c",
+            milstd2525c,
+            "2525"
+          );
+          break;
+        case 1:
+          panelInitialized[index] = initLetterPanel(
+            ".panel-app6b",
+            app6b,
+            "APP6"
+          );
+          break;
+        case 2:
+          panelInitialized[index] = initNumberPanel(
+            ".panel-2525d",
+            milstd2525d,
+            "2525"
+          );
+          break;
+        case 3:
+          panelInitialized[index] = initNumberPanel(
+            ".panel-app6d",
+            app6d,
+            "APP6"
+          );
+          break;
+      }
+    }
     var activePanel = panels.querySelector(".panel.active");
     if (activePanel) {
       activePanel.classList.remove("active");
@@ -43,7 +76,9 @@ export default function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
-  //mdc.autoInit();
+  // Activate 2525C by default
+  // TODO add cookie so that we start up at last used panel
+  updatePanel(0);
 
   // Set up event listeners for all option inputs
   var optionFields = {};
@@ -57,7 +92,7 @@ export default function initGenerator() {
         renderSymbol();
       });
     });
-  // Set up event listeners for all option inputs
+  // Set up event listeners for all style inputs
   var styleFields = {};
   document
     .querySelectorAll(".style-inputs .mdc-switch input")
@@ -80,10 +115,4 @@ export default function initGenerator() {
       renderSymbol();
     });
   });
-
-  //TODO, initiate panels when they are shown.
-  initLetterPanel(".panel-2525c", milstd2525c, "2525");
-  initLetterPanel(".panel-app6b", app6b, "APP6");
-  initNumberPanel(".panel-2525d", milstd2525d, "2525");
-  initNumberPanel(".panel-app6d", app6d, "APP6");
 }
