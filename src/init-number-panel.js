@@ -4,6 +4,7 @@ import template from "./number-panel-template.html";
 import initSelect from "./number-sidc/init-select.js";
 
 import echelonMobilityTowedarray from "./number-sidc/echelon-mobility-towedarray.js";
+import headquartersTaskforceDummy from "./number-sidc/headquarters-taskforce-dummy.js";
 
 export default function(element, standardJSON, standard) {
   var className;
@@ -123,6 +124,14 @@ export default function(element, standardJSON, standard) {
   mdcSelects[className].listen("MDCSelect:change", function() {
     initSelect(
       panel,
+      ".headquarters-taskforce-dummy",
+      headquartersTaskforceDummy(mdcSelects[".symbol-set"].value),
+      standard,
+      mdcSelects,
+      0
+    );
+    initSelect(
+      panel,
       ".echelon-mobility-towedarray",
       echelonMobilityTowedarray(mdcSelects[".symbol-set"].value),
       standard,
@@ -188,28 +197,7 @@ export default function(element, standardJSON, standard) {
   mdcSelects[className] = initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Unspecified", sidc: "10031000000000000000" },
-      { code: 1, name: "Feint/Dummy", sidc: "10031001000000000000" },
-      { code: 2, name: "Headquarters", sidc: "10031002000000000000" },
-      {
-        code: 3,
-        name: "Feint/Dummy Headquarters",
-        sidc: "10031003000000000000"
-      },
-      { code: 4, name: "Task Force", sidc: "10031004000000000000" },
-      { code: 5, name: "Feint/Dummy Task Force", sidc: "10031005000000000000" },
-      {
-        code: 6,
-        name: "Task Force Headquarters",
-        sidc: "10031006000000000000"
-      },
-      {
-        code: 7,
-        name: "Feint/Dummy Task Force Headquarters",
-        sidc: "10031007000000000000"
-      }
-    ],
+    headquartersTaskforceDummy(mdcSelects[".symbol-set"].value),
     standard,
     mdcSelects,
     0
