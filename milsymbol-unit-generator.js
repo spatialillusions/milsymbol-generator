@@ -11515,6 +11515,10 @@ function initSelect$1(
   selectedIndex
 ) {
   var selectElement = panel.querySelector(className + " .mdc-select");
+  if (Array.isArray(options) && options.length == 0) {
+    // If options is an empty array, set it to undefined
+    options = undefined;
+  }
   //var selectedIndex = 0;
   if (mdcSelects.hasOwnProperty(className)) {
     var mdcSelect = mdcSelects[className];
