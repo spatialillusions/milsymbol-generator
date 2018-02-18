@@ -11035,10 +11035,10 @@ function renderSymbol(standard, sidc) {
         symetric: true
       });
 
-      if (isIE || true) {
+      if (isIE) {
         sym.innerHTML = symbol.asSVG();
       } else {
-        // The image won't resize correctly, need to look into this...
+        // The image won't keep max-height and max-width correctly, need to look into this...
         sym.innerHTML =
           '<img src="' +
           symbol.asCanvas(window.devicePixelRatio).toDataURL() +

@@ -20,9 +20,9 @@
         --mdc-theme-primary: #00aff5;
         --mdc-theme-primary-light: #67e1ff;
         --mdc-theme-primary-dark: #0080c2;
-        --mdc-theme-secondary: #018786;
-        --mdc-theme-secondary-light: #02cecc;
-        --mdc-theme-secondary-dark: #004040;
+        --mdc-theme-secondary: #00aff5;
+        --mdc-theme-secondary-light: #67e1ff;
+        --mdc-theme-secondary-dark: #0080c2;
         --mdc-theme-background: #fff;
         /* --mdc-theme-text-primary-on-primary: white;
         --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
@@ -76,7 +76,7 @@
     }
 
     a {
-        color: #0080c2;
+        color: #00aff5;
     }
 
     .toolbar {
@@ -147,12 +147,16 @@
         z-index: 2;
     }
 
-    .symbol svg,
-    .symbol img {
+    .symbol svg {
         max-width: 100%;
         max-height: 180px;
         /*width: auto;
         height: auto;*/
+    }
+
+    .symbol img {
+        width: auto;
+        max-height: 180px;
     }
 
     .mdc-select {
