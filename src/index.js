@@ -13,7 +13,7 @@ import initNumberPanel from "./init-number-panel.js";
 import renderSymbol from "./render-symbol.js";
 
 export default function initGenerator() {
-  var panelInitialized = [];
+  var panelInitialized = {};
 
   var tabBarScroller = new tabs.MDCTabBarScroller(
     document.querySelector("#tab-bar-scroller")
@@ -28,29 +28,29 @@ export default function initGenerator() {
   function updatePanel(index) {
     if (!panelInitialized[index]) {
       // The panel has never been used so let's start it up
-      switch (index) {
-        case 0:
+      switch (String(index)) {
+        case "0":
           panelInitialized[index] = initLetterPanel(
             ".panel-2525c",
             milstd2525c,
             "2525"
           );
           break;
-        case 1:
+        case "1":
           panelInitialized[index] = initLetterPanel(
             ".panel-app6b",
             app6b,
             "APP6"
           );
           break;
-        case 2:
+        case "2":
           panelInitialized[index] = initNumberPanel(
             ".panel-2525d",
             milstd2525d,
             "2525"
           );
           break;
-        case 3:
+        case "3":
           panelInitialized[index] = initNumberPanel(
             ".panel-app6d",
             app6d,
@@ -64,10 +64,17 @@ export default function initGenerator() {
       activePanel.classList.remove("active");
     }
     var newActivePanel = panels.querySelector(
-      ".panel:nth-child(" + (index + 1) + ")"
+      ".panel:nth-child(" + (Number(index) + 1) + ")"
     );
     if (newActivePanel) {
       newActivePanel.classList.add("active");
+    }
+
+    // Save the active panel for next session
+    try {
+      localStorage.setItem("panel", index);
+    } catch (error) {
+      console.log("Could not set local storage");
     }
   }
 
@@ -76,9 +83,13 @@ export default function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
+  var panel;
+  try {
+    panel = localStorage.getItem("panel");
+  } catch (error) {}
   // Activate 2525C by default
-  // TODO add cookie so that we start up at last used panel
-  updatePanel(0);
+  tabBarScroller.tabBar.activeTabIndex = panel || 0;
+  updatePanel(panel || 0);
 
   // Set up event listeners for all option inputs
   var optionFields = {};

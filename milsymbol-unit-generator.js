@@ -12014,7 +12014,7 @@ function initNumberPanel(element, standardJSON, standard) {
 
 // At the moment use our development version of milsymbol
 function initGenerator() {
-  var panelInitialized = [];
+  var panelInitialized = {};
 
   var tabBarScroller = new MDCTabBarScroller(
     document.querySelector("#tab-bar-scroller")
@@ -12029,29 +12029,29 @@ function initGenerator() {
   function updatePanel(index$$1) {
     if (!panelInitialized[index$$1]) {
       // The panel has never been used so let's start it up
-      switch (index$$1) {
-        case 0:
+      switch (String(index$$1)) {
+        case "0":
           panelInitialized[index$$1] = initLetterPanel(
             ".panel-2525c",
             milstd2525c,
             "2525"
           );
           break;
-        case 1:
+        case "1":
           panelInitialized[index$$1] = initLetterPanel(
             ".panel-app6b",
             app6b,
             "APP6"
           );
           break;
-        case 2:
+        case "2":
           panelInitialized[index$$1] = initNumberPanel(
             ".panel-2525d",
             milstd2525d,
             "2525"
           );
           break;
-        case 3:
+        case "3":
           panelInitialized[index$$1] = initNumberPanel(
             ".panel-app6d",
             app6d,
@@ -12065,10 +12065,17 @@ function initGenerator() {
       activePanel.classList.remove("active");
     }
     var newActivePanel = panels.querySelector(
-      ".panel:nth-child(" + (index$$1 + 1) + ")"
+      ".panel:nth-child(" + (Number(index$$1) + 1) + ")"
     );
     if (newActivePanel) {
       newActivePanel.classList.add("active");
+    }
+
+    // Save the active panel for next session
+    try {
+      localStorage.setItem("panel", index$$1);
+    } catch (error) {
+      console.log("Could not set local storage");
     }
   }
 
@@ -12077,9 +12084,13 @@ function initGenerator() {
     updatePanel(nthChildIndex);
   });
 
+  var panel;
+  try {
+    panel = localStorage.getItem("panel");
+  } catch (error) {}
   // Activate 2525C by default
-  // TODO add cookie so that we start up at last used panel
-  updatePanel(0);
+  tabBarScroller.tabBar.activeTabIndex = panel || 0;
+  updatePanel(panel || 0);
 
   // Set up event listeners for all option inputs
   var optionFields = {};
