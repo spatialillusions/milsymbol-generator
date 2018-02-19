@@ -1,12 +1,7 @@
 import { select, slider, tabs, textField } from "material-components-web";
 import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
-import {
-  app6b,
-  milstd2525c,
-  milstd2525d,
-  app6d
-} from "../../milsymbol/dist/milstd.js";
+import { app6b, ms2525c, ms2525d, app6d } from "../../milsymbol/dist/milstd.js";
 
 import initLetterPanel from "./init-letter-panel.js";
 import initNumberPanel from "./init-number-panel.js";
@@ -32,7 +27,7 @@ export default function initGenerator() {
         case "0":
           panelInitialized[index] = new initLetterPanel(
             ".panel-2525c",
-            milstd2525c,
+            ms2525c,
             "2525"
           );
           break;
@@ -46,7 +41,7 @@ export default function initGenerator() {
         case "2":
           panelInitialized[index] = new initNumberPanel(
             ".panel-2525d",
-            milstd2525d,
+            ms2525d,
             "2525"
           );
           break;

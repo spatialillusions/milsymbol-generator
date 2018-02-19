@@ -10904,7 +10904,7 @@ var activities_app6d = {
 	"modifier 2": []
 };
 
-var milstd2525c = {
+var ms2525c = {
   WAR: warfighting_2525c,
   TACGRP: tacticalgraphics_2525c,
   SIGINT: signalsintelligence_2525c,
@@ -10912,7 +10912,7 @@ var milstd2525c = {
   EMS: emergencymanagment_2525c
 };
 
-var milstd2525d = {
+var ms2525d = {
   "01": air_2525d,
   "02": airmissile_2525d,
   "05": space_2525d,
@@ -12092,7 +12092,7 @@ function initGenerator() {
         case "0":
           panelInitialized[index$$1] = new initLetterPanel(
             ".panel-2525c",
-            milstd2525c,
+            ms2525c,
             "2525"
           );
           break;
@@ -12106,7 +12106,7 @@ function initGenerator() {
         case "2":
           panelInitialized[index$$1] = new initNumberPanel(
             ".panel-2525d",
-            milstd2525d,
+            ms2525d,
             "2525"
           );
           break;
@@ -12186,8 +12186,6 @@ function initGenerator() {
       renderSymbol();
     });
   });
-
-  window.panelInitialized = panelInitialized;
 }
 
 return initGenerator;
