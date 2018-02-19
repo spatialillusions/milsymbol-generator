@@ -6,67 +6,52 @@ import initSelect from "./number-sidc/init-select.js";
 import echelonMobilityTowedarray from "./number-sidc/echelon-mobility-towedarray.js";
 import headquartersTaskforceDummy from "./number-sidc/headquarters-taskforce-dummy.js";
 
-export default function(element, standardJSON, standard) {
+function initNumberPanel(element, standardJSON, standard) {
+  this.element = element;
+  this.mdcSelects = {};
+  this.standard = standard;
+  this.standardJSON = standardJSON;
   var className;
-  var mdcSelects = {};
-
-  function _preRenderSymbol(standardJSON, standard, mdcSelects) {
-    var sidc =
-      "10" +
-      mdcSelects[".standard-identity-1"].value +
-      mdcSelects[".standard-identity-2"].value +
-      mdcSelects[".symbol-set"].value +
-      mdcSelects[".status"].value +
-      (mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
-      (mdcSelects[".echelon-mobility-towedarray"].value || "00") +
-      mdcSelects[".icon"].value +
-      (mdcSelects[".icon-modifier-1"].value || "00") +
-      (mdcSelects[".icon-modifier-2"].value || "00");
-
-    var symbolElement = document.querySelector(element + " .svg-symbol");
-    symbolElement.setAttribute("sidc", sidc);
-    symbolElement.setAttribute("standard", standard);
-
-    document.querySelector(element + " .sidc").textContent = sidc;
-
-    renderSymbol();
-  }
 
   //Set a generic SIDC for all battle dimensions
   var symbolsets = [];
-  for (var i in standardJSON) {
+  for (var i in this.standardJSON) {
     symbolsets.push(i);
-    standardJSON[i].code = i;
-    standardJSON[i].sidc =
-      "1003" + standardJSON[i].symbolset + "00000000000000";
-    for (var j in standardJSON[i]["main icon"]) {
-      standardJSON[i]["main icon"][j]["symbol set"] = i;
-      standardJSON[i]["main icon"][j].sidc =
-        "1003" + i + "0000" + standardJSON[i]["main icon"][j]["code"] + "0000";
+    this.standardJSON[i].code = i;
+    this.standardJSON[i].sidc =
+      "1003" + this.standardJSON[i].symbolset + "00000000000000";
+    for (var j in this.standardJSON[i]["main icon"]) {
+      this.standardJSON[i]["main icon"][j]["symbol set"] = i;
+      this.standardJSON[i]["main icon"][j].sidc =
+        "1003" +
+        i +
+        "0000" +
+        this.standardJSON[i]["main icon"][j]["code"] +
+        "0000";
     }
-    for (var j in standardJSON[i]["modifier 1"]) {
-      standardJSON[i]["modifier 1"][j].sidc =
+    for (var j in this.standardJSON[i]["modifier 1"]) {
+      this.standardJSON[i]["modifier 1"][j].sidc =
         "1003" +
         i +
         "0000" +
         "000000" +
-        standardJSON[i]["modifier 1"][j]["code"] +
+        this.standardJSON[i]["modifier 1"][j]["code"] +
         "00";
     }
-    for (var j in standardJSON[i]["modifier 2"]) {
-      standardJSON[i]["modifier 2"][j].sidc =
+    for (var j in this.standardJSON[i]["modifier 2"]) {
+      this.standardJSON[i]["modifier 2"][j].sidc =
         "1003" +
         i +
         "0000" +
         "000000" +
         "00" +
-        standardJSON[i]["modifier 2"][j]["code"];
+        this.standardJSON[i]["modifier 2"][j]["code"];
     }
   }
   // Make an ordered array of the symbol sets
   symbolsets = symbolsets.sort();
   for (var i = 0; i < symbolsets.length; i++) {
-    symbolsets[i] = standardJSON[symbolsets[i]];
+    symbolsets[i] = this.standardJSON[symbolsets[i]];
   }
 
   var selectElement, selectItems, mdcSelect;
@@ -75,7 +60,7 @@ export default function(element, standardJSON, standard) {
   panel.innerHTML = template;
 
   className = ".standard-identity-1";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     [
@@ -83,16 +68,19 @@ export default function(element, standardJSON, standard) {
       { code: 1, name: "Exercise" },
       { code: 2, name: "Simulation" }
     ],
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".standard-identity-2";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     [
@@ -104,69 +92,75 @@ export default function(element, standardJSON, standard) {
       { code: 5, name: "Suspect/Joker", sidc: "10051000000000000000" },
       { code: 6, name: "Hostile/Faker", sidc: "10061000000000000000" }
     ],
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     3
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".symbol-set";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     symbolsets,
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     4
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".headquarters-taskforce-dummy",
-      headquartersTaskforceDummy(mdcSelects[".symbol-set"].value),
-      standard,
-      mdcSelects,
-      0
-    );
-    initSelect(
-      panel,
-      ".echelon-mobility-towedarray",
-      echelonMobilityTowedarray(mdcSelects[".symbol-set"].value),
-      standard,
-      mdcSelects,
-      0
-    );
-    initSelect(
-      panel,
-      ".icon",
-      standardJSON[mdcSelects[".symbol-set"].value]["main icon"],
-      standard,
-      mdcSelects
-    );
-    initSelect(
-      panel,
-      ".icon-modifier-1",
-      standardJSON[mdcSelects[".symbol-set"].value]["modifier 1"],
-      standard,
-      mdcSelects,
-      0
-    );
-    initSelect(
-      panel,
-      ".icon-modifier-2",
-      standardJSON[mdcSelects[".symbol-set"].value]["modifier 2"],
-      standard,
-      mdcSelects,
-      0
-    ).emit("MDCSelect:change");
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this.initSelect(
+        panel,
+        ".headquarters-taskforce-dummy",
+        headquartersTaskforceDummy(this.mdcSelects[".symbol-set"].value),
+        this.standard,
+        this.mdcSelects,
+        0
+      );
+      this.initSelect(
+        panel,
+        ".echelon-mobility-towedarray",
+        echelonMobilityTowedarray(this.mdcSelects[".symbol-set"].value),
+        this.standard,
+        this.mdcSelects,
+        0
+      );
+      this.initSelect(
+        panel,
+        ".icon",
+        this.standardJSON[this.mdcSelects[".symbol-set"].value]["main icon"],
+        this.standard,
+        this.mdcSelects
+      );
+      this.initSelect(
+        panel,
+        ".icon-modifier-1",
+        this.standardJSON[this.mdcSelects[".symbol-set"].value]["modifier 1"],
+        this.standard,
+        this.mdcSelects,
+        0
+      );
+      this.initSelect(
+        panel,
+        ".icon-modifier-2",
+        this.standardJSON[this.mdcSelects[".symbol-set"].value]["modifier 2"],
+        this.standard,
+        this.mdcSelects,
+        0
+      ).emit("MDCSelect:change");
 
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".status";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     [
@@ -185,81 +179,127 @@ export default function(element, standardJSON, standard) {
         sidc: "10031050000000000000"
       }
     ],
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".headquarters-taskforce-dummy";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    headquartersTaskforceDummy(mdcSelects[".symbol-set"].value),
-    standard,
-    mdcSelects,
+    headquartersTaskforceDummy(this.mdcSelects[".symbol-set"].value),
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".echelon-mobility-towedarray";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    echelonMobilityTowedarray(mdcSelects[".symbol-set"].value),
-    standard,
-    mdcSelects,
+    echelonMobilityTowedarray(this.mdcSelects[".symbol-set"].value),
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".icon";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON[mdcSelects[".symbol-set"].value]["main icon"],
-    standard,
-    mdcSelects,
+    this.standardJSON[this.mdcSelects[".symbol-set"].value]["main icon"],
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".icon-modifier-1";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON[mdcSelects[".symbol-set"].value]["modifier 1"],
-    standard,
-    mdcSelects,
+    this.standardJSON[this.mdcSelects[".symbol-set"].value]["modifier 1"],
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".icon-modifier-2";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON[mdcSelects[".symbol-set"].value]["modifier 2"],
-    standard,
-    mdcSelects,
+    this.standardJSON[this.mdcSelects[".symbol-set"].value]["modifier 2"],
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   // Now emit a change to render first symbol
-  mdcSelects[className].emit("MDCSelect:change");
+  this.mdcSelects[className].emit("MDCSelect:change");
 
-  return panel;
+  return this;
 }
+
+initNumberPanel.prototype._preRenderSymbol = function() {
+  var sidc = this.getSIDC();
+  var symbolElement = document.querySelector(this.element + " .svg-symbol");
+  symbolElement.setAttribute("sidc", sidc);
+  symbolElement.setAttribute("standard", this.standard);
+  document.querySelector(this.element + " .sidc").textContent = sidc;
+  renderSymbol();
+};
+
+initNumberPanel.prototype.initSelect = initSelect;
+
+initNumberPanel.prototype.getSIDC = function() {
+  var sidc =
+    "10" +
+    this.mdcSelects[".standard-identity-1"].value +
+    this.mdcSelects[".standard-identity-2"].value +
+    this.mdcSelects[".symbol-set"].value +
+    this.mdcSelects[".status"].value +
+    (this.mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
+    (this.mdcSelects[".echelon-mobility-towedarray"].value || "00") +
+    this.mdcSelects[".icon"].value +
+    (this.mdcSelects[".icon-modifier-1"].value || "00") +
+    (this.mdcSelects[".icon-modifier-2"].value || "00");
+  return sidc;
+};
+
+export default initNumberPanel;

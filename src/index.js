@@ -30,28 +30,28 @@ export default function initGenerator() {
       // The panel has never been used so let's start it up
       switch (String(index)) {
         case "0":
-          panelInitialized[index] = initLetterPanel(
+          panelInitialized[index] = new initLetterPanel(
             ".panel-2525c",
             milstd2525c,
             "2525"
           );
           break;
         case "1":
-          panelInitialized[index] = initLetterPanel(
+          panelInitialized[index] = new initLetterPanel(
             ".panel-app6b",
             app6b,
             "APP6"
           );
           break;
         case "2":
-          panelInitialized[index] = initNumberPanel(
+          panelInitialized[index] = new initNumberPanel(
             ".panel-2525d",
             milstd2525d,
             "2525"
           );
           break;
         case "3":
-          panelInitialized[index] = initNumberPanel(
+          panelInitialized[index] = new initNumberPanel(
             ".panel-app6d",
             app6d,
             "APP6"

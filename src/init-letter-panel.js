@@ -5,45 +5,25 @@ import initSelect from "./letter-sidc/init-select.js";
 import modifier1 from "./letter-sidc/modifier1.js";
 import modifier2 from "./letter-sidc/modifier2.js";
 
-export default function(element, standardJSON, standard) {
+function initLetterPanel(element, standardJSON, standard) {
+  this.element = element;
+  this.mdcSelects = {};
+  this.standard = standard;
+  this.standardJSON = standardJSON;
   var className;
-  var mdcSelects = {};
-
-  function _preRenderSymbol(standardJSON, standard, mdcSelects) {
-    var options =
-      standardJSON[mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ]["main icon"][mdcSelects[".function-id"].selectedIndex];
-    var sidc =
-      options["code scheme"] +
-      mdcSelects[".affiliation"].value +
-      options["battle dimension"] +
-      mdcSelects[".status"].value +
-      options["code"] +
-      mdcSelects[".symbol-modifier-1"].value +
-      mdcSelects[".symbol-modifier-2"].value;
-
-    var symbolElement = document.querySelector(element + " .svg-symbol");
-    symbolElement.setAttribute("sidc", sidc);
-    symbolElement.setAttribute("standard", standard);
-
-    document.querySelector(element + " .sidc").textContent = sidc;
-
-    renderSymbol();
-  }
 
   //Set a generic SIDC for all battle dimensions
-  for (var i in standardJSON) {
-    for (var j in standardJSON[i]) {
-      if (typeof standardJSON[i][j] == "object") {
-        var firstSymbol = standardJSON[i][j]["main icon"][0];
-        standardJSON[i][j].sidc =
+  for (var i in this.standardJSON) {
+    for (var j in this.standardJSON[i]) {
+      if (typeof this.standardJSON[i][j] == "object") {
+        var firstSymbol = this.standardJSON[i][j]["main icon"][0];
+        this.standardJSON[i][j].sidc =
           firstSymbol["code scheme"] +
           "F" +
           firstSymbol["battle dimension"] +
           "-";
-        if (j == "GRDTRK_EQT") standardJSON[i][j].sidc += "E-----";
-        if (j == "GRDTRK_INS") standardJSON[i][j].sidc += "------" + "H-";
+        if (j == "GRDTRK_EQT") this.standardJSON[i][j].sidc += "E-----";
+        if (j == "GRDTRK_INS") this.standardJSON[i][j].sidc += "------" + "H-";
       }
     }
   }
@@ -54,32 +34,29 @@ export default function(element, standardJSON, standard) {
   panel.innerHTML = template;
 
   className = ".coding-scheme";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON,
-    standard,
-    mdcSelects,
+    this.standardJSON,
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    /*console.log("outside listen coding scheeme");
-    console.log(
-      `Selected "${codingScheme.selectedOptions[0].textContent}" at index ${
-        codingScheme.selectedIndex
-      } ` + `with value "${codingScheme.value}"`
-    );*/
-    initSelect(
-      panel,
-      ".battle-dimension",
-      standardJSON[mdcSelects[".coding-scheme"].value],
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this.initSelect(
+        panel,
+        ".battle-dimension",
+        this.standardJSON[this.mdcSelects[".coding-scheme"].value],
+        this.standard,
+        this.mdcSelects
+      ).emit("MDCSelect:change");
+    }.bind(this)
+  );
 
   className = ".affiliation";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     {
@@ -99,56 +76,62 @@ export default function(element, standardJSON, standard) {
       K: { name: "Faker", sidc: "SKGP" },
       O: { name: "None Specified", sidc: "SOGP" }
     },
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     3
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".battle-dimension";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON.WAR,
-    standard,
-    mdcSelects,
+    this.standardJSON.WAR,
+    this.standard,
+    this.mdcSelects,
     2
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".function-id",
-      standardJSON[mdcSelects[".coding-scheme"].value][
-        mdcSelects[".battle-dimension"].value
-      ],
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this.initSelect(
+        panel,
+        ".function-id",
+        this.standardJSON[this.mdcSelects[".coding-scheme"].value][
+          this.mdcSelects[".battle-dimension"].value
+        ],
+        this.standard,
+        this.mdcSelects
+      ).emit("MDCSelect:change");
 
-    initSelect(
-      panel,
-      ".symbol-modifier-1",
-      modifier1(mdcSelects[".battle-dimension"].value),
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
+      this.initSelect(
+        panel,
+        ".symbol-modifier-1",
+        modifier1(this.mdcSelects[".battle-dimension"].value),
+        this.standard,
+        this.mdcSelects
+      ).emit("MDCSelect:change");
 
-    initSelect(
-      panel,
-      ".symbol-modifier-2",
-      modifier2(
-        mdcSelects[".battle-dimension"].value,
-        mdcSelects[".symbol-modifier-1"].value
-      ),
-      standard,
-      mdcSelects
-    ).emit("MDCSelect:change");
-  });
+      this.initSelect(
+        panel,
+        ".symbol-modifier-2",
+        modifier2(
+          this.mdcSelects[".battle-dimension"].value,
+          this.mdcSelects[".symbol-modifier-1"].value
+        ),
+        this.standard,
+        this.mdcSelects
+      ).emit("MDCSelect:change");
+    }.bind(this)
+  );
 
   className = ".status";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     {
@@ -159,70 +142,110 @@ export default function(element, standardJSON, standard) {
       X: { name: "Present/Destroyed", sidc: "SFGX" },
       F: { name: "Present/Full To Capacity", sidc: "SFGF" }
     },
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     1
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".function-id";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    standardJSON[mdcSelects[".coding-scheme"].value][
-      mdcSelects[".battle-dimension"].value
+    this.standardJSON[this.mdcSelects[".coding-scheme"].value][
+      this.mdcSelects[".battle-dimension"].value
     ],
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".symbol-modifier-1";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    modifier1(mdcSelects[".battle-dimension"].value),
-    standard,
-    mdcSelects,
+    modifier1(this.mdcSelects[".battle-dimension"].value),
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    initSelect(
-      panel,
-      ".symbol-modifier-2",
-      modifier2(
-        mdcSelects[".battle-dimension"].value,
-        mdcSelects[".symbol-modifier-1"].value
-      ),
-      standard,
-      mdcSelects
-    );
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this.initSelect(
+        panel,
+        ".symbol-modifier-2",
+        modifier2(
+          this.mdcSelects[".battle-dimension"].value,
+          this.mdcSelects[".symbol-modifier-1"].value
+        ),
+        this.standard,
+        this.mdcSelects
+      );
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   className = ".symbol-modifier-2";
-  mdcSelects[className] = initSelect(
+  this.mdcSelects[className] = this.initSelect(
     panel,
     className,
     modifier2(
-      mdcSelects[".battle-dimension"].value,
-      mdcSelects[".symbol-modifier-1"].value
+      this.mdcSelects[".battle-dimension"].value,
+      this.mdcSelects[".symbol-modifier-1"].value
     ),
-    standard,
-    mdcSelects,
+    this.standard,
+    this.mdcSelects,
     0
   );
-  mdcSelects[className].listen("MDCSelect:change", function() {
-    _preRenderSymbol(standardJSON, standard, mdcSelects);
-  });
+  this.mdcSelects[className].listen(
+    "MDCSelect:change",
+    function() {
+      this._preRenderSymbol();
+    }.bind(this)
+  );
 
   // Now emit a change to render first symbol
-  mdcSelects[className].emit("MDCSelect:change");
+  this.mdcSelects[className].emit("MDCSelect:change");
 
-  return panel;
+  return this;
 }
+
+initLetterPanel.prototype._preRenderSymbol = function() {
+  var sidc = this.getSIDC();
+  var symbolElement = document.querySelector(this.element + " .svg-symbol");
+  symbolElement.setAttribute("sidc", sidc);
+  symbolElement.setAttribute("standard", this.standard);
+  document.querySelector(this.element + " .sidc").textContent = sidc;
+  renderSymbol();
+};
+
+initLetterPanel.prototype.initSelect = initSelect;
+
+initLetterPanel.prototype.getSIDC = function() {
+  var options = this.standardJSON[this.mdcSelects[".coding-scheme"].value][
+    this.mdcSelects[".battle-dimension"].value
+  ]["main icon"][this.mdcSelects[".function-id"].selectedIndex];
+  var sidc =
+    options["code scheme"] +
+    this.mdcSelects[".affiliation"].value +
+    options["battle dimension"] +
+    this.mdcSelects[".status"].value +
+    options["code"] +
+    this.mdcSelects[".symbol-modifier-1"].value +
+    this.mdcSelects[".symbol-modifier-2"].value;
+  return sidc;
+};
+
+export default initLetterPanel;
