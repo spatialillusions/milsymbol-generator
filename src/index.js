@@ -3,8 +3,8 @@ import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
 import { app6b, ms2525c, ms2525d, app6d } from "../../milsymbol/dist/milstd.js";
 
-import initLetterPanel from "./init-letter-panel.js";
-import initNumberPanel from "./init-number-panel.js";
+import letterPanel from "./letter-panel.js";
+import numberPanel from "./number-panel.js";
 import renderSymbol from "./render-symbol.js";
 
 export default function initGenerator() {
@@ -25,28 +25,28 @@ export default function initGenerator() {
       // The panel has never been used so let's start it up
       switch (String(index)) {
         case "0":
-          panelInitialized[index] = new initLetterPanel(
+          panelInitialized[index] = new letterPanel(
             ".panel-2525c",
             ms2525c,
             "2525"
           );
           break;
         case "1":
-          panelInitialized[index] = new initLetterPanel(
+          panelInitialized[index] = new letterPanel(
             ".panel-app6b",
             app6b,
             "APP6"
           );
           break;
         case "2":
-          panelInitialized[index] = new initNumberPanel(
+          panelInitialized[index] = new numberPanel(
             ".panel-2525d",
             ms2525d,
             "2525"
           );
           break;
         case "3":
-          panelInitialized[index] = new initNumberPanel(
+          panelInitialized[index] = new numberPanel(
             ".panel-app6d",
             app6d,
             "APP6"
@@ -121,4 +121,6 @@ export default function initGenerator() {
       renderSymbol();
     });
   });
+
+  window.panelInitialized = panelInitialized;
 }

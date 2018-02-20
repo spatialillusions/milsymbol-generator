@@ -5,7 +5,7 @@ import initSelect from "./letter-sidc/init-select.js";
 import modifier1 from "./letter-sidc/modifier1.js";
 import modifier2 from "./letter-sidc/modifier2.js";
 
-function initLetterPanel(element, standardJSON, standard) {
+function letterPanel(element, standardJSON, standard) {
   this.element = element;
   this.mdcSelects = {};
   this.standard = standard;
@@ -27,7 +27,6 @@ function initLetterPanel(element, standardJSON, standard) {
       }
     }
   }
-
   var selectElement, selectItems, mdcSelect;
   var panel = document.querySelector(element);
   //First add the template to the element
@@ -56,30 +55,32 @@ function initLetterPanel(element, standardJSON, standard) {
   );
 
   className = ".affiliation";
+  var affiliationDefault = {
+    P: { index: 0, name: "Pending", sidc: "SPGP" },
+    U: { index: 1, name: "Unknown", sidc: "SUGP" },
+    A: { index: 2, name: "Assumed Friend", sidc: "SAGP" },
+    F: { index: 3, name: "Friend", sidc: "SFGP" },
+    N: { index: 4, name: "Neutral", sidc: "SNGP" },
+    S: { index: 5, name: "Suspect", sidc: "SSGP" },
+    H: { index: 6, name: "Hostile", sidc: "SHGP" },
+    G: { index: 7, name: "Exercise Pending", sidc: "SGGP" },
+    W: { index: 8, name: "Exercise Unknown", sidc: "SWGP" },
+    D: { index: 9, name: "Exercise Friend", sidc: "SDGP" },
+    L: { index: 10, name: "Exercise Neutral", sidc: "SLGP" },
+    M: { index: 11, name: "Exercise Assumed Friend", sidc: "SMGP" },
+    J: { index: 12, name: "Joker", sidc: "SJGP" },
+    K: { index: 13, name: "Faker", sidc: "SKGP" },
+    O: { index: 14, name: "None Specified", sidc: "SOGP" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    {
-      P: { name: "Pending", sidc: "SPGP" },
-      U: { name: "Unknown", sidc: "SUGP" },
-      A: { name: "Assumed Friend", sidc: "SAGP" },
-      F: { name: "Friend", sidc: "SFGP" },
-      N: { name: "Neutral", sidc: "SNGP" },
-      S: { name: "Suspect", sidc: "SSGP" },
-      H: { name: "Hostile", sidc: "SHGP" },
-      G: { name: "Exercise Pending", sidc: "SGGP" },
-      W: { name: "Exercise Unknown", sidc: "SWGP" },
-      D: { name: "Exercise Friend", sidc: "SDGP" },
-      L: { name: "Exercise Neutral", sidc: "SLGP" },
-      M: { name: "Exercise Assumed Friend", sidc: "SMGP" },
-      J: { name: "Joker", sidc: "SJGP" },
-      K: { name: "Faker", sidc: "SKGP" },
-      O: { name: "None Specified", sidc: "SOGP" }
-    },
+    affiliationDefault,
     this.standard,
     this.mdcSelects,
     3
   );
+  this.mdcSelects[className].defaults = affiliationDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -131,21 +132,23 @@ function initLetterPanel(element, standardJSON, standard) {
   );
 
   className = ".status";
+  var statusDefault = {
+    A: { index: 0, name: "Anticipated/Planned", sidc: "SFGA" },
+    P: { index: 1, name: "Present", sidc: "SFGP" },
+    C: { index: 2, name: "Present/Fully Capable", sidc: "SFGC" },
+    D: { index: 3, name: "Present/Damaged", sidc: "SFGD" },
+    X: { index: 4, name: "Present/Destroyed", sidc: "SFGX" },
+    F: { index: 5, name: "Present/Full To Capacity", sidc: "SFGF" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    {
-      A: { name: "Anticipated/Planned", sidc: "SFGA" },
-      P: { name: "Present", sidc: "SFGP" },
-      C: { name: "Present/Fully Capable", sidc: "SFGC" },
-      D: { name: "Present/Damaged", sidc: "SFGD" },
-      X: { name: "Present/Destroyed", sidc: "SFGX" },
-      F: { name: "Present/Full To Capacity", sidc: "SFGF" }
-    },
+    statusDefault,
     this.standard,
     this.mdcSelects,
     1
   );
+  this.mdcSelects[className].defaults = statusDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -222,7 +225,7 @@ function initLetterPanel(element, standardJSON, standard) {
   return this;
 }
 
-initLetterPanel.prototype._preRenderSymbol = function() {
+letterPanel.prototype._preRenderSymbol = function() {
   var sidc = this.getSIDC();
   var symbolElement = document.querySelector(this.element + " .svg-symbol");
   symbolElement.setAttribute("sidc", sidc);
@@ -231,9 +234,9 @@ initLetterPanel.prototype._preRenderSymbol = function() {
   renderSymbol();
 };
 
-initLetterPanel.prototype.initSelect = initSelect;
+letterPanel.prototype.initSelect = initSelect;
 
-initLetterPanel.prototype.getSIDC = function() {
+letterPanel.prototype.getSIDC = function() {
   var options = this.standardJSON[this.mdcSelects[".coding-scheme"].value][
     this.mdcSelects[".battle-dimension"].value
   ]["main icon"][this.mdcSelects[".function-id"].selectedIndex];
@@ -243,9 +246,62 @@ initLetterPanel.prototype.getSIDC = function() {
     options["battle dimension"] +
     this.mdcSelects[".status"].value +
     options["code"] +
-    this.mdcSelects[".symbol-modifier-1"].value +
-    this.mdcSelects[".symbol-modifier-2"].value;
+    (this.mdcSelects[".symbol-modifier-1"].value || "-") +
+    (this.mdcSelects[".symbol-modifier-2"].value || "-");
   return sidc;
 };
 
-export default initLetterPanel;
+letterPanel.prototype.setSIDC = function(sidc) {
+  this.mdcSelects[".affiliation"].selectedIndex = this.mdcSelects[
+    ".affiliation"
+  ].defaults[sidc.charAt(1)].index;
+  this.mdcSelects[".status"].selectedIndex = this.mdcSelects[
+    ".status"
+  ].defaults[sidc.charAt(3)].index;
+
+  var codingScheme = 0;
+  var foundSIDC = false;
+  for (var i in this.standardJSON) {
+    var battleDimension = 0;
+    for (var j in this.standardJSON[i]) {
+      if (typeof this.standardJSON[i][j] == "string") continue;
+      var functionId = 0;
+      for (var k in this.standardJSON[i][j]["main icon"]) {
+        var rowSIDC =
+          this.standardJSON[i][j]["main icon"][k]["code scheme"] +
+          sidc.charAt(1) +
+          this.standardJSON[i][j]["main icon"][k]["battle dimension"] +
+          sidc.charAt(3) +
+          this.standardJSON[i][j]["main icon"][k]["code"] +
+          "--";
+        if (sidc == rowSIDC) {
+          foundSIDC = true;
+          break;
+        }
+        functionId++;
+      }
+      if (foundSIDC) {
+        break;
+      } else {
+        battleDimension++;
+      }
+    }
+    if (foundSIDC) {
+      break;
+    } else {
+      codingScheme++;
+    }
+  }
+  this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
+  this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
+  this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
+  this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
+  this.mdcSelects[".function-id"].selectedIndex = functionId;
+  this.mdcSelects[".function-id"].emit("MDCSelect:change");
+
+  //TODO add mobility settings
+
+  return this;
+};
+
+export default letterPanel;

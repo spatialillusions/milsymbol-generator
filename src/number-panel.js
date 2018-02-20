@@ -6,7 +6,7 @@ import initSelect from "./number-sidc/init-select.js";
 import echelonMobilityTowedarray from "./number-sidc/echelon-mobility-towedarray.js";
 import headquartersTaskforceDummy from "./number-sidc/headquarters-taskforce-dummy.js";
 
-function initNumberPanel(element, standardJSON, standard) {
+function numberPanel(element, standardJSON, standard) {
   this.element = element;
   this.mdcSelects = {};
   this.standard = standard;
@@ -276,7 +276,7 @@ function initNumberPanel(element, standardJSON, standard) {
   return this;
 }
 
-initNumberPanel.prototype._preRenderSymbol = function() {
+numberPanel.prototype._preRenderSymbol = function() {
   var sidc = this.getSIDC();
   var symbolElement = document.querySelector(this.element + " .svg-symbol");
   symbolElement.setAttribute("sidc", sidc);
@@ -285,9 +285,9 @@ initNumberPanel.prototype._preRenderSymbol = function() {
   renderSymbol();
 };
 
-initNumberPanel.prototype.initSelect = initSelect;
+numberPanel.prototype.initSelect = initSelect;
 
-initNumberPanel.prototype.getSIDC = function() {
+numberPanel.prototype.getSIDC = function() {
   var sidc =
     "10" +
     this.mdcSelects[".standard-identity-1"].value +
@@ -301,5 +301,20 @@ initNumberPanel.prototype.getSIDC = function() {
     (this.mdcSelects[".icon-modifier-2"].value || "00");
   return sidc;
 };
-
-export default initNumberPanel;
+numberPanel.prototype.setSIDC = function(sidc) {
+  /*
+  var sidc =
+    "10" +
+    this.mdcSelects[".standard-identity-1"].value +
+    this.mdcSelects[".standard-identity-2"].value +
+    this.mdcSelects[".symbol-set"].value +
+    this.mdcSelects[".status"].value +
+    (this.mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
+    (this.mdcSelects[".echelon-mobility-towedarray"].value || "00") +
+    this.mdcSelects[".icon"].value +
+    (this.mdcSelects[".icon-modifier-1"].value || "00") +
+    (this.mdcSelects[".icon-modifier-2"].value || "00");
+    */
+  return this;
+};
+export default numberPanel;

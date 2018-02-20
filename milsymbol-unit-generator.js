@@ -11283,7 +11283,7 @@ function modifier2(battledimension, modifier1) {
   return undefined; //{ "-": { name: "-" } };
 }
 
-function initLetterPanel(element, standardJSON, standard) {
+function letterPanel(element, standardJSON, standard) {
   this.element = element;
   this.mdcSelects = {};
   this.standard = standard;
@@ -11305,7 +11305,6 @@ function initLetterPanel(element, standardJSON, standard) {
       }
     }
   }
-
   var panel = document.querySelector(element);
   //First add the template to the element
   panel.innerHTML = template;
@@ -11333,30 +11332,32 @@ function initLetterPanel(element, standardJSON, standard) {
   );
 
   className = ".affiliation";
+  var affiliationDefault = {
+    P: { index: 0, name: "Pending", sidc: "SPGP" },
+    U: { index: 1, name: "Unknown", sidc: "SUGP" },
+    A: { index: 2, name: "Assumed Friend", sidc: "SAGP" },
+    F: { index: 3, name: "Friend", sidc: "SFGP" },
+    N: { index: 4, name: "Neutral", sidc: "SNGP" },
+    S: { index: 5, name: "Suspect", sidc: "SSGP" },
+    H: { index: 6, name: "Hostile", sidc: "SHGP" },
+    G: { index: 7, name: "Exercise Pending", sidc: "SGGP" },
+    W: { index: 8, name: "Exercise Unknown", sidc: "SWGP" },
+    D: { index: 9, name: "Exercise Friend", sidc: "SDGP" },
+    L: { index: 10, name: "Exercise Neutral", sidc: "SLGP" },
+    M: { index: 11, name: "Exercise Assumed Friend", sidc: "SMGP" },
+    J: { index: 12, name: "Joker", sidc: "SJGP" },
+    K: { index: 13, name: "Faker", sidc: "SKGP" },
+    O: { index: 14, name: "None Specified", sidc: "SOGP" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    {
-      P: { name: "Pending", sidc: "SPGP" },
-      U: { name: "Unknown", sidc: "SUGP" },
-      A: { name: "Assumed Friend", sidc: "SAGP" },
-      F: { name: "Friend", sidc: "SFGP" },
-      N: { name: "Neutral", sidc: "SNGP" },
-      S: { name: "Suspect", sidc: "SSGP" },
-      H: { name: "Hostile", sidc: "SHGP" },
-      G: { name: "Exercise Pending", sidc: "SGGP" },
-      W: { name: "Exercise Unknown", sidc: "SWGP" },
-      D: { name: "Exercise Friend", sidc: "SDGP" },
-      L: { name: "Exercise Neutral", sidc: "SLGP" },
-      M: { name: "Exercise Assumed Friend", sidc: "SMGP" },
-      J: { name: "Joker", sidc: "SJGP" },
-      K: { name: "Faker", sidc: "SKGP" },
-      O: { name: "None Specified", sidc: "SOGP" }
-    },
+    affiliationDefault,
     this.standard,
     this.mdcSelects,
     3
   );
+  this.mdcSelects[className].defaults = affiliationDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -11408,21 +11409,23 @@ function initLetterPanel(element, standardJSON, standard) {
   );
 
   className = ".status";
+  var statusDefault = {
+    A: { index: 0, name: "Anticipated/Planned", sidc: "SFGA" },
+    P: { index: 1, name: "Present", sidc: "SFGP" },
+    C: { index: 2, name: "Present/Fully Capable", sidc: "SFGC" },
+    D: { index: 3, name: "Present/Damaged", sidc: "SFGD" },
+    X: { index: 4, name: "Present/Destroyed", sidc: "SFGX" },
+    F: { index: 5, name: "Present/Full To Capacity", sidc: "SFGF" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    {
-      A: { name: "Anticipated/Planned", sidc: "SFGA" },
-      P: { name: "Present", sidc: "SFGP" },
-      C: { name: "Present/Fully Capable", sidc: "SFGC" },
-      D: { name: "Present/Damaged", sidc: "SFGD" },
-      X: { name: "Present/Destroyed", sidc: "SFGX" },
-      F: { name: "Present/Full To Capacity", sidc: "SFGF" }
-    },
+    statusDefault,
     this.standard,
     this.mdcSelects,
     1
   );
+  this.mdcSelects[className].defaults = statusDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -11499,7 +11502,7 @@ function initLetterPanel(element, standardJSON, standard) {
   return this;
 }
 
-initLetterPanel.prototype._preRenderSymbol = function() {
+letterPanel.prototype._preRenderSymbol = function() {
   var sidc = this.getSIDC();
   var symbolElement = document.querySelector(this.element + " .svg-symbol");
   symbolElement.setAttribute("sidc", sidc);
@@ -11508,9 +11511,9 @@ initLetterPanel.prototype._preRenderSymbol = function() {
   renderSymbol();
 };
 
-initLetterPanel.prototype.initSelect = initSelect;
+letterPanel.prototype.initSelect = initSelect;
 
-initLetterPanel.prototype.getSIDC = function() {
+letterPanel.prototype.getSIDC = function() {
   var options = this.standardJSON[this.mdcSelects[".coding-scheme"].value][
     this.mdcSelects[".battle-dimension"].value
   ]["main icon"][this.mdcSelects[".function-id"].selectedIndex];
@@ -11520,9 +11523,62 @@ initLetterPanel.prototype.getSIDC = function() {
     options["battle dimension"] +
     this.mdcSelects[".status"].value +
     options["code"] +
-    this.mdcSelects[".symbol-modifier-1"].value +
-    this.mdcSelects[".symbol-modifier-2"].value;
+    (this.mdcSelects[".symbol-modifier-1"].value || "-") +
+    (this.mdcSelects[".symbol-modifier-2"].value || "-");
   return sidc;
+};
+
+letterPanel.prototype.setSIDC = function(sidc) {
+  this.mdcSelects[".affiliation"].selectedIndex = this.mdcSelects[
+    ".affiliation"
+  ].defaults[sidc.charAt(1)].index;
+  this.mdcSelects[".status"].selectedIndex = this.mdcSelects[
+    ".status"
+  ].defaults[sidc.charAt(3)].index;
+
+  var codingScheme = 0;
+  var foundSIDC = false;
+  for (var i in this.standardJSON) {
+    var battleDimension = 0;
+    for (var j in this.standardJSON[i]) {
+      if (typeof this.standardJSON[i][j] == "string") continue;
+      var functionId = 0;
+      for (var k in this.standardJSON[i][j]["main icon"]) {
+        var rowSIDC =
+          this.standardJSON[i][j]["main icon"][k]["code scheme"] +
+          sidc.charAt(1) +
+          this.standardJSON[i][j]["main icon"][k]["battle dimension"] +
+          sidc.charAt(3) +
+          this.standardJSON[i][j]["main icon"][k]["code"] +
+          "--";
+        if (sidc == rowSIDC) {
+          foundSIDC = true;
+          break;
+        }
+        functionId++;
+      }
+      if (foundSIDC) {
+        break;
+      } else {
+        battleDimension++;
+      }
+    }
+    if (foundSIDC) {
+      break;
+    } else {
+      codingScheme++;
+    }
+  }
+  this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
+  this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
+  this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
+  this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
+  this.mdcSelects[".function-id"].selectedIndex = functionId;
+  this.mdcSelects[".function-id"].emit("MDCSelect:change");
+
+  //TODO add mobility settings
+
+  return this;
 };
 
 var template$1 = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a href=\"\" title=\"Download as PNG\">\n            <svg style=\"float:right;margin:20px;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"standard-identity-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"standard-identity-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-set\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol set</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"headquarters-taskforce-dummy\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Headquarters/Task force/Dummy</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"echelon-mobility-towedarray\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Echelon/Mobility/Towed array</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
@@ -11776,7 +11832,7 @@ function headquartersTaskforceDummy(symbolset) {
   return undefined;
 }
 
-function initNumberPanel(element, standardJSON, standard) {
+function numberPanel(element, standardJSON, standard) {
   this.element = element;
   this.mdcSelects = {};
   this.standard = standard;
@@ -12045,7 +12101,7 @@ function initNumberPanel(element, standardJSON, standard) {
   return this;
 }
 
-initNumberPanel.prototype._preRenderSymbol = function() {
+numberPanel.prototype._preRenderSymbol = function() {
   var sidc = this.getSIDC();
   var symbolElement = document.querySelector(this.element + " .svg-symbol");
   symbolElement.setAttribute("sidc", sidc);
@@ -12054,9 +12110,9 @@ initNumberPanel.prototype._preRenderSymbol = function() {
   renderSymbol();
 };
 
-initNumberPanel.prototype.initSelect = initSelect$1;
+numberPanel.prototype.initSelect = initSelect$1;
 
-initNumberPanel.prototype.getSIDC = function() {
+numberPanel.prototype.getSIDC = function() {
   var sidc =
     "10" +
     this.mdcSelects[".standard-identity-1"].value +
@@ -12069,6 +12125,22 @@ initNumberPanel.prototype.getSIDC = function() {
     (this.mdcSelects[".icon-modifier-1"].value || "00") +
     (this.mdcSelects[".icon-modifier-2"].value || "00");
   return sidc;
+};
+numberPanel.prototype.setSIDC = function(sidc) {
+  /*
+  var sidc =
+    "10" +
+    this.mdcSelects[".standard-identity-1"].value +
+    this.mdcSelects[".standard-identity-2"].value +
+    this.mdcSelects[".symbol-set"].value +
+    this.mdcSelects[".status"].value +
+    (this.mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
+    (this.mdcSelects[".echelon-mobility-towedarray"].value || "00") +
+    this.mdcSelects[".icon"].value +
+    (this.mdcSelects[".icon-modifier-1"].value || "00") +
+    (this.mdcSelects[".icon-modifier-2"].value || "00");
+    */
+  return this;
 };
 
 // At the moment use our development version of milsymbol
@@ -12090,28 +12162,28 @@ function initGenerator() {
       // The panel has never been used so let's start it up
       switch (String(index$$1)) {
         case "0":
-          panelInitialized[index$$1] = new initLetterPanel(
+          panelInitialized[index$$1] = new letterPanel(
             ".panel-2525c",
             ms2525c,
             "2525"
           );
           break;
         case "1":
-          panelInitialized[index$$1] = new initLetterPanel(
+          panelInitialized[index$$1] = new letterPanel(
             ".panel-app6b",
             app6b,
             "APP6"
           );
           break;
         case "2":
-          panelInitialized[index$$1] = new initNumberPanel(
+          panelInitialized[index$$1] = new numberPanel(
             ".panel-2525d",
             ms2525d,
             "2525"
           );
           break;
         case "3":
-          panelInitialized[index$$1] = new initNumberPanel(
+          panelInitialized[index$$1] = new numberPanel(
             ".panel-app6d",
             app6d,
             "APP6"
@@ -12186,6 +12258,8 @@ function initGenerator() {
       renderSymbol();
     });
   });
+
+  window.panelInitialized = panelInitialized;
 }
 
 return initGenerator;
