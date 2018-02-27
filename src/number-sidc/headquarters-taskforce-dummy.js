@@ -1,5 +1,5 @@
 export default function headquartersTaskforceDummy(symbolset) {
-  if (symbolset == "10") {
+  if (symbolset == "10" || true) {
     return [
       { code: 0, name: "Unspecified", sidc: "10031000000000000000" },
       { code: 1, name: "Feint/Dummy", sidc: "10031001000000000000" },
