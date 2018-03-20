@@ -1,4 +1,10 @@
-import { select, slider, tabs, textField } from "material-components-web";
+//import { select, slider, tabs, textField } from "material-components-web";
+import mdc from "material-components-web/dist/material-components-web.min.js";
+var select = mdc.select;
+var slider = mdc.slider;
+var tabs = mdc.tabs;
+var textField = mdc.textField;
+
 import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
 import { app6b, ms2525c, ms2525d, app6d } from "../../milsymbol/dist/milstd.js";

@@ -1,4 +1,6 @@
-import { select } from "material-components-web";
+//import { select } from "material-components-web";
+import mdc from "material-components-web/dist/material-components-web.min.js";
+var select = mdc.select;
 import addSelectItem from "../add-select-item.js";
 
 export default function initSelect(

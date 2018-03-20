@@ -264,7 +264,9 @@ letterPanel.prototype.setSIDC = function(sidc) {
   for (var i in this.standardJSON) {
     var battleDimension = 0;
     for (var j in this.standardJSON[i]) {
-      if (typeof this.standardJSON[i][j] == "string") continue;
+      if (typeof this.standardJSON[i][j] == "string") {
+        continue;
+      }
       var functionId = 0;
       for (var k in this.standardJSON[i][j]["main icon"]) {
         var rowSIDC =
@@ -273,7 +275,8 @@ letterPanel.prototype.setSIDC = function(sidc) {
           this.standardJSON[i][j]["main icon"][k]["battle dimension"] +
           sidc.charAt(3) +
           this.standardJSON[i][j]["main icon"][k]["code"] +
-          "--";
+          (sidc.charAt(10) || "-") +
+          (sidc.charAt(11) || "-");
         if (sidc == rowSIDC) {
           foundSIDC = true;
           break;
@@ -298,8 +301,26 @@ letterPanel.prototype.setSIDC = function(sidc) {
   this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
   this.mdcSelects[".function-id"].selectedIndex = functionId;
   this.mdcSelects[".function-id"].emit("MDCSelect:change");
-
-  //TODO add mobility settings
+  for (
+    var i = 0;
+    i < this.mdcSelects[".symbol-modifier-1"].options.length;
+    i++
+  ) {
+    if (this.mdcSelects[".symbol-modifier-1"].item(i).id == sidc.charAt(10)) {
+      this.mdcSelects[".symbol-modifier-1"].selectedIndex = i;
+      this.mdcSelects[".symbol-modifier-1"].emit("MDCSelect:change");
+    }
+  }
+  for (
+    var i = 0;
+    i < this.mdcSelects[".symbol-modifier-2"].options.length;
+    i++
+  ) {
+    if (this.mdcSelects[".symbol-modifier-2"].item(i).id == sidc.charAt(11)) {
+      this.mdcSelects[".symbol-modifier-2"].selectedIndex = i;
+      this.mdcSelects[".symbol-modifier-2"].emit("MDCSelect:change");
+    }
+  }
 
   return this;
 };
