@@ -110,7 +110,7 @@
     }
 
     .content.scroll {
-        margin-top: 398px;
+        margin-top: 378px;
     }
 
     .panels {
@@ -131,7 +131,7 @@
         height: 250px;
         margin-left: -20px;
         margin-right: -20px;
-        margin-bottom: 20px;
+        /*margin-bottom: 20px;*/
         padding: 0.1px 0px 0px 0px;
         transition: box-shadow 0.2s ease;
         border-bottom: 1px solid #e5e5e5;
@@ -157,6 +157,16 @@
     .symbol img {
         width: auto;
         max-height: 180px;
+    }
+
+    .search .mdc-text-field {
+        max-width: 0px;
+        overflow: hidden;
+        transition: max-width 0.2s ease;
+    }
+
+    .search .mdc-text-field.active {
+        max-width: 300px;
     }
 
     .search figure {

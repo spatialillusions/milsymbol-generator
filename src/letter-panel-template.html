@@ -19,33 +19,19 @@
 </div>
 
 <div class="search">
+    <span id="search-icon">
+        <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+            />
+            <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+    </span>
     <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
         <input type="text" class="mdc-text-field__input" id="search" maxlength="30" size="30">
         <label for="direction" class="mdc-text-field__label">Search</label>
     </div>
     <div style="position:relative;">
-        <nav style="position:absolute; left:0; top:0;" class="mdc-list" data-demo-interactive-list="">
-            <!--<a href="#" class="mdc-list-item mdc-ripple-upgraded" style="--mdc-ripple-fg-size: 360px; --mdc-ripple-fg-scale: 1.69977; --mdc-ripple-fg-translate-start: 43px, -159.031px; --mdc-ripple-fg-translate-end: 120px, -156px;">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-                    <figure>
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAACs9JREFUaAXdWwlQVEca7jeDDgYZI8upEgLxXFFgLQQGEXRXXZUtJQOjHAEBk5hFQNYEFnGzoiYFroCcI8gpo44uJlmQK55LeaDLUhEKFEHw4PLgcKKDXNP7N+ujcByOgeGyq6g3773u/v/v/f2f3SA0Po0BZNdijJnjQ34MqWZlZX0A5FICAgIkhYWFJQB66hiSR2P6haurq7WmT59eraGhYeHh4UFVVVVprVixQtTW1nZ9LEGPFS2Gurq6ID8/H5cXF+OW8HC88pNPJLNnz5ZkZ2cXjLWkRxV0TU2NNoCqAcniHRwO7goJwXjfPvwiMBAXFhTgJ0+e4G3bth0ZVSbeTD4WS5ohFot/cnNzM7E2MkJ/VlFBzO7uHvIsJSXEbm5G+1NTcfzx42ZBQUG6BQUFecHBwf/vMApfYFQBE8l2d3dnHj16dJWWWIx4XV2ICX99G6u9HXFUVKgZFhbIJyDgd5mZmcszMjIEffso8jelyMmk5mKARa7kcDgG6QcOIO8ZMxCD6p+cCN5f09NDPFdXPGfOnL137tw5TFFUh9ScI77tn4MRTE0kC0DDXr9+7ZRx7Biyvn8fMdvaBp1RBNLempOD/x4fT0kkkhKYw2jQQXJ2IAGAQtvly5eVX758WX7ixAknR0NDZFNaOiSwhAk2i4WEbm6UloYGCg8PXwKPfMF6K1QoCgV85syZqatWreIDszO1YYlG2doOuIxlfWm2SITUjh9HtYWFyN3dPQKCk9uKdFkKM1pkGbPZ7OqnT59aTC0vRx5ggZmdnbIwDfqMBbrOW7aMMvf2pp41NWnBRxS3trZeHXTgEDooarkw9PX1T546dWqLKgBdmJ2NGBgPgfzAXUSqqoiblIT/29CAkpKSLtnZ2W0YqSEbsYSJZC0tLYtOnjxprXT3LnJmMoctWWn4rI4OtHnuXGqFnx9lbmlpsGfPHk1Y4uek+8lzP1LADBaLlUuCCs6CBcgLJCLtZ+VhRlZfEpz85uVLFH72LD4UHb3My8tL49atWxeGG5wMGzCR7PPnzzNIUKHHYCAe6KuiwdIfgAQny5SUKLxoEQo6eHD5+fPnrYRCYRr9Xp7rcHWYAUQfLF26VDc5KAj5z54ttzWWh0m6LwlOboOr4zo5YSaT+deGhoYj8uq03G4JUjpNVVXVVAj2de8VFaFv5s0bE7AENPvFC2R06RIyVFNDqampoTdv3iwClyUXBrmW9NWrV8EIK923srIyoyCg+GratFFbxrRUpa9Ep+04HErVygrF8fmatra2LdDnpnS//u6H/HUcHByYkKxHQQQ1c5G+PuLb2Y2ZZKWZZ//6K/owPR0VZ2YiABwBgvhlqMGJkvRksu6JgWpubi4FI6XekJuL5pMUTyrrkTVuNJ+xJRKUD1WTps8+Qy0ikRHYkwCgd2AwmkMxWgwTE5MzAoGA2wVhn2Fe3rhJVhYYYsicBQJ8oawMJSYm5jk7O28eyJANqMNEskZGRjeSk5OtWZDxOEHIN96SlQZNXJbtxx9Tpjt2UGvWr593+PDhjyCB+Um6H30/EGCGjo7ORRcXF2NTyFN3stkTDiwNghgyHYgDEi9exIHBwUZOTk7skpKSK7KCE5mAiWQrKytP8fl8m0WwZBwgxJtokqXB0lciacPOTko0axb6LiKCc/369dWghsn0e/oqS4cZYPVq9fT0dBL9/dG38+dPKJ2lGe/vSnS60swM2UNw0tTU9LVIJIrpq9NvuaWKigr1KVOmJG/fvl2nobIS/c3YeFKBJR+BBCfzsrLQHLA38fHxYW+Ck15v1Luky8rK1KDgVgnm3Zy6fRt9CdWHib6M+5My0Wl7S0tKc906dPaHH7RsbGyaoW9PcEIvaQa0pLCwsG3rrK3R/Px8xASdmOxNNGUKWsfnY0pXF4WGhhZDhMhhEgPl6OhY+fDhwxVtN24gdyJZMFLvQ2NBcMJbupT6Q1AQNZ3NngUFBESBgcpYvHgxtwdgaCj6UFn5fcD6FoYayLB809IQlI3FDKhWOAUGBsbAvg+OFIsxsXLvU7sPGwBKpqYI1BWDLrtBbZzqgCTee9euXcd89u2jbs2di0h9+H1oD6ZORSv5fAkEIp0PHjw4fuXKlYxeKw2O+ufc3FwLZzc3/WtQNNtkYUERZz5Z20MoN6l6eCBKWVmSmpa2Pj09PZxg6fVPb5zzGgMDg8C9cXHft4BlQ1AfZk9CxPchyfl9VJQkBKIuUFkhQLhAw6DdEn2PSF4JlcH/xMXFLam8fBnle3pS7AH2hHoHTpAfj7W10QvYmNtsZ9fR+OTJn169evVzX9beirTICyJpc3NzY1gCfnqWlqjZ1RWJIHGYDK0Ktl53nzuHNbS0UFR0dIo0WILhHcDkIYAmVfRIMGSl9Y2NiJeSgie6IXuso4OEqqr4bHZ2h7+//7aNGzfuIFikW68OS78g9yBp0wULFnwN1cGDNyAgt6ip6YlVZfUdz2dEshXGxngnj0cxVVT2QsE+rT9+ZEqY7kyW9717976HbY4Ly1euRNG1tRNO0o9gp5GXlyfhOTp2gJf5B4A9TPMv6/qO0ZLViRgyCE5iQ0JCPP1Ap/eZmFAkKxnvVg0h8Ac7d6LGxkbs6uZmV1pa+q/BeBpwSdOD37isz+GokTgwJMSn/M4d9FuobZH93PFqNUDYKjpaYlpW1u3j4yMcCljC65AkTIMiks7JyTkP+bIVqVxmQh2JDfs+Y90ezpyJVJyc0P7g4K7omJj1QL/Xzw7Gy4A6LD2YSBqsn3VnZ2fAX8LCqFYuF4kg9xzLVtXaitaEhEiKi4sln3K5p4H2kMESPuWSMA2MSJpUEuC0jeFVoRDlu7tTbNgmHe1GXE/d4sVoM5fbAR9/M+hurrw05ZIwPTmRtJmZmQmURP1UYJv0mYsLGu0si7ieg9eu4XkLFyJIdhKGA5bwPyzAZCCAJofHIqEU+osYkgw3oXDUXBaRbHR7O05MT+/Yv3//l5DIexMehtNGvA7BR6fA/k73tZISG2NY2nPgqIMis6yqlhb0mMNBPGdnClTJFw7MHB0OUHrMsHSYHtz3CtuXWZs2bbIVxMZi11evKEW4rEewLbru0CHJM7G4Kz4h4ai9vb1vX5rD+T3sJS1NDI49cBMSEk54792LdpeXj7hyUgP1qGlbt6J4gYBSnjbtU0WAJTwrzKcQQwbzuXC53PrgqKhvquvrkcGPPyI2VB3kbdWwM2kVGSnZUFcncXZxEdbV1WXLO0d//RW2pGkCxGXBcYh/w+ETM00I/XK8vCg21JWG2h6pqyOWvT3a5evbKTx9egOMk8vPDkZHYUuaJkQkvXbtWova2trdHt9+S7U6OCDREENQYqBsw8IkUDLGn3/xhdxBBc3DQFeFS5gmRgcnUAZecjYyEue5ulJsKIz314jruQtlJfstW9o1tbQc4CxJVn99R/Jc4RKmmXkTnCyDZNyvQ1MT1W3Z0m9wQoIKfkUFNoXSTGJSUuxogSW8jRpgMjmA7oRjwEegJlzEgmTjq+zsd4ITUoMKrqvDoRERHREREbt4PN5uMnZSN7K8Qa8Pwv6VJCUqCr+IiOj5n4dKPz9cXFTU8z8Pnp6eHpMapCzmY2Nj/9nS0oJTY2Jw+aFD2EBDo/sjXd122ALhy+o/6Z8RSUP5N0NbWxsT4FmZmd1qamp/nPTABgOwevXqA/X19RgOnwgG66vo9/8D9NJ6YWTnL1wAAAAASUVORK5CYII=">
-                    </figure>
-                </i>
-                Wi-Fi
-            </a>
-            <a href="#" class="mdc-list-item mdc-ripple-upgraded" style="--mdc-ripple-fg-size: 360px; --mdc-ripple-fg-scale: 1.69977; --mdc-ripple-fg-translate-start: 39px, -157.031px; --mdc-ripple-fg-translate-end: 120px, -156px;">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-                    bluetooth
-                </i>
-                Bluetooth
-            </a>
-            <a href="#" class="mdc-list-item mdc-ripple-upgraded" style="--mdc-ripple-fg-size: 360px; --mdc-ripple-fg-scale: 1.69977; --mdc-ripple-fg-translate-start: 30px, -146.031px; --mdc-ripple-fg-translate-end: 120px, -156px;">
-                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">
-                    data_usage
-                </i>
-                Data Usage
-            </a>-->
-        </nav>
+        <nav style="position:absolute; left:0; top:0;" class="mdc-list" data-demo-interactive-list=""></nav>
     </div>
 
 </div>

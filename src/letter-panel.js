@@ -37,13 +37,24 @@ function letterPanel(element, standardJSON, standard) {
   //First add the template to the element
   panel.innerHTML = template;
 
+  panel
+    .querySelector(".search #search-icon")
+    .addEventListener("click", function() {
+      // fix better way to show panel
+      panel.querySelector(".search .mdc-text-field").classList.add("active");
+    });
+
   panel.querySelector(".search input").addEventListener("focus", function() {
-    //console.log("search active");
-    panel.querySelector(".search nav").style.opacity = 1;
+    // fix better way to show panel
+    if (panel.querySelector(".search nav").innerHTML != "") {
+      panel.querySelector(".search nav").style.opacity = 1;
+    }
+    panel.querySelector(".search nav").style.display = "block";
   });
   panel.querySelector(".search input").addEventListener("blur", function() {
-    //console.log("search inactive");
+    // fix better way to hide panel
     panel.querySelector(".search nav").style.opacity = 0;
+    panel.querySelector(".search .mdc-text-field").classList.remove("active");
   });
   var search = new textField.MDCTextField(
     panel.querySelector(".search .mdc-text-field")
@@ -53,6 +64,11 @@ function letterPanel(element, standardJSON, standard) {
     function() {
       var max_number_results = 10;
       var results = this.search(search.value, max_number_results);
+      if (results.length) {
+        panel.querySelector(".search nav").style.opacity = 1;
+      } else {
+        panel.querySelector(".search nav").style.opacity = 0;
+      }
       var resultElement = panel.querySelector(".search nav");
       resultElement.innerHTML = "";
       for (var i = 0; i < results.length; i++) {
@@ -79,6 +95,7 @@ function letterPanel(element, standardJSON, standard) {
           results[i].name[results[i].name.length - 1];
         link.onclick = function(sidc) {
           this.setSIDC(sidc);
+          panel.querySelector(".search nav").style.display = "none";
         }.bind(this, sidc);
         resultElement.appendChild(link);
       }
