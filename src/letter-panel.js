@@ -1,3 +1,8 @@
+import mdc from "material-components-web/dist/material-components-web.min.js";
+var textField = mdc.textField;
+
+import ms from "../../milsymbol/dist/milsymbol.js";
+
 import renderSymbol from "./render-symbol.js";
 import template from "./letter-panel-template.html";
 
@@ -31,6 +36,54 @@ function letterPanel(element, standardJSON, standard) {
   var panel = document.querySelector(element);
   //First add the template to the element
   panel.innerHTML = template;
+
+  panel.querySelector(".search input").addEventListener("focus", function() {
+    //console.log("search active");
+    panel.querySelector(".search nav").style.opacity = 1;
+  });
+  panel.querySelector(".search input").addEventListener("blur", function() {
+    //console.log("search inactive");
+    panel.querySelector(".search nav").style.opacity = 0;
+  });
+  var search = new textField.MDCTextField(
+    panel.querySelector(".search .mdc-text-field")
+  );
+  search.listen(
+    "keyup",
+    function() {
+      var max_number_results = 10;
+      var results = this.search(search.value, max_number_results);
+      var resultElement = panel.querySelector(".search nav");
+      resultElement.innerHTML = "";
+      for (var i = 0; i < results.length; i++) {
+        var link = document.createElement("a");
+        link.classList.add("mdc-list-item", "mdc-ripple-upgraded");
+        link.style =
+          "--mdc-ripple-fg-size: 360px; --mdc-ripple-fg-scale: 1.69977; --mdc-ripple-fg-translate-start: 43px, -159.031px; --mdc-ripple-fg-translate-end: 120px, -156px;";
+        var sidc =
+          results[i]["code scheme"] +
+          "F" +
+          results[i]["battle dimension"] +
+          "P" +
+          results[i]["code"] +
+          "--";
+        var symbol = new ms.Symbol(sidc, {
+          size: 20,
+          standard: standard || "2525",
+          symetric: true
+        });
+        link.innerHTML =
+          '<i class="material-icons mdc-list-item__graphic" aria-hidden="true"><figure><img src="' +
+          symbol.asCanvas().toDataURL() +
+          '"></figure></i>' +
+          results[i].name[results[i].name.length - 1];
+        link.onclick = function(sidc) {
+          this.setSIDC(sidc);
+        }.bind(this, sidc);
+        resultElement.appendChild(link);
+      }
+    }.bind(this)
+  );
 
   className = ".coding-scheme";
   this.mdcSelects[className] = this.initSelect(
@@ -249,6 +302,40 @@ letterPanel.prototype.getSIDC = function() {
     (this.mdcSelects[".symbol-modifier-1"].value || "-") +
     (this.mdcSelects[".symbol-modifier-2"].value || "-");
   return sidc;
+};
+letterPanel.prototype.search = function(searchString, results) {
+  var found = [];
+  for (var i in this.standardJSON) {
+    var battleDimension = 0;
+    for (var j in this.standardJSON[i]) {
+      if (typeof this.standardJSON[i][j] == "string") {
+        continue;
+      }
+      var functionId = 0;
+      for (var k in this.standardJSON[i][j]["main icon"]) {
+        var names = this.standardJSON[i][j]["main icon"][k].name;
+        if (names[names.length - 1].indexOf(searchString.toUpperCase()) != -1) {
+          found.push(this.standardJSON[i][j]["main icon"][k]);
+        }
+
+        if (found.length >= results) {
+          //foundSIDC = true;
+          break;
+        }
+        functionId++;
+      }
+      if (found.length >= results) {
+        break;
+      } else {
+        battleDimension++;
+      }
+    }
+    if (found.length >= results) {
+      break;
+    }
+  }
+
+  return found;
 };
 
 letterPanel.prototype.setSIDC = function(sidc) {

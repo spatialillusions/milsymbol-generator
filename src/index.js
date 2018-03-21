@@ -79,8 +79,8 @@ export default function initGenerator() {
     }
   }
 
-  tabBarScroller.tabBar.listen("MDCTabBar:change", function({ detail: tabs }) {
-    var nthChildIndex = tabs.activeTabIndex;
+  tabBarScroller.tabBar.listen("MDCTabBar:change", function(tabs) {
+    var nthChildIndex = tabs.detail.activeTabIndex;
     updatePanel(nthChildIndex);
   });
 
