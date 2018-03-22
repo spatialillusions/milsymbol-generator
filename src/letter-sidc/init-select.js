@@ -27,6 +27,10 @@ export default function initSelect(
       .querySelector(".mdc-select__label")
       .classList.remove("mdc-select__label--float-above");
     mdcSelect.selectedIndex = -1;
+    var selectItems = panel.querySelector(className + " .mdc-menu__items");
+    while (selectItems.firstChild) {
+      selectItems.removeChild(selectItems.firstChild);
+    }
     mdcSelect.disabled = true;
     return mdcSelect;
   }
@@ -90,13 +94,5 @@ export default function initSelect(
   if (selectedIndex == -1 || selectedIndex > mdcSelect.options.length)
     selectedIndex = 0;
   mdcSelect.selectedIndex = selectedIndex || 0;
-
-  /*if (mdcSelect.value == "-") {
-    // For modifier 1 and 2
-    selectElement
-      .querySelector(".mdc-select__label")
-      .classList.remove("mdc-select__label--float-above");
-  }*/
-
   return mdcSelect;
 }

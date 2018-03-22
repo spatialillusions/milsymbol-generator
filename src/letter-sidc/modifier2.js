@@ -1,5 +1,5 @@
 export default function modifier2(battledimension, modifier1) {
-  if (battledimension == "GRDTRK_UNT") {
+  if (battledimension == "GRDTRK_UNT" || battledimension == "SOFUNT") {
     return {
       "-": { name: "Unspecified" },
       A: { name: "Team/Crew", sidc: "SFGP-------A" },
