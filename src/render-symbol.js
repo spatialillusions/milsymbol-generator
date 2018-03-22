@@ -83,12 +83,18 @@ export default function(standard, sidc) {
         }
       );
 
-      elm.querySelector("a").href = downloadSymbol.asCanvas().toDataURL();
+      elm.querySelector("a.png").href = downloadSymbol.asCanvas().toDataURL();
+      elm.querySelector("a.svg").href = downloadSymbol.toDataURL();
+
       var fileName = [];
       if (options.uniqueDesignation) fileName.push(options.uniqueDesignation);
       fileName.push(sym.getAttribute("sidc"));
-      elm.querySelector("a").download = fileName.join(" ") + ".png";
-      if (isIE) elm.querySelector("a").style = "display:none;";
+      elm.querySelector("a.png").download = fileName.join(" ") + ".png";
+      elm.querySelector("a.svg").download = fileName.join(" ") + ".svg";
+      if (isIE) {
+        elm.querySelector("a.png").style = "display:none;";
+        elm.querySelector("a.svg").style = "display:none;";
+      }
     }
   });
 }
