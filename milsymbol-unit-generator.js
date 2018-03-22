@@ -1159,9 +1159,13 @@ function letterPanel(element, standardJSON, standard) {
       resultElement.innerHTML = "";
       for (var i = 0; i < results.length; i++) {
         var link = document.createElement("a");
+
         link.classList.add("mdc-list-item", "mdc-ripple-upgraded");
-        link.style =
-          "--mdc-ripple-fg-size: 360px; --mdc-ripple-fg-scale: 1.69977; --mdc-ripple-fg-translate-start: 43px, -159.031px; --mdc-ripple-fg-translate-end: 120px, -156px;";
+        link.style["--mdc-ripple-fg-size"] = "360px";
+        link.style["--mdc-ripple-fg-scale"] = 1.69977;
+        link.style["--mdc-ripple-fg-translate-start"] = "43px, -159.031px";
+        link.style["--mdc-ripple-fg-translate-end"] = "120px, -156px";
+
         var sidc =
           results[i]["code scheme"] +
           "F" +
