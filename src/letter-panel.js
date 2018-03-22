@@ -97,7 +97,9 @@ function letterPanel(element, standardJSON, standard) {
           this.setSIDC(sidc);
           panel.querySelector(".search nav").style.display = "none";
         }.bind(this, sidc);
-        resultElement.appendChild(link);
+        if (symbol.isValid()) {
+          resultElement.appendChild(link);
+        }
       }
     }.bind(this)
   );
