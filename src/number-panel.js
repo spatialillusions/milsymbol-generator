@@ -1,3 +1,8 @@
+import mdc from "material-components-web/dist/material-components-web.min.js";
+var textField = mdc.textField;
+
+import ms from "../../milsymbol/dist/milsymbol.js";
+
 import renderSymbol from "./render-symbol.js";
 import template from "./number-panel-template.html";
 
@@ -13,6 +18,8 @@ function numberPanel(element, standardJSON, standard) {
   this.standardJSON = standardJSON;
   var className;
 
+  console.log(this.standardJSON);
+
   //Set a generic SIDC for all battle dimensions
   var symbolsets = [];
   for (var i in this.standardJSON) {
@@ -22,6 +29,21 @@ function numberPanel(element, standardJSON, standard) {
       "1003" + this.standardJSON[i].symbolset + "00000000000000";
     for (var j in this.standardJSON[i]["main icon"]) {
       this.standardJSON[i]["main icon"][j]["symbol set"] = i;
+      if (this.standardJSON[i]["main icon"][j].hasOwnProperty("entity")) {
+        this.standardJSON[i]["main icon"][j].name = [
+          this.standardJSON[i]["main icon"][j]["entity"]
+        ];
+        if (this.standardJSON[i]["main icon"][j].hasOwnProperty("entity type"))
+          this.standardJSON[i]["main icon"][j].name.push(
+            this.standardJSON[i]["main icon"][j]["entity type"]
+          );
+        if (
+          this.standardJSON[i]["main icon"][j].hasOwnProperty("entity subtype")
+        )
+          this.standardJSON[i]["main icon"][j].name.push(
+            this.standardJSON[i]["main icon"][j]["entity subtype"]
+          );
+      }
       this.standardJSON[i]["main icon"][j].sidc =
         "1003" +
         i +
@@ -58,6 +80,77 @@ function numberPanel(element, standardJSON, standard) {
   var panel = document.querySelector(element);
   //First add the template to the element
   panel.innerHTML = template;
+
+  panel
+    .querySelector(".search #search-icon")
+    .addEventListener("click", function() {
+      // fix better way to show panel
+      panel.querySelector(".search .mdc-text-field").classList.add("active");
+    });
+
+  panel.querySelector(".search input").addEventListener("focus", function() {
+    // fix better way to show panel
+    if (panel.querySelector(".search nav").innerHTML != "") {
+      panel.querySelector(".search nav").style.opacity = 1;
+    }
+    panel.querySelector(".search nav").style.display = "block";
+  });
+  panel.querySelector(".search input").addEventListener("blur", function() {
+    // fix better way to hide panel
+    panel.querySelector(".search nav").style.opacity = 0;
+    panel.querySelector(".search .mdc-text-field").classList.remove("active");
+  });
+  var search = new textField.MDCTextField(
+    panel.querySelector(".search .mdc-text-field")
+  );
+  search.listen(
+    "keyup",
+    function() {
+      var max_number_results = 10;
+      var results = this.search(search.value, max_number_results);
+      if (results.length) {
+        panel.querySelector(".search nav").style.opacity = 1;
+      } else {
+        panel.querySelector(".search nav").style.opacity = 0;
+      }
+      var resultElement = panel.querySelector(".search nav");
+      resultElement.innerHTML = "";
+      for (var i = 0; i < results.length; i++) {
+        var link = document.createElement("a");
+
+        link.classList.add("mdc-list-item", "mdc-ripple-upgraded");
+        link.style["--mdc-ripple-fg-size"] = "360px";
+        link.style["--mdc-ripple-fg-scale"] = 1.69977;
+        link.style["--mdc-ripple-fg-translate-start"] = "43px, -159.031px";
+        link.style["--mdc-ripple-fg-translate-end"] = "120px, -156px";
+
+        var sidc = results[i].sidc;
+        /*results[i]["code scheme"] +
+          "F" +
+          results[i]["battle dimension"] +
+          "P" +
+          results[i]["code"] +
+          "--";*/
+        var symbol = new ms.Symbol(sidc, {
+          size: 20,
+          standard: standard || "2525",
+          symetric: true
+        });
+        link.innerHTML =
+          '<i class="material-icons mdc-list-item__graphic" aria-hidden="true"><figure><img src="' +
+          symbol.asCanvas().toDataURL() +
+          '"></figure></i>' +
+          results[i].name[results[i].name.length - 1];
+        link.onclick = function(sidc) {
+          this.setSIDC(sidc);
+          panel.querySelector(".search nav").style.display = "none";
+        }.bind(this, sidc);
+        if (symbol.isValid()) {
+          resultElement.appendChild(link);
+        }
+      }
+    }.bind(this)
+  );
 
   className = ".standard-identity-1";
   this.mdcSelects[className] = this.initSelect(
@@ -301,6 +394,30 @@ numberPanel.prototype.getSIDC = function() {
     (this.mdcSelects[".icon-modifier-2"].value || "00");
   return sidc;
 };
+
+numberPanel.prototype.search = function(searchString, results) {
+  var found = [];
+  for (var i in this.standardJSON) {
+    for (var j in this.standardJSON[i]["main icon"]) {
+      var names = this.standardJSON[i]["main icon"][j].name;
+      if (
+        names[names.length - 1]
+          .toUpperCase()
+          .indexOf(searchString.toUpperCase()) != -1
+      ) {
+        found.push(this.standardJSON[i]["main icon"][j]);
+      }
+      if (found.length >= results) {
+        break;
+      }
+    }
+    if (found.length >= results) {
+      break;
+    }
+  }
+  return found;
+};
+
 numberPanel.prototype.setSIDC = function(sidc) {
   /*
   var sidc =

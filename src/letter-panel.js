@@ -82,11 +82,12 @@ function letterPanel(element, standardJSON, standard) {
 
         var sidc =
           results[i]["code scheme"] +
-          "F" +
+          this.mdcSelects[".affiliation"].value +
           results[i]["battle dimension"] +
-          "P" +
+          this.mdcSelects[".status"].value +
           results[i]["code"] +
           "--";
+
         var symbol = new ms.Symbol(sidc, {
           size: 20,
           standard: standard || "2525",
@@ -326,6 +327,7 @@ letterPanel.prototype.getSIDC = function() {
     (this.mdcSelects[".symbol-modifier-2"].value || "-");
   return sidc;
 };
+
 letterPanel.prototype.search = function(searchString, results) {
   var found = [];
   for (var i in this.standardJSON) {
