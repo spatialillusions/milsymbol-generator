@@ -14,7 +14,17 @@
 
 <link rel="stylesheet" href="milsymbol-unit-generator.css" type="text/css">
 <script src="milsymbol-unit-generator.js"></script>
-
+<script>
+    // Polyfill for nodelist.forEach in IE
+    if (window.NodeList && !NodeList.prototype.forEach) {
+        NodeList.prototype.forEach = function (callback, thisArg) {
+            thisArg = thisArg || window;
+            for (var i = 0; i < this.length; i++) {
+                callback.call(thisArg, this[i], i, this);
+            }
+        };
+    }
+</script>
 <style>
     :root {
         --mdc-theme-primary: #00aff5;
