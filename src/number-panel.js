@@ -18,8 +18,6 @@ function numberPanel(element, standardJSON, standard) {
   this.standardJSON = standardJSON;
   var className;
 
-  console.log(this.standardJSON);
-
   //Set a generic SIDC for all battle dimensions
   var symbolsets = [];
   for (var i in this.standardJSON) {
@@ -72,9 +70,13 @@ function numberPanel(element, standardJSON, standard) {
   }
   // Make an ordered array of the symbol sets
   symbolsets = symbolsets.sort();
+  var symbolsetsDefaults = {};
   for (var i = 0; i < symbolsets.length; i++) {
     symbolsets[i] = this.standardJSON[symbolsets[i]];
+    symbolsetsDefaults[symbolsets[i].symbolset] = symbolsets[i];
+    symbolsetsDefaults[symbolsets[i].symbolset].index = i;
   }
+  this.symbolsets = symbolsets;
 
   var selectElement, selectItems, mdcSelect;
   var panel = document.querySelector(element);
@@ -153,18 +155,20 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".standard-identity-1";
+  var standardIdentity1Default = {
+    0: { index: 0, name: "Reality" },
+    1: { index: 1, name: "Exercise" },
+    2: { index: 2, name: "Simulation" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Reality" },
-      { code: 1, name: "Exercise" },
-      { code: 2, name: "Simulation" }
-    ],
+    standardIdentity1Default,
     this.standard,
     this.mdcSelects,
     0
   );
+  this.mdcSelects[className].defaults = standardIdentity1Default;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -173,22 +177,39 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".standard-identity-2";
+  var standardIdentity2Default = {
+    0: { code: 0, index: 0, name: "Pending", sidc: "10001000000000000000" },
+    1: { code: 1, index: 1, name: "Unknown", sidc: "10011000000000000000" },
+    2: {
+      code: 2,
+      index: 2,
+      name: "Assumed Friend",
+      sidc: "10021000000000000000"
+    },
+    3: { code: 3, index: 3, name: "Friend", sidc: "10031000000000000000" },
+    4: { code: 4, index: 4, name: "Neutral", sidc: "10041000000000000000" },
+    5: {
+      code: 5,
+      index: 5,
+      name: "Suspect/Joker",
+      sidc: "10051000000000000000"
+    },
+    6: {
+      code: 6,
+      index: 6,
+      name: "Hostile/Faker",
+      sidc: "10061000000000000000"
+    }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Pending", sidc: "10001000000000000000" },
-      { code: 1, name: "Unknown", sidc: "10011000000000000000" },
-      { code: 2, name: "Assumed Friend", sidc: "10021000000000000000" },
-      { code: 3, name: "Friend", sidc: "10031000000000000000" },
-      { code: 4, name: "Neutral", sidc: "10041000000000000000" },
-      { code: 5, name: "Suspect/Joker", sidc: "10051000000000000000" },
-      { code: 6, name: "Hostile/Faker", sidc: "10061000000000000000" }
-    ],
+    standardIdentity2Default,
     this.standard,
     this.mdcSelects,
     3
   );
+  this.mdcSelects[className].defaults = standardIdentity2Default;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -205,6 +226,7 @@ function numberPanel(element, standardJSON, standard) {
     this.mdcSelects,
     4
   );
+  this.mdcSelects[className].defaults = symbolsetsDefaults;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -253,29 +275,48 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".status";
+  var statusDefault = {
+    0: { code: 0, index: 0, name: "Present", sidc: "10031000000000000000" },
+    1: {
+      code: 1,
+      index: 1,
+      name: "Planned/Anticipated/Suspect",
+      sidc: "10031010000000000000"
+    },
+    2: {
+      code: 2,
+      index: 2,
+      name: "Present/Fully capable",
+      sidc: "10031020000000000000"
+    },
+    3: {
+      code: 3,
+      index: 3,
+      name: "Present/Damaged",
+      sidc: "10031030000000000000"
+    },
+    4: {
+      code: 4,
+      index: 4,
+      name: "Present/Destroyed",
+      sidc: "10031040000000000000"
+    },
+    5: {
+      code: 5,
+      index: 5,
+      name: "Present/Full to capacity",
+      sidc: "10031050000000000000"
+    }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Present", sidc: "10031000000000000000" },
-      {
-        code: 1,
-        name: "Planned/Anticipated/Suspect",
-        sidc: "10031010000000000000"
-      },
-      { code: 2, name: "Present/Fully capable", sidc: "10031020000000000000" },
-      { code: 3, name: "Present/Damaged", sidc: "10031030000000000000" },
-      { code: 4, name: "Present/Destroyed", sidc: "10031040000000000000" },
-      {
-        code: 5,
-        name: "Present/Full to capacity",
-        sidc: "10031050000000000000"
-      }
-    ],
+    statusDefault,
     this.standard,
     this.mdcSelects,
     0
   );
+  this.mdcSelects[className].defaults = statusDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -397,15 +438,21 @@ numberPanel.prototype.getSIDC = function() {
 
 numberPanel.prototype.search = function(searchString, results) {
   var found = [];
-  for (var i in this.standardJSON) {
-    for (var j in this.standardJSON[i]["main icon"]) {
-      var names = this.standardJSON[i]["main icon"][j].name;
+  for (var i in this.symbolsets) {
+    for (var j in this.standardJSON[this.symbolsets[i].symbolset][
+      "main icon"
+    ]) {
+      var names = this.standardJSON[this.symbolsets[i].symbolset]["main icon"][
+        j
+      ].name;
       if (
         names[names.length - 1]
           .toUpperCase()
           .indexOf(searchString.toUpperCase()) != -1
       ) {
-        found.push(this.standardJSON[i]["main icon"][j]);
+        found.push(
+          this.standardJSON[this.symbolsets[i].symbolset]["main icon"][j]
+        );
       }
       if (found.length >= results) {
         break;
@@ -419,19 +466,55 @@ numberPanel.prototype.search = function(searchString, results) {
 };
 
 numberPanel.prototype.setSIDC = function(sidc) {
-  /*
-  var sidc =
-    "10" +
-    this.mdcSelects[".standard-identity-1"].value +
-    this.mdcSelects[".standard-identity-2"].value +
-    this.mdcSelects[".symbol-set"].value +
-    this.mdcSelects[".status"].value +
-    (this.mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
-    (this.mdcSelects[".echelon-mobility-towedarray"].value || "00") +
-    this.mdcSelects[".icon"].value +
-    (this.mdcSelects[".icon-modifier-1"].value || "00") +
-    (this.mdcSelects[".icon-modifier-2"].value || "00");
-    */
+  this.mdcSelects[".standard-identity-1"].selectedIndex =
+    this.mdcSelects[".standard-identity-1"].defaults[sidc.charAt(2)].index || 0;
+
+  this.mdcSelects[".standard-identity-2"].selectedIndex =
+    this.mdcSelects[".standard-identity-2"].defaults[sidc.charAt(3)].index || 0;
+
+  this.mdcSelects[".symbol-set"].selectedIndex =
+    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
+  this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+
+  this.mdcSelects[".status"].selectedIndex =
+    this.mdcSelects[".status"].defaults[sidc.charAt(6)].index || 0;
+
+  this.mdcSelects[".headquarters-taskforce-dummy"].selectedIndex =
+    headquartersTaskforceDummy(sidc.substring(4, 6))[sidc.charAt(7)].index || 0;
+
+  var ecehlonEtc = echelonMobilityTowedarray(sidc.substring(4, 6));
+  for (var i = 0; i < ecehlonEtc.length; i++) {
+    if (sidc.substring(8, 10) == ecehlonEtc[i].code) {
+      this.mdcSelects[".echelon-mobility-towedarray"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["main icon"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(10, 16) == icons[i].code) {
+      this.mdcSelects[".icon"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["modifier 1"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(16, 18) == icons[i].code) {
+      this.mdcSelects[".icon-modifier-1"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["modifier 2"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(18, 20) == icons[i].code) {
+      this.mdcSelects[".icon-modifier-2"].selectedIndex = i;
+      break;
+    }
+  }
+  this.mdcSelects[".icon-modifier-2"].emit("MDCSelect:change");
+
   return this;
 };
 export default numberPanel;

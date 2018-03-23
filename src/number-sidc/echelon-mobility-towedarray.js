@@ -23,36 +23,7 @@ export default function echelonMobilityTowedarray(symbolset) {
         code: "26",
         name: "Command",
         sidc: "10031000260000000000"
-      } /*,
-      {
-        code: "31",
-        name: "Wheeled limited cross country",
-        sidc: "10031500310000000000"
-      },
-      {
-        code: "32",
-        name: "Wheeled cross country",
-        sidc: "10031500320000000000"
-      },
-      { code: "33", name: "Tracked", sidc: "10031500330000000000" },
-      {
-        code: "34",
-        name: "Wheeled and tracked combination",
-        sidc: "10031500340000000000"
-      },
-      { code: "35", name: "Towed", sidc: "10031500350000000000" },
-      { code: "36", name: "Rail", sidc: "10031500360000000000" },
-      { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
-      {
-        code: "41",
-        name: "Over snow (prime mover)",
-        sidc: "10031500410000000000"
-      },
-      { code: "42", name: "Sled", sidc: "10031500420000000000" },
-      { code: "51", name: "Barge", sidc: "10031500510000000000" },
-      { code: "52", name: "Amphibious", sidc: "10031500520000000000" },
-      { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
-      { code: "62", name: "Long towed array", sidc: "10033000620000000000" }*/
+      }
     ];
   }
   // add signals intelligence

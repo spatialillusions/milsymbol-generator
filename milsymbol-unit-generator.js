@@ -888,7 +888,7 @@ function renderSymbol(standard, sidc) {
   });
 }
 
-var template = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a class=\"svg\" href=\"\" title=\"Download as SVG\" style=\"float:right;margin: 20px 20px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>SVG\n        </a>\n        <a class=\"png\" href=\"\" title=\"Download as PNG\" style=\"float:right;margin: 20px 10px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>PNG\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"search\">\n    <span id=\"search-icon\">\n        <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n        </svg>\n    </span>\n    <div class=\"mdc-text-field\" data-mdc-auto-init=\"MDCTextField\">\n        <input type=\"text\" class=\"mdc-text-field__input\" id=\"search\" maxlength=\"30\" size=\"30\">\n        <label for=\"direction\" class=\"mdc-text-field__label\">Search</label>\n    </div>\n    <div style=\"position:relative;\">\n        <nav style=\"position:absolute; left:0; top:0;\" class=\"mdc-list\" data-demo-interactive-list=\"\"></nav>\n    </div>\n</div>\n\n<div class=\"coding-scheme\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Coding Scheme</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"affiliation\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Affiliation</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"battle-dimension\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Battle Dimension</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"function-id\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Function ID</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
+var template = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a class=\"svg\" href=\"\" title=\"Download as SVG\" style=\"float:right;margin: 20px 20px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>SVG\n        </a>\n        <a class=\"png\" href=\"\" title=\"Download as PNG\" style=\"float:right;margin: 20px 10px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>PNG\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"search\">\n    <span id=\"search-icon\">\n        <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n        </svg>\n    </span>\n    <div class=\"mdc-text-field\" data-mdc-auto-init=\"MDCTextField\">\n        <input type=\"text\" class=\"mdc-text-field__input\" id=\"search\" maxlength=\"30\" size=\"30\">\n        <label for=\"direction\" class=\"mdc-text-field__label\">Search main icon</label>\n    </div>\n    <div style=\"position:relative;\">\n        <nav style=\"position:absolute; left:0; top:0;\" class=\"mdc-list\" data-demo-interactive-list=\"\"></nav>\n    </div>\n</div>\n\n<div class=\"coding-scheme\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Coding Scheme</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"affiliation\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Affiliation</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"battle-dimension\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Battle Dimension</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"function-id\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Function ID</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
 
 function addSelectItem(
   mdcSelect,
@@ -1174,9 +1174,9 @@ function letterPanel(element, standardJSON, standard) {
 
         var sidc =
           results[i]["code scheme"] +
-          this.mdcSelects[".affiliation"].value +
+          "F" + //this.mdcSelects[".affiliation"].value +
           results[i]["battle dimension"] +
-          this.mdcSelects[".status"].value +
+          "P" + //this.mdcSelects[".status"].value +
           results[i]["code"] +
           "--";
 
@@ -1189,7 +1189,12 @@ function letterPanel(element, standardJSON, standard) {
           '<i class="material-icons mdc-list-item__graphic" aria-hidden="true"><figure><img src="' +
           symbol.asCanvas().toDataURL() +
           '"></figure></i>' +
-          results[i].name[results[i].name.length - 1];
+          '<span class="mdc-list-item__text">' +
+          results[i].name[results[i].name.length - 1] +
+          /*'<span class="mdc-list-item__secondary-text">' +
+          results[i].name.slice(1, -1).join(" -&nbsp;") +
+          "</span>"+*/ "</span>";
+
         link.onclick = function(sidc) {
           this.setSIDC(sidc);
           panel.querySelector(".search nav").style.display = "none";
@@ -1527,7 +1532,7 @@ letterPanel.prototype.setSIDC = function(sidc) {
   return this;
 };
 
-var template$1 = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a class=\"svg\" href=\"\" title=\"Download as SVG\" style=\"float:right;margin: 20px 20px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>SVG\n        </a>\n        <a class=\"png\" href=\"\" title=\"Download as PNG\" style=\"float:right;margin: 20px 10px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>PNG\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"search\">\n    <span id=\"search-icon\">\n        <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n        </svg>\n    </span>\n    <div class=\"mdc-text-field\" data-mdc-auto-init=\"MDCTextField\">\n        <input type=\"text\" class=\"mdc-text-field__input\" id=\"search\" maxlength=\"30\" size=\"30\">\n        <label for=\"direction\" class=\"mdc-text-field__label\">Search</label>\n    </div>\n    <div style=\"position:relative;\">\n        <nav style=\"position:absolute; left:0; top:0;\" class=\"mdc-list\" data-demo-interactive-list=\"\"></nav>\n    </div>\n</div>\n\n<div class=\"standard-identity-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"standard-identity-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-set\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol set</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"headquarters-taskforce-dummy\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Headquarters/Task force/Dummy</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"echelon-mobility-towedarray\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Echelon/Mobility/Towed array</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
+var template$1 = "<div class=\"symbol\">\n    <div>\n        <h2 style=\"display: inline-block;\" class=\"mdc-typography--title sidc\">&nbsp;</h2>\n        <a class=\"svg\" href=\"\" title=\"Download as SVG\" style=\"float:right;margin: 20px 20px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>SVG\n        </a>\n        <a class=\"png\" href=\"\" title=\"Download as PNG\" style=\"float:right;margin: 20px 10px 0px 0px;text-decoration:none;color:#000000;font-size:small;\">\n            <svg style=\"vertical-align:middle;\" fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n                <path d=\"M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z\"/>\n                <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n            </svg>PNG\n        </a>\n    </div>\n\n    <center>\n        <div class=\"svg-symbol\">\n            <svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.2\" baseProfile=\"tiny\" width=\"158\" height=\"108\" viewBox=\"21 46 158 108\">\n                <path d=\"M25,50 l150,0 0,100 -150,0 z\" stroke-width=\"4\" stroke=\"black\" fill=\"rgb(128,224,255)\" fill-opacity=\"1\"></path>\n            </svg>\n        </div>\n    </center>\n</div>\n\n<div class=\"search\">\n    <span id=\"search-icon\">\n        <svg fill=\"#000000\" height=\"24\" viewBox=\"0 0 24 24\" width=\"24\" xmlns=\"http://www.w3.org/2000/svg\">\n            <path d=\"M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z\"/>\n            <path d=\"M0 0h24v24H0z\" fill=\"none\"/>\n        </svg>\n    </span>\n    <div class=\"mdc-text-field\" data-mdc-auto-init=\"MDCTextField\">\n        <input type=\"text\" class=\"mdc-text-field__input\" id=\"search\" maxlength=\"30\" size=\"30\">\n        <label for=\"direction\" class=\"mdc-text-field__label\">Search main icon</label>\n    </div>\n    <div style=\"position:relative;\">\n        <nav style=\"position:absolute; left:0; top:0;\" class=\"mdc-list\" data-demo-interactive-list=\"\"></nav>\n    </div>\n</div>\n\n<div class=\"standard-identity-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"standard-identity-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Standard Identity 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"symbol-set\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Symbol set</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"status\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Status</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"headquarters-taskforce-dummy\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Headquarters/Task force/Dummy</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"echelon-mobility-towedarray\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Echelon/Mobility/Towed array</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-1\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 1</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"icon-modifier-2\">\n    <div class=\"mdc-select\" role=\"listbox\">\n        <div class=\"mdc-select__surface\" tabindex=\"0\">\n            <div class=\"mdc-select__label\">Icon Modifier 2</div>\n            <div class=\"mdc-select__selected-text\"></div>\n            <div class=\"mdc-select__bottom-line\"></div>\n        </div>\n        <div class=\"mdc-menu mdc-select__menu\">\n            <ul class=\"mdc-list mdc-menu__items\">\n            </ul>\n        </div>\n    </div>\n</div>";
 
 //import { select } from "material-components-web";
 var select$1 = mdc.select;
@@ -1665,36 +1670,7 @@ function echelonMobilityTowedarray(symbolset) {
         code: "26",
         name: "Command",
         sidc: "10031000260000000000"
-      } /*,
-      {
-        code: "31",
-        name: "Wheeled limited cross country",
-        sidc: "10031500310000000000"
-      },
-      {
-        code: "32",
-        name: "Wheeled cross country",
-        sidc: "10031500320000000000"
-      },
-      { code: "33", name: "Tracked", sidc: "10031500330000000000" },
-      {
-        code: "34",
-        name: "Wheeled and tracked combination",
-        sidc: "10031500340000000000"
-      },
-      { code: "35", name: "Towed", sidc: "10031500350000000000" },
-      { code: "36", name: "Rail", sidc: "10031500360000000000" },
-      { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
-      {
-        code: "41",
-        name: "Over snow (prime mover)",
-        sidc: "10031500410000000000"
-      },
-      { code: "42", name: "Sled", sidc: "10031500420000000000" },
-      { code: "51", name: "Barge", sidc: "10031500510000000000" },
-      { code: "52", name: "Amphibious", sidc: "10031500520000000000" },
-      { code: "61", name: "Short towed array", sidc: "10033000610000000000" },
-      { code: "62", name: "Long towed array", sidc: "10033000620000000000" }*/
+      }
     ];
   }
   // add signals intelligence
@@ -1749,35 +1725,59 @@ function echelonMobilityTowedarray(symbolset) {
 
 function headquartersTaskforceDummy(symbolset) {
   if (symbolset == "10" || true) {
-    return [
-      { code: 0, name: "Unspecified", sidc: "10031000000000000000" },
-      { code: 1, name: "Feint/Dummy", sidc: "10031001000000000000" },
-      { code: 2, name: "Headquarters", sidc: "10031002000000000000" },
-      {
+    return {
+      0: {
+        code: 0,
+        index: 0,
+        name: "Unspecified",
+        sidc: "10031000000000000000"
+      },
+      1: {
+        code: 1,
+        index: 1,
+        name: "Feint/Dummy",
+        sidc: "10031001000000000000"
+      },
+      2: {
+        code: 2,
+        index: 2,
+        name: "Headquarters",
+        sidc: "10031002000000000000"
+      },
+      3: {
         code: 3,
+        index: 3,
         name: "Feint/Dummy Headquarters",
         sidc: "10031003000000000000"
       },
-      { code: 4, name: "Task Force", sidc: "10031004000000000000" },
-      {
+      4: {
+        code: 4,
+        index: 4,
+        name: "Task Force",
+        sidc: "10031004000000000000"
+      },
+      5: {
         code: 5,
+        index: 5,
         name: "Feint/Dummy Task Force",
         sidc: "10031005000000000000"
       },
-      {
+      6: {
         code: 6,
+        index: 6,
         name: "Task Force Headquarters",
         sidc: "10031006000000000000"
       },
-      {
+      7: {
         code: 7,
+        index: 7,
         name: "Feint/Dummy Task Force Headquarters",
         sidc: "10031007000000000000"
       }
-    ];
+    };
   }
 
-  return undefined;
+  return {};
 }
 
 var textField$1 = mdc.textField;
@@ -1788,8 +1788,6 @@ function numberPanel(element, standardJSON, standard) {
   this.standard = standard;
   this.standardJSON = standardJSON;
   var className;
-
-  console.log(this.standardJSON);
 
   //Set a generic SIDC for all battle dimensions
   var symbolsets = [];
@@ -1843,9 +1841,13 @@ function numberPanel(element, standardJSON, standard) {
   }
   // Make an ordered array of the symbol sets
   symbolsets = symbolsets.sort();
+  var symbolsetsDefaults = {};
   for (var i = 0; i < symbolsets.length; i++) {
     symbolsets[i] = this.standardJSON[symbolsets[i]];
+    symbolsetsDefaults[symbolsets[i].symbolset] = symbolsets[i];
+    symbolsetsDefaults[symbolsets[i].symbolset].index = i;
   }
+  this.symbolsets = symbolsets;
 
   var panel = document.querySelector(element);
   //First add the template to the element
@@ -1923,18 +1925,20 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".standard-identity-1";
+  var standardIdentity1Default = {
+    0: { index: 0, name: "Reality" },
+    1: { index: 1, name: "Exercise" },
+    2: { index: 2, name: "Simulation" }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Reality" },
-      { code: 1, name: "Exercise" },
-      { code: 2, name: "Simulation" }
-    ],
+    standardIdentity1Default,
     this.standard,
     this.mdcSelects,
     0
   );
+  this.mdcSelects[className].defaults = standardIdentity1Default;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -1943,22 +1947,39 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".standard-identity-2";
+  var standardIdentity2Default = {
+    0: { code: 0, index: 0, name: "Pending", sidc: "10001000000000000000" },
+    1: { code: 1, index: 1, name: "Unknown", sidc: "10011000000000000000" },
+    2: {
+      code: 2,
+      index: 2,
+      name: "Assumed Friend",
+      sidc: "10021000000000000000"
+    },
+    3: { code: 3, index: 3, name: "Friend", sidc: "10031000000000000000" },
+    4: { code: 4, index: 4, name: "Neutral", sidc: "10041000000000000000" },
+    5: {
+      code: 5,
+      index: 5,
+      name: "Suspect/Joker",
+      sidc: "10051000000000000000"
+    },
+    6: {
+      code: 6,
+      index: 6,
+      name: "Hostile/Faker",
+      sidc: "10061000000000000000"
+    }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Pending", sidc: "10001000000000000000" },
-      { code: 1, name: "Unknown", sidc: "10011000000000000000" },
-      { code: 2, name: "Assumed Friend", sidc: "10021000000000000000" },
-      { code: 3, name: "Friend", sidc: "10031000000000000000" },
-      { code: 4, name: "Neutral", sidc: "10041000000000000000" },
-      { code: 5, name: "Suspect/Joker", sidc: "10051000000000000000" },
-      { code: 6, name: "Hostile/Faker", sidc: "10061000000000000000" }
-    ],
+    standardIdentity2Default,
     this.standard,
     this.mdcSelects,
     3
   );
+  this.mdcSelects[className].defaults = standardIdentity2Default;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -1975,6 +1996,7 @@ function numberPanel(element, standardJSON, standard) {
     this.mdcSelects,
     4
   );
+  this.mdcSelects[className].defaults = symbolsetsDefaults;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -2023,29 +2045,48 @@ function numberPanel(element, standardJSON, standard) {
   );
 
   className = ".status";
+  var statusDefault = {
+    0: { code: 0, index: 0, name: "Present", sidc: "10031000000000000000" },
+    1: {
+      code: 1,
+      index: 1,
+      name: "Planned/Anticipated/Suspect",
+      sidc: "10031010000000000000"
+    },
+    2: {
+      code: 2,
+      index: 2,
+      name: "Present/Fully capable",
+      sidc: "10031020000000000000"
+    },
+    3: {
+      code: 3,
+      index: 3,
+      name: "Present/Damaged",
+      sidc: "10031030000000000000"
+    },
+    4: {
+      code: 4,
+      index: 4,
+      name: "Present/Destroyed",
+      sidc: "10031040000000000000"
+    },
+    5: {
+      code: 5,
+      index: 5,
+      name: "Present/Full to capacity",
+      sidc: "10031050000000000000"
+    }
+  };
   this.mdcSelects[className] = this.initSelect(
     panel,
     className,
-    [
-      { code: 0, name: "Present", sidc: "10031000000000000000" },
-      {
-        code: 1,
-        name: "Planned/Anticipated/Suspect",
-        sidc: "10031010000000000000"
-      },
-      { code: 2, name: "Present/Fully capable", sidc: "10031020000000000000" },
-      { code: 3, name: "Present/Damaged", sidc: "10031030000000000000" },
-      { code: 4, name: "Present/Destroyed", sidc: "10031040000000000000" },
-      {
-        code: 5,
-        name: "Present/Full to capacity",
-        sidc: "10031050000000000000"
-      }
-    ],
+    statusDefault,
     this.standard,
     this.mdcSelects,
     0
   );
+  this.mdcSelects[className].defaults = statusDefault;
   this.mdcSelects[className].listen(
     "MDCSelect:change",
     function() {
@@ -2167,15 +2208,21 @@ numberPanel.prototype.getSIDC = function() {
 
 numberPanel.prototype.search = function(searchString, results) {
   var found = [];
-  for (var i in this.standardJSON) {
-    for (var j in this.standardJSON[i]["main icon"]) {
-      var names = this.standardJSON[i]["main icon"][j].name;
+  for (var i in this.symbolsets) {
+    for (var j in this.standardJSON[this.symbolsets[i].symbolset][
+      "main icon"
+    ]) {
+      var names = this.standardJSON[this.symbolsets[i].symbolset]["main icon"][
+        j
+      ].name;
       if (
         names[names.length - 1]
           .toUpperCase()
           .indexOf(searchString.toUpperCase()) != -1
       ) {
-        found.push(this.standardJSON[i]["main icon"][j]);
+        found.push(
+          this.standardJSON[this.symbolsets[i].symbolset]["main icon"][j]
+        );
       }
       if (found.length >= results) {
         break;
@@ -2189,19 +2236,55 @@ numberPanel.prototype.search = function(searchString, results) {
 };
 
 numberPanel.prototype.setSIDC = function(sidc) {
-  /*
-  var sidc =
-    "10" +
-    this.mdcSelects[".standard-identity-1"].value +
-    this.mdcSelects[".standard-identity-2"].value +
-    this.mdcSelects[".symbol-set"].value +
-    this.mdcSelects[".status"].value +
-    (this.mdcSelects[".headquarters-taskforce-dummy"].value || "0") +
-    (this.mdcSelects[".echelon-mobility-towedarray"].value || "00") +
-    this.mdcSelects[".icon"].value +
-    (this.mdcSelects[".icon-modifier-1"].value || "00") +
-    (this.mdcSelects[".icon-modifier-2"].value || "00");
-    */
+  this.mdcSelects[".standard-identity-1"].selectedIndex =
+    this.mdcSelects[".standard-identity-1"].defaults[sidc.charAt(2)].index || 0;
+
+  this.mdcSelects[".standard-identity-2"].selectedIndex =
+    this.mdcSelects[".standard-identity-2"].defaults[sidc.charAt(3)].index || 0;
+
+  this.mdcSelects[".symbol-set"].selectedIndex =
+    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
+  this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+
+  this.mdcSelects[".status"].selectedIndex =
+    this.mdcSelects[".status"].defaults[sidc.charAt(6)].index || 0;
+
+  this.mdcSelects[".headquarters-taskforce-dummy"].selectedIndex =
+    headquartersTaskforceDummy(sidc.substring(4, 6))[sidc.charAt(7)].index || 0;
+
+  var ecehlonEtc = echelonMobilityTowedarray(sidc.substring(4, 6));
+  for (var i = 0; i < ecehlonEtc.length; i++) {
+    if (sidc.substring(8, 10) == ecehlonEtc[i].code) {
+      this.mdcSelects[".echelon-mobility-towedarray"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["main icon"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(10, 16) == icons[i].code) {
+      this.mdcSelects[".icon"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["modifier 1"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(16, 18) == icons[i].code) {
+      this.mdcSelects[".icon-modifier-1"].selectedIndex = i;
+      break;
+    }
+  }
+
+  var icons = this.standardJSON[sidc.substring(4, 6)]["modifier 2"] || [];
+  for (var i = 0; i < icons.length; i++) {
+    if (sidc.substring(18, 20) == icons[i].code) {
+      this.mdcSelects[".icon-modifier-2"].selectedIndex = i;
+      break;
+    }
+  }
+  this.mdcSelects[".icon-modifier-2"].emit("MDCSelect:change");
+
   return this;
 };
 

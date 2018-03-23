@@ -82,9 +82,9 @@ function letterPanel(element, standardJSON, standard) {
 
         var sidc =
           results[i]["code scheme"] +
-          this.mdcSelects[".affiliation"].value +
+          "F" + //this.mdcSelects[".affiliation"].value +
           results[i]["battle dimension"] +
-          this.mdcSelects[".status"].value +
+          "P" + //this.mdcSelects[".status"].value +
           results[i]["code"] +
           "--";
 
@@ -97,7 +97,12 @@ function letterPanel(element, standardJSON, standard) {
           '<i class="material-icons mdc-list-item__graphic" aria-hidden="true"><figure><img src="' +
           symbol.asCanvas().toDataURL() +
           '"></figure></i>' +
-          results[i].name[results[i].name.length - 1];
+          '<span class="mdc-list-item__text">' +
+          results[i].name[results[i].name.length - 1] +
+          /*'<span class="mdc-list-item__secondary-text">' +
+          results[i].name.slice(1, -1).join(" -&nbsp;") +
+          "</span>"+*/ "</span>";
+
         link.onclick = function(sidc) {
           this.setSIDC(sidc);
           panel.querySelector(".search nav").style.display = "none";
