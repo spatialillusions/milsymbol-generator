@@ -46,9 +46,14 @@ function letterPanel(element, standardJSON, standard) {
     .addEventListener("click", function() {
       // fix better way to show panel
       panel.querySelector(".search .mdc-text-field").classList.add("active");
-      panel.querySelector(".search input").focus();
+      //panel.querySelector(".search input").focus();
     });
-
+  panel
+    .querySelector(".search .mdc-text-field")
+    .addEventListener("transitionend", function() {
+      if (this.classList.contains("active"))
+        panel.querySelector(".search input").focus();
+    });
   panel.querySelector(".search input").addEventListener("focus", function() {
     // fix better way to show panel
     if (panel.querySelector(".search nav").innerHTML != "") {
