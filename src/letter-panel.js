@@ -37,11 +37,16 @@ function letterPanel(element, standardJSON, standard) {
   //First add the template to the element
   panel.innerHTML = template;
 
+  var search = new textField.MDCTextField(
+    panel.querySelector(".search .mdc-text-field")
+  );
+  window.search = search;
   panel
     .querySelector(".search #search-icon")
     .addEventListener("click", function() {
       // fix better way to show panel
       panel.querySelector(".search .mdc-text-field").classList.add("active");
+      panel.querySelector(".search input").focus();
     });
 
   panel.querySelector(".search input").addEventListener("focus", function() {
@@ -56,9 +61,6 @@ function letterPanel(element, standardJSON, standard) {
     panel.querySelector(".search nav").style.opacity = 0;
     panel.querySelector(".search .mdc-text-field").classList.remove("active");
   });
-  var search = new textField.MDCTextField(
-    panel.querySelector(".search .mdc-text-field")
-  );
   search.listen(
     "keyup",
     function() {
