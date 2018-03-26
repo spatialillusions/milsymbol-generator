@@ -419,12 +419,18 @@ letterPanel.prototype.setSIDC = function(sidc) {
       codingScheme++;
     }
   }
-  this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
-  this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
-  this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
-  this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
-  this.mdcSelects[".function-id"].selectedIndex = functionId;
-  this.mdcSelects[".function-id"].emit("MDCSelect:change");
+  if (this.mdcSelects[".coding-scheme"].selectedIndex != codingScheme) {
+    this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
+    this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
+  }
+  if (this.mdcSelects[".battle-dimension"].selectedIndex != battleDimension) {
+    this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
+    this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
+  }
+  if (this.mdcSelects[".function-id"].selectedIndex != functionId) {
+    this.mdcSelects[".function-id"].selectedIndex = functionId;
+    this.mdcSelects[".function-id"].emit("MDCSelect:change");
+  }
   for (
     var i = 0;
     i < this.mdcSelects[".symbol-modifier-1"].options.length;

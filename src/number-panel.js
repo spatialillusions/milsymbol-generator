@@ -478,9 +478,14 @@ numberPanel.prototype.setSIDC = function(sidc) {
   this.mdcSelects[".standard-identity-2"].selectedIndex =
     this.mdcSelects[".standard-identity-2"].defaults[sidc.charAt(3)].index || 0;
 
-  this.mdcSelects[".symbol-set"].selectedIndex =
-    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
-  this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+  if (
+    this.mdcSelects[".symbol-set"].selectedIndex !=
+    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index
+  ) {
+    this.mdcSelects[".symbol-set"].selectedIndex =
+      this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
+    this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+  }
 
   this.mdcSelects[".status"].selectedIndex =
     this.mdcSelects[".status"].defaults[sidc.charAt(6)].index || 0;

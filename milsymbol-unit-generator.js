@@ -1509,12 +1509,18 @@ letterPanel.prototype.setSIDC = function(sidc) {
       codingScheme++;
     }
   }
-  this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
-  this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
-  this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
-  this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
-  this.mdcSelects[".function-id"].selectedIndex = functionId;
-  this.mdcSelects[".function-id"].emit("MDCSelect:change");
+  if (this.mdcSelects[".coding-scheme"].selectedIndex != codingScheme) {
+    this.mdcSelects[".coding-scheme"].selectedIndex = codingScheme;
+    this.mdcSelects[".coding-scheme"].emit("MDCSelect:change");
+  }
+  if (this.mdcSelects[".battle-dimension"].selectedIndex != battleDimension) {
+    this.mdcSelects[".battle-dimension"].selectedIndex = battleDimension;
+    this.mdcSelects[".battle-dimension"].emit("MDCSelect:change");
+  }
+  if (this.mdcSelects[".function-id"].selectedIndex != functionId) {
+    this.mdcSelects[".function-id"].selectedIndex = functionId;
+    this.mdcSelects[".function-id"].emit("MDCSelect:change");
+  }
   for (
     var i = 0;
     i < this.mdcSelects[".symbol-modifier-1"].options.length;
@@ -2255,9 +2261,14 @@ numberPanel.prototype.setSIDC = function(sidc) {
   this.mdcSelects[".standard-identity-2"].selectedIndex =
     this.mdcSelects[".standard-identity-2"].defaults[sidc.charAt(3)].index || 0;
 
-  this.mdcSelects[".symbol-set"].selectedIndex =
-    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
-  this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+  if (
+    this.mdcSelects[".symbol-set"].selectedIndex !=
+    this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index
+  ) {
+    this.mdcSelects[".symbol-set"].selectedIndex =
+      this.mdcSelects[".symbol-set"].defaults[sidc.substring(4, 6)].index || 0;
+    this.mdcSelects[".symbol-set"].emit("MDCSelect:change");
+  }
 
   this.mdcSelects[".status"].selectedIndex =
     this.mdcSelects[".status"].defaults[sidc.charAt(6)].index || 0;
