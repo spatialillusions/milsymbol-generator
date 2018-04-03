@@ -63,7 +63,6 @@ export default function(standard, sidc) {
       if (isIE) {
         sym.innerHTML = symbol.asSVG();
       } else {
-        // The image won't keep max-height and max-width correctly, need to look into this...
         sym.innerHTML =
           '<img src="' +
           symbol.asCanvas(window.devicePixelRatio).toDataURL() +
