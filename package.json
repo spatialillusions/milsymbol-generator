@@ -7,7 +7,9 @@
     "build": "npm run bundle",
     "bundle": "rollup -c"
   },
-  "dependencies": {},
+  "dependencies": {
+    "milsymbol": "^2.0.0-rc1"
+  },
   "devDependencies": {
     "material-components-web": "^0.30.0",
     "rollup": "^0.55.5",

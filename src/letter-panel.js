@@ -1,7 +1,7 @@
 import mdc from "material-components-web/dist/material-components-web.min.js";
 var textField = mdc.textField;
 
-import ms from "../../milsymbol/dist/milsymbol.js";
+import ms from "milsymbol";
 
 import renderSymbol from "./render-symbol.js";
 import template from "./letter-panel-template.html";

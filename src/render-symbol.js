@@ -1,4 +1,4 @@
-import ms from "../../milsymbol/dist/milsymbol.js";
+import ms from "milsymbol";
 
 //Make sure symbol are centered
 ms.addSymbolPart(function squareIcon() {

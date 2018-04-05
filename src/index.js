@@ -7,7 +7,7 @@ var textField = mdc.textField;
 
 import "material-components-web/dist/material-components-web.min.css";
 // At the moment use our development version of milsymbol
-import { app6b, ms2525c, ms2525d, app6d } from "../../milsymbol/dist/milstd.js";
+import { app6b, ms2525c, ms2525d, app6d } from "milsymbol/dist/milstd.js";
 
 import letterPanel from "./letter-panel.js";
 import numberPanel from "./number-panel.js";

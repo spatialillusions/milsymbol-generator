@@ -1,4 +1,4 @@
-import ms from "../../milsymbol/dist/milsymbol.js";
+import ms from "milsymbol";
 
 export default function addSelectItem(
   mdcSelect,
