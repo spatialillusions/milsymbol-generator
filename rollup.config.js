@@ -7,14 +7,14 @@ export default [
   {
     input: "src/index.js",
     output: {
-      file: "milsymbol-unit-generator.js",
+      file: "unitgenerator/milsymbol-unit-generator.js",
       format: "iife",
       name: "milsymbolUnitGenerator"
     },
     plugins: [
       resolve(),
       commonjs(),
-      css({ output: "milsymbol-unit-generator.css" }),
+      css({ output: "unitgenerator/milsymbol-unit-generator.css" }),
       html({
         include: "**/*.html"
       })
