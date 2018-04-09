@@ -1,5 +1,17 @@
 import ms from "milsymbol";
 
+//Add custom color mode
+ms.setColorMode(
+  "swe_fm",
+  new ms.ColorMode(
+    "rgb(128,0,128)",
+    "rgb(0,94,171)",
+    "rgb(255,103,92)",
+    "rgb(43,219,140)",
+    "rgb(245,229,0)"
+  )
+);
+
 //Make sure symbol are centered
 ms.addSymbolPart(function squareIcon() {
   var gbbox = new ms.BBox();
