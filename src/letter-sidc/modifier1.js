@@ -1,7 +1,7 @@
 export default function modifier1(battledimension) {
   if (battledimension == "GRDTRK_UNT") {
     return {
-      "-": { name: "Unspecified" },
+      "-": { name: "Not Applicable" },
       A: { name: "Headquarters", sidc: "SFGP------A" },
       B: { name: "Task Force HQ", sidc: "SFGP------B" },
       C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },

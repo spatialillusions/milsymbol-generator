@@ -1033,7 +1033,7 @@ function initSelect(
 function modifier1(battledimension) {
   if (battledimension == "GRDTRK_UNT") {
     return {
-      "-": { name: "Unspecified" },
+      "-": { name: "Not Applicable" },
       A: { name: "Headquarters", sidc: "SFGP------A" },
       B: { name: "Task Force HQ", sidc: "SFGP------B" },
       C: { name: "Feint Dummy HQ", sidc: "SFGP------C" },
@@ -1091,7 +1091,7 @@ function modifier2(battledimension, modifier1) {
       Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
       R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
       S: { name: "Towed", sidc: "SFGPE-----MS" },
-      T: { name: "Rail", sidc: "SFGPE-----MT" },
+      T: { name: "Railway", sidc: "SFGPE-----MT" },
       U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
       V: { name: "Sled", sidc: "SFGPE-----MV" },
       W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
@@ -1718,7 +1718,7 @@ function echelonMobilityTowedarray(symbolset) {
         sidc: "10031500340000000000"
       },
       { code: "35", name: "Towed", sidc: "10031500350000000000" },
-      { code: "36", name: "Rail", sidc: "10031500360000000000" },
+      { code: "36", name: "Railway", sidc: "10031500360000000000" },
       { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
       {
         code: "41",
@@ -1753,7 +1753,7 @@ function headquartersTaskforceDummy(symbolset) {
       0: {
         code: 0,
         index: 0,
-        name: "Unspecified",
+        name: "Not Applicable",
         sidc: "10031000000000000000"
       },
       1: {

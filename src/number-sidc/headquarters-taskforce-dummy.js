@@ -4,7 +4,7 @@ export default function headquartersTaskforceDummy(symbolset) {
       0: {
         code: 0,
         index: 0,
-        name: "Unspecified",
+        name: "Not Applicable",
         sidc: "10031000000000000000"
       },
       1: {

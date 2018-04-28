@@ -47,7 +47,7 @@ export default function echelonMobilityTowedarray(symbolset) {
         sidc: "10031500340000000000"
       },
       { code: "35", name: "Towed", sidc: "10031500350000000000" },
-      { code: "36", name: "Rail", sidc: "10031500360000000000" },
+      { code: "36", name: "Railway", sidc: "10031500360000000000" },
       { code: "37", name: "Pack animals", sidc: "10031500370000000000" },
       {
         code: "41",

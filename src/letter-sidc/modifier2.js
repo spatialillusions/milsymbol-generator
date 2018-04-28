@@ -25,7 +25,7 @@ export default function modifier2(battledimension, modifier1) {
       Q: { name: "Tracked", sidc: "SFGPE-----MQ" },
       R: { name: "Wheeled And Tracked", sidc: "SFGPE-----MR" },
       S: { name: "Towed", sidc: "SFGPE-----MS" },
-      T: { name: "Rail", sidc: "SFGPE-----MT" },
+      T: { name: "Railway", sidc: "SFGPE-----MT" },
       U: { name: "Over The Snow", sidc: "SFGPE-----MU" },
       V: { name: "Sled", sidc: "SFGPE-----MV" },
       W: { name: "Pack Animals", sidc: "SFGPE-----MW" },
