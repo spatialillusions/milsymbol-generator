@@ -218,6 +218,7 @@
     .option-inputs {
         padding: 0px 20px 0px 20px;
         margin-top: 8px;
+        vertical-align: top;
         /*-webkit-column-width: 400px;
         -moz-column-width: 400px;
         column-width: 400px;*/
@@ -232,6 +233,7 @@
     .style-inputs {
         padding: 0px 20px 0px 20px;
         margin-top: 48px;
+        vertical-align: top;
         /*-webkit-column-width: 400px;
         -moz-column-width: 400px;
         column-width: 400px;*/
@@ -476,6 +478,16 @@
             </div>
             <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
                 A text modifier for units, equipment, and installations that displays DTG format: DDHHMMSSZMONYYYY or "O/O" for on order.
+            </p>
+        </section>
+        <section id="demo-text-field-wrapper">
+            <div class="mdc-text-field" data-mdc-auto-init="MDCTextField">
+                <input type="text" class="mdc-text-field__input" id="engagementBar" maxlength="10" size="30">
+                <label for="engagementBar" class="mdc-text-field__label">Engagement Bar</label>
+            </div>
+            <p id="my-text-field-helper-text" class="mdc-text-field-helper-text" style="display: block;" aria-hidden="true">
+                A graphic amplifier placed immediately atop the symbol. May denote, 1) local/remote status; 2) engagement status; and 3)
+                weapon type.
             </p>
         </section>
         <section id="demo-text-field-wrapper">
@@ -777,6 +789,32 @@
                         <circle cx="10.5" cy="10.5" r="7.875"></circle>
                     </svg>
                     <div class="mdc-slider__focus-ring"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="select">
+            <div id="engagementType" class="mdc-select" role="listbox">
+                <div class="mdc-select__surface" tabindex="0">
+                    <div class="mdc-select__label">Engagement Bar Type</div>
+                    <div class="mdc-select__selected-text"></div>
+                    <div class="mdc-select__bottom-line"></div>
+                </div>
+                <div class="mdc-menu mdc-select__menu">
+                    <ul class="mdc-list mdc-menu__items">
+                        <li class="mdc-list-item" role="option" tabindex="0">
+
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            TARGET
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            NON-TARGET
+                        </li>
+                        <li class="mdc-list-item" role="option" tabindex="0">
+                            EXPIRED
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
