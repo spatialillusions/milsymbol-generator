@@ -1,5 +1,8 @@
 import ms from "milsymbol";
 
+// For testing with local milsymbol build
+//import ms from "../../milsymbol/dist/milsymbol.js";
+
 //Add custom color mode
 ms.setColorMode(
   "swe_fm",
