@@ -98,7 +98,11 @@ export default function(standard, sidc) {
       );
 
       elm.querySelector("a.png").href = downloadSymbol.asCanvas().toDataURL();
-      elm.querySelector("a.svg").href = downloadSymbol.toDataURL();
+      try {
+        elm.querySelector("a.svg").href = downloadSymbol.toDataURL();
+      } catch (err) {
+        elm.querySelector("a.svg").href = "";
+      }
 
       var fileName = [];
       if (options.uniqueDesignation) fileName.push(options.uniqueDesignation);
